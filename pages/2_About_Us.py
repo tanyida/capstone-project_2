@@ -18,7 +18,7 @@ The scope of this project is to assist MOM officers in the Licensing Department 
 The MOM Licensing branch, operating under PICS (Planning, Info & Corp Services) within OSHD, is responsible for evaluating and approving applications for the registrations of WSHOs 
 (Workplace Safety and Health Officer). As part of the assessment criteria, applicants are required to complete the Professional Work Review Write-up Form.")
 
-## Objective
+## Objectives
 In the process of assessing an applicant’s suitability, officers from the Licensing Branch will have to manually review and evaluate “Section E: Demonstration of WSH Experience” within the assessment form. 
 
 In this section, applicants are required to demonstrate their WSH experience and knowledge by accurately citing examples of Section/Regulation No. for the following WSH legislations. 
