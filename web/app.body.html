@@ -1,0 +1,1403 @@
+<title>Little Wins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    color-scheme: light;
+    --paper:        #f4f6f8;
+    --card:         #ffffff;
+    --card-sunk:    #eef1f4;
+    --ink:          #131a21;
+    --ink-2:        #57646f;
+    --ink-3:        #8593a0;
+    --rule:         #dde4ea;
+    --rule-strong:  #c4cfd9;
+    --accent:       #1d4f8f;
+    --accent-soft:  #e7eef7;
+    --on-accent:    #ffffff;
+    --cash:         #2a78d6;
+    --edu:          #eb6834;
+    --health:       #1baf7a;
+    --cash-soft:    #e3edfa;
+    --edu-soft:     #fceae2;
+    --health-soft:  #ddf3ea;
+    --shadow:       0 1px 2px rgba(19,26,33,.06), 0 8px 24px -16px rgba(19,26,33,.28);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper:        #0f1317;
+      --card:         #171c22;
+      --card-sunk:    #1e242b;
+      --ink:          #e9eef3;
+      --ink-2:        #97a4b1;
+      --ink-3:        #6e7d8b;
+      --rule:         #262e37;
+      --rule-strong:  #38424e;
+      --accent:       #7fb0ee;
+      --accent-soft:  #1a2634;
+    --on-accent:    #0f1317;
+      --on-accent:    #0f1317;
+      --cash:         #3987e5;
+      --edu:          #d95926;
+      --health:       #199e70;
+      --cash-soft:    #16273c;
+      --edu-soft:     #33190f;
+      --health-soft:  #10281f;
+      --shadow:       0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper:        #0f1317;
+    --card:         #171c22;
+    --card-sunk:    #1e242b;
+    --ink:          #e9eef3;
+    --ink-2:        #97a4b1;
+    --ink-3:        #6e7d8b;
+    --rule:         #262e37;
+    --rule-strong:  #38424e;
+    --accent:       #7fb0ee;
+    --accent-soft:  #1a2634;
+    --on-accent:    #0f1317;
+    --cash:         #3987e5;
+    --edu:          #d95926;
+    --health:       #199e70;
+    --cash-soft:    #16273c;
+    --edu-soft:     #33190f;
+    --health-soft:  #10281f;
+    --shadow:       0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px 96px; }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    padding: 18px 0 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .brand { display: flex; align-items: baseline; gap: 10px; }
+  .brand b {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 21px; font-weight: 600; letter-spacing: -.01em;
+  }
+  .chip {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .09em;
+    padding: 3px 8px; border-radius: 3px;
+    border: 1px solid var(--rule-strong); color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .chip.warn { border-color: var(--edu); color: var(--edu); }
+
+  /* ---------- intro ---------- */
+  .intro { padding: 44px 0 30px; max-width: 40rem; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 14px;
+  }
+  h1 {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: clamp(34px, 5vw, 52px);
+    line-height: 1.06; letter-spacing: -.022em; font-weight: 500;
+    margin: 0 0 16px; text-wrap: balance;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .standfirst { font-size: 17px; color: var(--ink-2); margin: 0; text-wrap: pretty; }
+
+  h2 {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 26px; font-weight: 500; letter-spacing: -.015em;
+    margin: 0 0 4px; text-wrap: balance;
+  }
+  h3 {
+    font-size: 13px; font-weight: 600; letter-spacing: .02em;
+    margin: 0 0 10px; color: var(--ink);
+  }
+  .section { padding-top: 52px; }
+  .section-note { color: var(--ink-2); font-size: 14px; margin: 0 0 20px; max-width: 46rem; }
+
+  /* ---------- children editor ---------- */
+  .console {
+    display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: 20px; align-items: start;
+  }
+  @media (max-width: 860px) { .console { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--card); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 18px; box-shadow: var(--shadow);
+  }
+  .kid-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .kid {
+    display: grid; grid-template-columns: 1fr auto; gap: 4px 10px;
+    align-items: center;
+    padding: 10px 12px; border-radius: 7px;
+    background: var(--card-sunk);
+  }
+  .kid .nm { font-weight: 600; font-size: 14px; }
+  .kid .meta {
+    grid-column: 1; font-size: 12px; color: var(--ink-2);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  .kid button {
+    grid-row: 1 / span 2; align-self: center;
+    background: none; border: 1px solid var(--rule-strong); color: var(--ink-2);
+    border-radius: 5px; padding: 4px 9px; font-size: 12px; cursor: pointer;
+    font-family: inherit;
+  }
+  .kid button:hover { border-color: var(--edu); color: var(--edu); }
+
+  form.add { display: grid; grid-template-columns: 1fr; gap: 9px; }
+  label.fld { display: grid; gap: 4px; }
+  label.fld span {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3);
+  }
+  input[type="text"], input[type="date"] {
+    font: inherit; font-size: 14px; color: var(--ink);
+    background: var(--paper); border: 1px solid var(--rule-strong);
+    border-radius: 6px; padding: 8px 10px; width: 100%;
+  }
+  input:focus-visible, button:focus-visible, .legend-item:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px;
+  }
+  .btn {
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    background: var(--accent); color: var(--on-accent);
+    border: 1px solid var(--accent); border-radius: 6px; padding: 9px 14px;
+  }
+  .btn.ghost {
+    background: none; color: var(--ink-2); border-color: var(--rule-strong); font-weight: 500;
+  }
+  .btn.ghost:hover { color: var(--ink); border-color: var(--ink-3); }
+
+  .slider-row { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .slider-row .hd { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .slider-row .val {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 13px; font-weight: 600; color: var(--accent);
+  }
+  input[type="range"] { width: 100%; accent-color: var(--accent); margin-top: 6px; }
+  .hint { font-size: 12.5px; color: var(--ink-2); margin: 6px 0 0; }
+
+  /* ---------- headline figures ---------- */
+  .headline {
+    background: var(--card); border: 1px solid var(--rule);
+    border-radius: 10px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  .headline .total {
+    padding: 22px 24px 20px; border-bottom: 1px solid var(--rule);
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+  }
+  .total .lbl {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 2px;
+  }
+  .total .fig {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: clamp(40px, 6vw, 58px); font-weight: 500;
+    line-height: 1; letter-spacing: -.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  .total .sub { font-size: 13.5px; color: var(--ink-2); margin-top: 6px; }
+  .split { display: flex; gap: 26px; flex-wrap: wrap; }
+  .split div .k {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3);
+  }
+  .split div .v {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 19px; font-weight: 500; font-variant-numeric: tabular-nums;
+  }
+
+  .cats { display: grid; grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 620px) { .cats { grid-template-columns: 1fr; } }
+  .cat { padding: 16px 24px 18px; border-right: 1px solid var(--rule); }
+  .cat:last-child { border-right: none; }
+  @media (max-width: 620px) {
+    .cat { border-right: none; border-bottom: 1px solid var(--rule); }
+    .cat:last-child { border-bottom: none; }
+  }
+  .swatch-row { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; }
+  .sw { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+  .sw.cash { background: var(--cash); }
+  .sw.edu { background: var(--edu); }
+  .sw.health { background: var(--health); }
+  .cat .nm { font-size: 13px; font-weight: 600; }
+  .cat .amt {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 23px; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1.2;
+  }
+  .cat .desc { font-size: 12.5px; color: var(--ink-2); margin-top: 5px; }
+
+  /* ---------- charts ---------- */
+  .chart-card {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 20px 20px 14px; box-shadow: var(--shadow);
+  }
+  .chart-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 16px; flex-wrap: wrap; margin-bottom: 14px;
+  }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12.5px; color: var(--ink-2);
+  }
+  .chart-host { position: relative; }
+  .chart-host svg { display: block; width: 100%; overflow: hidden; }
+  .tip {
+    position: absolute; pointer-events: none; opacity: 0; transition: opacity .11s;
+    background: var(--card); border: 1px solid var(--rule-strong);
+    border-radius: 7px; padding: 9px 11px; box-shadow: var(--shadow);
+    font-size: 12.5px; min-width: 150px; z-index: 5;
+  }
+  .tip.on { opacity: 1; }
+  .tip .t-yr { font-weight: 600; font-size: 13px; margin-bottom: 1px; }
+  .tip .t-age {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; color: var(--ink-3); margin-bottom: 7px;
+  }
+  .tip .t-row {
+    display: flex; align-items: center; gap: 7px;
+    justify-content: space-between; margin-top: 3px;
+  }
+  .tip .t-row .l { display: flex; align-items: center; gap: 6px; color: var(--ink-2); }
+  .tip .t-row .n {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums; font-weight: 500;
+  }
+  .tip .t-tot {
+    margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; gap: 10px; font-weight: 600;
+  }
+  .tip .t-tot .n { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+  .two-up { display: grid; grid-template-columns: 1.55fr 1fr; gap: 20px; }
+  @media (max-width: 900px) { .two-up { grid-template-columns: 1fr; } }
+
+  /* ---------- tables ---------- */
+  /* Grid and flex children default to min-width:auto, which lets a wide table
+     push the page sideways instead of scrolling inside its own container. */
+  .two-up > *, .console > *, .panel { min-width: 0; }
+  .tbl-wrap {
+    overflow-x: auto; max-width: 100%;
+    border: 1px solid var(--rule); border-radius: 10px;
+    background: var(--card); box-shadow: var(--shadow);
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th, td { padding: 9px 14px; text-align: left; border-bottom: 1px solid var(--rule); }
+  thead th {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 500; white-space: nowrap;
+    background: var(--card-sunk);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.is-past td { color: var(--ink-2); }
+  tbody tr.now td { background: var(--accent-soft); }
+  td.num, th.num {
+    text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  td.zero { color: var(--ink-3); }
+  td.yr { font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 500; white-space: nowrap; }
+  td.ages { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; color: var(--ink-2); white-space: nowrap; }
+  tfoot td { font-weight: 600; border-top: 2px solid var(--rule-strong); background: var(--card-sunk); }
+  .tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11.5px; color: var(--ink-2); white-space: nowrap;
+  }
+
+  /* ---------- leave ---------- */
+  .bands { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
+  @media (max-width: 760px) { .bands { grid-template-columns: 1fr; } }
+  .band {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 16px 18px; box-shadow: var(--shadow);
+  }
+  .band.live { border-color: var(--accent); }
+  .band .cnt {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3);
+  }
+  .band .days {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 34px; font-weight: 500; line-height: 1.15; letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .band .days small { font-size: 15px; font-family: "IBM Plex Sans", sans-serif; color: var(--ink-2); }
+  .band .per { font-size: 12.5px; color: var(--ink-2); margin-top: 4px; }
+  .band .now-tag {
+    display: inline-block; margin-top: 9px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-soft);
+    padding: 2px 7px; border-radius: 3px;
+  }
+
+  /* ---------- mapping ---------- */
+  .map-row {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: start;
+    padding: 16px 0; border-bottom: 1px solid var(--rule);
+  }
+  .map-row:last-child { border-bottom: none; }
+  @media (max-width: 780px) { .map-row { grid-template-columns: 1fr; gap: 8px; } }
+  .map-old { color: var(--ink-2); }
+  .map-old s { text-decoration-color: var(--rule-strong); }
+  .map-arrow { color: var(--ink-3); font-family: "IBM Plex Mono", monospace; padding-top: 1px; }
+  @media (max-width: 780px) { .map-arrow { display: none; } }
+  .map-new b { font-weight: 600; }
+  .map-note { font-size: 12.5px; color: var(--ink-2); margin-top: 3px; }
+
+  /* ---------- footer ---------- */
+  .foot { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink-2); }
+  .foot a { color: var(--accent); }
+  .foot ul { margin: 8px 0 0; padding-left: 18px; }
+  .foot li { margin-bottom: 3px; }
+  .disclaimer {
+    margin-top: 22px; padding: 14px 16px; border-radius: 8px;
+    background: var(--card-sunk); border: 1px solid var(--rule);
+    font-size: 12.5px; color: var(--ink-2);
+  }
+
+  @media (max-width: 620px) {
+    .wrap { padding: 0 16px 72px; }
+    th, td { padding: 8px 10px; }
+    .total, .cat { padding-left: 18px; padding-right: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="brand">
+      <b>Little Wins</b>
+      <span class="chip">Singapore</span>
+    </div>
+    <span class="chip warn">Unofficial &middot; educational prototype</span>
+  </header>
+
+  <section class="intro">
+    <div class="eyebrow">SG Child Support Package &middot; NDR 2026</div>
+    <h1>Every benefit your child is owed, <em>year by year</em>.</h1>
+    <p class="standfirst">
+      The Baby Bonus Scheme and the Large Families Scheme have been replaced by a flat
+      $62,000 per Singapore Citizen child. Enter your children below to see what lands,
+      when it lands, and which account it lands in &mdash; from birth to age 17.
+    </p>
+  </section>
+
+  <section class="console">
+    <div class="panel">
+      <h3>Your children</h3>
+      <div class="kid-list" id="kidList"></div>
+      <form class="add" id="addForm">
+        <label class="fld">
+          <span>Child's name</span>
+          <input type="text" id="kidName" placeholder="e.g. Amelia" autocomplete="off" required>
+        </label>
+        <label class="fld">
+          <span>Date of birth or due date</span>
+          <input type="date" id="kidDob" required>
+        </label>
+        <button class="btn" type="submit">Add child</button>
+      </form>
+
+      <div class="slider-row">
+        <div class="hd">
+          <span style="font-size:12.5px;color:var(--ink-2)">CDA co-matching you expect to earn</span>
+          <span class="val" id="cdaVal">100%</span>
+        </div>
+        <input type="range" id="cdaRange" min="0" max="100" step="10" value="100"
+               aria-label="Share of the $5,000 CDA co-matching cap you expect to earn">
+        <p class="hint">
+          The Government matches your Child Development Account savings dollar for dollar
+          up to $5,000. It is the one benefit that only arrives if you save.
+        </p>
+      </div>
+    </div>
+
+    <div class="headline">
+      <div class="total">
+        <div>
+          <div class="lbl">Total projected benefits</div>
+          <div class="fig" id="figTotal">$0</div>
+          <div class="sub" id="figSub">&nbsp;</div>
+        </div>
+        <div class="split">
+          <div>
+            <div class="k">Already received</div>
+            <div class="v" id="figPast">$0</div>
+          </div>
+          <div>
+            <div class="k">Still to come</div>
+            <div class="v" id="figFuture">$0</div>
+          </div>
+        </div>
+      </div>
+      <div class="cats">
+        <div class="cat">
+          <div class="swatch-row"><i class="sw cash"></i><span class="nm">Cash</span></div>
+          <div class="amt" id="figCash">$0</div>
+          <div class="desc">Paid to your bank account. Spend it on anything.</div>
+        </div>
+        <div class="cat">
+          <div class="swatch-row"><i class="sw edu"></i><span class="nm">Education</span></div>
+          <div class="amt" id="figEdu">$0</div>
+          <div class="desc">Ring-fenced in the CDA, Edusave and PSEA.</div>
+        </div>
+        <div class="cat">
+          <div class="swatch-row"><i class="sw health"></i><span class="nm">Healthcare</span></div>
+          <div class="amt" id="figHealth">$0</div>
+          <div class="desc">Credited to your child's MediSave account.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>The payout timeline</h2>
+    <p class="section-note" id="chartNote"></p>
+    <div class="two-up">
+      <div class="chart-card">
+        <div class="chart-head">
+          <div>
+            <h3 style="margin:0">Benefits received each calendar year</h3>
+            <div style="font-size:12.5px;color:var(--ink-2)">Hover a year for the breakdown</div>
+          </div>
+          <div class="legend">
+            <span class="legend-item"><i class="sw cash"></i>Cash</span>
+            <span class="legend-item"><i class="sw edu"></i>Education</span>
+            <span class="legend-item"><i class="sw health"></i>Healthcare</span>
+          </div>
+        </div>
+        <div class="chart-host" id="barHost"><div class="tip" id="barTip"></div></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-head">
+          <div>
+            <h3 style="margin:0">Cumulative total</h3>
+            <div style="font-size:12.5px;color:var(--ink-2)">Everything banked to date</div>
+          </div>
+        </div>
+        <div class="chart-host" id="lineHost"><div class="tip" id="lineTip"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Year by year</h2>
+    <p class="section-note">
+      Every calendar year from the first payout to the last. The current year is highlighted;
+      earlier rows are money already disbursed.
+    </p>
+    <div class="tbl-wrap">
+      <table id="yearTable">
+        <thead>
+          <tr>
+            <th>Year</th><th>Ages</th>
+            <th class="num">Cash</th><th class="num">Education</th>
+            <th class="num">Healthcare</th><th class="num">Total</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Where it comes from</h2>
+    <p class="section-note">
+      Each scheme, what it is worth to your family, and the account it is paid into.
+      Only the cash rows can be spent on anything.
+    </p>
+    <div class="tbl-wrap">
+      <table id="benefitTable">
+        <thead>
+          <tr>
+            <th>Benefit</th><th>Paid into</th><th>Years</th><th class="num">Total</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Government-paid leave</h2>
+    <p class="section-note">
+      Childcare Leave and Extended Childcare Leave merge into one scheme that scales with
+      the number of Singapore Citizen children aged 12 and below. The start date has not
+      been announced &mdash; implementation details are due in early 2027.
+    </p>
+    <div class="bands" id="bands"></div>
+    <div class="tbl-wrap">
+      <table id="leaveTable">
+        <thead>
+          <tr>
+            <th>Year</th><th>Children aged 12 and below</th>
+            <th class="num">Days per parent</th>
+            <th class="num">Household, both parents</th>
+            <th class="num">vs today's rules</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="two-up" style="margin-top:20px">
+      <div class="panel">
+        <h3>Paid leave in the child's first year</h3>
+        <div class="tbl-wrap" style="border:none;box-shadow:none">
+          <table id="birthLeave">
+            <thead>
+              <tr>
+                <th>Child</th><th class="num">Maternity</th><th class="num">Paternity</th>
+                <th class="num">Shared</th><th class="num">Total</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="hint">
+          Shared Parental Leave phased in at 6 weeks for children born on or after 1 Apr 2025
+          and 10 weeks from 1 Apr 2026. Weeks, per birth.
+        </p>
+      </div>
+      <div class="panel">
+        <h3>Also available</h3>
+        <p class="hint" style="margin-top:0">
+          <b style="color:var(--ink)">Adoption leave</b> &mdash; 12 weeks for adoptive mothers,
+          for a child under 12 months at the point of application.
+        </p>
+        <p class="hint">
+          <b style="color:var(--ink)">Unpaid infant care leave</b> &mdash; 12 days per working
+          parent per year, in each of the child's first two years. Unpaid but job-protected.
+        </p>
+        <p class="hint">
+          <b style="color:var(--ink)">Employer cost</b> &mdash; the Government covers all
+          child-related leave for every birth order, up to the reimbursement cap.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>What changed</h2>
+    <p class="section-note">
+      Every Singapore Citizen child now receives the same support regardless of birth order.
+      Here is the old scheme mapped onto the new one.
+    </p>
+    <div class="panel" id="mapping"></div>
+  </section>
+
+  <section class="section">
+    <h2>Transition rules</h2>
+    <p class="section-note">For children born before 1 April 2027, who are not starting from scratch.</p>
+    <div class="panel">
+      <ul style="margin:0;padding-left:18px;font-size:14px;color:var(--ink-2)">
+        <li style="margin-bottom:8px">Children still receiving <b style="color:var(--ink)">Baby Bonus Cash Gift</b>
+          payouts keep them until 31 Mar 2027, then get a top-up by 30 Apr 2027 bringing the total to $10,000.</li>
+        <li style="margin-bottom:8px"><b style="color:var(--ink)">Child Credits</b> are backdated. Children who turn
+          1 to 16 in 2026 receive their 2026 tranche of $2,000 by 30 Apr 2027; children with January to April
+          birthdays also get their 2027 tranche by then. From 2028 the credits arrive on the child's birthday.</li>
+        <li style="margin-bottom:8px"><b style="color:var(--ink)">CDA co-matching caps</b> for children born between
+          1 Jan 2015 and 31 Mar 2027 are kept until 30 Sep 2027, then move to the uniform $5,000 cap.</li>
+        <li style="margin-bottom:8px">The <b style="color:var(--ink)">PSEA top-up</b> of $10,000 goes to children
+          turning 17 from 2026 onwards; those who turned 17 in 2026 receive it in June 2027.</li>
+        <li>Discontinued for large families: the extra $5,000 CDA First Step Grant and the $6,000 Large Family
+          LifeSG Credits for the third and later child. The $5,000 Large Family MediSave Grant stays.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <strong style="color:var(--ink)">Sources</strong>
+    <ul>
+      <li><a href="https://go.gov.sg/ndr2026supportingfamilies" target="_blank" rel="noopener">NDR 2026 &mdash; Supporting Families</a></li>
+      <li><a href="https://www.life.gov.sg/family-parenting/benefits-support/sg-child-support-package" target="_blank" rel="noopener">SG Child Support Package (LifeSG)</a></li>
+      <li><a href="https://www.cpf.gov.sg/member/infohub/educational-resources/baby-bonus-benefits-and-support-for-new-parents" target="_blank" rel="noopener">CPF &mdash; Baby Bonus benefits and support for new parents</a></li>
+      <li><a href="https://www.mom.gov.sg/employment-practices/leave" target="_blank" rel="noopener">MOM &mdash; Leave schemes</a></li>
+      <li><a href="https://www.moe.gov.sg/financial-matters/edusave-account" target="_blank" rel="noopener">MOE &mdash; Edusave Account</a></li>
+    </ul>
+    <div class="disclaimer">
+      <b style="color:var(--ink)">This is not a government service.</b>
+      It is a prototype built for educational purposes and is not affiliated with, endorsed by,
+      or operated by any Singapore government agency. Benefit rules are modelled from public
+      announcements and may be incomplete or out of date &mdash; fuller implementation details
+      are expected in early 2027. Figures are in today's dollars with no inflation adjustment,
+      and exclude means-tested subsidies and tax reliefs. Do not rely on this for financial
+      decisions; check the official sources above. Children's names and dates of birth are kept
+      in your own browser and are never sent anywhere.
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ============================================================
+     1. Scheme rules — the single source of truth.
+        Dates are plain YYYYMMDD integers so no timezone can
+        shift a cohort boundary.
+     ============================================================ */
+
+  var CASH = "Cash", EDU = "Education", HEALTH = "Healthcare";
+  var CATS = [CASH, EDU, HEALTH];
+  var CAT_VAR = {}; CAT_VAR[CASH] = "cash"; CAT_VAR[EDU] = "edu"; CAT_VAR[HEALTH] = "health";
+
+  var BABY_GIFT_START = 20270401;   // new Baby Gift applies to births from here
+  var PACKAGE_FIRST_BIRTH_YEAR = 2009; // a child turning 17 in 2026
+  var CREDIT_FIRST_YEAR = 2026;
+  var CATCH_UP_YEAR = 2027;
+
+  var BABY_GIFT = 10000;
+  var CREDIT_PER_YEAR = 2000, CREDIT_FIRST_AGE = 1, CREDIT_LAST_AGE = 16;
+  var CDA_FSG = 5000, CDA_CAP = 5000, CDA_SPREAD_LAST_AGE = 6;
+  var PSEA = 10000, PSEA_AGE = 17;
+  var EDUSAVE_PRI = 230, EDUSAVE_SEC = 290;
+  var BBCG_FRONT_LOADED = 9000;     // $3,000 at birth + $1,500 at 6, 12, 15, 18 months
+
+  // Cohort tiers, newest first: [effectiveFrom, firstOrSecond, thirdPlus]
+  var BBCG_TIERS = [[20230214, 11000, 13000], [20150101, 8000, 10000], [0, 6000, 8000]];
+  var FSG_TIERS  = [[20250218, 5000, 10000], [20230214, 5000, 5000], [0, 3000, 3000]];
+  var MGN_TIERS  = [[20250401, 5000, 5000], [20230101, 4000, 4000], [0, 3000, 3000]];
+
+  var RECEIVED = "Received", UPCOMING = "Upcoming";
+
+  var NOW = new Date();
+  var THIS_YEAR = NOW.getFullYear(), THIS_MONTH = NOW.getMonth() + 1;
+
+  /* Leave rules */
+  var MATERNITY = 16, PATERNITY = 4;
+  var SPL_PHASES = [[20260401, 10], [20250401, 6], [0, 0]];
+  var CCL_NEW = { 1: 8, 2: 10 }, CCL_NEW_MANY = 12, CCL_MAX_AGE = 12;
+  var CCL_TODAY = 6, CCL_TODAY_MAX_AGE = 6, ECL_TODAY = 2, ECL_MAX_AGE = 12;
+  var NEW_CCL_FROM = 2027;   // start year not announced; working assumption
+
+  function tier(tiers, key, thirdPlus) {
+    for (var i = 0; i < tiers.length; i++) {
+      if (key >= tiers[i][0]) return thirdPlus ? tiers[i][2] : tiers[i][1];
+    }
+    return tiers[tiers.length - 1][1];
+  }
+
+  /* ============================================================
+     2. Projection engine
+     ============================================================ */
+
+  function key(d) { return d.y * 10000 + d.m * 100 + d.d; }
+
+  function monthsUntil(dob, target) {
+    var m = (target.y - dob.y) * 12 + (target.m - dob.m);
+    if (target.d < dob.d) m -= 1;
+    return m;
+  }
+
+  function status(year, month) {
+    if (year < THIS_YEAR) return RECEIVED;
+    if (year > THIS_YEAR) return UPCOMING;
+    return (month || 12) <= THIS_MONTH ? RECEIVED : UPCOMING;
+  }
+
+  function line(kid, year, age, benefit, cat, vehicle, amount, st) {
+    return { child: kid, year: year, age: age, benefit: benefit,
+             category: cat, vehicle: vehicle, amount: amount, status: st };
+  }
+
+  function babyGift(kid, out) {
+    var by = kid.dob.y, k = key(kid.dob);
+
+    if (k >= BABY_GIFT_START) {
+      var half = BABY_GIFT / 2;
+      var secondYear = kid.dob.m <= 6 ? by : by + 1;
+      out.push(line(kid.name, by, 0, "Baby Gift", CASH, "Cash to parent", half, status(by, kid.dob.m)));
+      out.push(line(kid.name, secondYear, secondYear - by, "Baby Gift", CASH, "Cash to parent", half, status(secondYear)));
+      return;
+    }
+
+    var legacy = tier(BBCG_TIERS, k, kid.order >= 3);
+    var stillPaying = monthsUntil(kid.dob, { y: 2027, m: 3, d: 31 }) < 78; // under 6.5
+
+    if (!stillPaying) {
+      out.push(line(kid.name, by, 0, "Baby Bonus Cash Gift", CASH, "Cash to parent", legacy, status(by, kid.dob.m)));
+      return;
+    }
+    var front = Math.min(BBCG_FRONT_LOADED, legacy);
+    out.push(line(kid.name, by, 0, "Baby Bonus Cash Gift", CASH, "Cash to parent", front, status(by, kid.dob.m)));
+    var topUp = BABY_GIFT - front;
+    if (topUp > 0) {
+      out.push(line(kid.name, CATCH_UP_YEAR, CATCH_UP_YEAR - by, "Baby Gift top-up", CASH, "Cash to parent", topUp, UPCOMING));
+    }
+  }
+
+  function childCredits(kid, out) {
+    for (var age = CREDIT_FIRST_AGE; age <= CREDIT_LAST_AGE; age++) {
+      var year = kid.dob.y + age;
+      if (year < CREDIT_FIRST_YEAR) continue;
+      var st = year <= CATCH_UP_YEAR ? UPCOMING : status(year, kid.dob.m);
+      out.push(line(kid.name, year, age, "Child Credits", CASH, "Cash to parent", CREDIT_PER_YEAR, st));
+    }
+  }
+
+  function cda(kid, ratio, out) {
+    var by = kid.dob.y, k = key(kid.dob);
+    var fsg = k >= BABY_GIFT_START ? CDA_FSG : tier(FSG_TIERS, k, kid.order >= 3);
+    out.push(line(kid.name, by, 0, "CDA First Step Grant", EDU, "Child Development Account", fsg, status(by, kid.dob.m)));
+
+    var matched = CDA_CAP * ratio;
+    if (matched <= 0) return;
+    var years = CDA_SPREAD_LAST_AGE + 1;
+    for (var i = 0; i < years; i++) {
+      out.push(line(kid.name, by + i, i, "CDA Co-Matching", EDU, "Child Development Account", matched / years, status(by + i)));
+    }
+  }
+
+  function psea(kid, out) {
+    var year = kid.dob.y + PSEA_AGE;
+    if (year < CREDIT_FIRST_YEAR) return;
+    var payYear = Math.max(year, CATCH_UP_YEAR);
+    out.push(line(kid.name, payYear, PSEA_AGE, "PSEA Top-Up", EDU, "Post-Secondary Education Account", PSEA, status(payYear, 6)));
+  }
+
+  function medisave(kid, out) {
+    var amount = tier(MGN_TIERS, key(kid.dob), false);
+    out.push(line(kid.name, kid.dob.y, 0, "MediSave Grant for Newborns", HEALTH, "Child's MediSave", amount, status(kid.dob.y, kid.dob.m)));
+  }
+
+  function edusave(kid, out) {
+    for (var age = 7; age <= 16; age++) {
+      var amount = age <= 12 ? EDUSAVE_PRI : EDUSAVE_SEC;
+      var year = kid.dob.y + age;
+      out.push(line(kid.name, year, age, "Edusave Contribution", EDU, "Edusave account", amount, status(year)));
+    }
+  }
+
+  function project(kids, ratio) {
+    var out = [];
+    kids.forEach(function (kid) {
+      babyGift(kid, out);
+      cda(kid, ratio, out);
+      if (kid.dob.y >= PACKAGE_FIRST_BIRTH_YEAR) { childCredits(kid, out); psea(kid, out); }
+      medisave(kid, out);
+      edusave(kid, out);
+    });
+    return out;
+  }
+
+  /* ============================================================
+     3. Leave
+     ============================================================ */
+
+  function splWeeks(dob) {
+    var k = key(dob);
+    for (var i = 0; i < SPL_PHASES.length; i++) if (k >= SPL_PHASES[i][0]) return SPL_PHASES[i][1];
+    return 0;
+  }
+
+  function cclNew(count) {
+    if (count <= 0) return 0;
+    return CCL_NEW[count] !== undefined ? CCL_NEW[count] : CCL_NEW_MANY;
+  }
+
+  function cclToday(ages) {
+    var eligible = ages.filter(function (a) { return a >= 0 && a <= ECL_MAX_AGE; });
+    if (!eligible.length) return 0;
+    return Math.min.apply(null, eligible) <= CCL_TODAY_MAX_AGE ? CCL_TODAY : ECL_TODAY;
+  }
+
+  function leaveSchedule(kids) {
+    if (!kids.length) return [];
+    var first = Math.min.apply(null, kids.map(function (k) { return k.dob.y; }));
+    var last = Math.max.apply(null, kids.map(function (k) { return k.dob.y + CCL_MAX_AGE; }));
+    var rows = [];
+    for (var year = first; year <= last; year++) {
+      var ages = kids.filter(function (k) { return k.dob.y <= year; })
+                     .map(function (k) { return year - k.dob.y; });
+      var young = ages.filter(function (a) { return a <= CCL_MAX_AGE; });
+      if (!young.length) continue;
+      var today = cclToday(ages);
+      var days = year >= NEW_CCL_FROM ? cclNew(young.length) : today;
+      rows.push({ year: year, count: young.length, days: days, today: today,
+                  household: days * 2, gain: (days - today) * 2 });
+    }
+    return rows;
+  }
+
+  /* ============================================================
+     4. State
+     ============================================================ */
+
+  var STORE = "little-wins-children-v1";
+  var state = { kids: [], ratio: 1 };
+
+  function seed() {
+    return [
+      { name: "Amelia", dob: { y: 2019, m: 3, d: 4 } },
+      { name: "Ben", dob: { y: 2024, m: 11, d: 20 } }
+    ];
+  }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length) return parsed;
+      }
+    } catch (e) { /* private mode, blocked storage — fall through to the examples */ }
+    return seed();
+  }
+
+  function save() {
+    try { localStorage.setItem(STORE, JSON.stringify(state.kids)); } catch (e) { /* not essential */ }
+  }
+
+  function ordered() {
+    var sorted = state.kids.slice().sort(function (a, b) { return key(a.dob) - key(b.dob); });
+    sorted.forEach(function (k, i) { k.order = i + 1; });
+    return sorted;
+  }
+
+  /* ============================================================
+     5. Formatting
+     ============================================================ */
+
+  function money(n) { return "$" + Math.round(n).toLocaleString("en-SG"); }
+  function moneyOrDash(n) { return n > 0 ? money(n) : "–"; }
+
+  var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function dateLabel(d) { return d.d + " " + MONTHS[d.m - 1] + " " + d.y; }
+
+  function ageLabel(kid) {
+    var k = key(kid.dob);
+    var today = NOW.getFullYear() * 10000 + (NOW.getMonth() + 1) * 100 + NOW.getDate();
+    if (k > today) return "due " + MONTHS[kid.dob.m - 1] + " " + kid.dob.y;
+    var age = THIS_YEAR - kid.dob.y;
+    return age === 0 ? "born this year" : "turns " + age + " in " + THIS_YEAR;
+  }
+
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  /* ============================================================
+     6. Charts — laid out in real pixels, redrawn on resize,
+        so labels stay crisp and never collide.
+     ============================================================ */
+
+  var SVG_NS = "http://www.w3.org/2000/svg";
+  function svgEl(tag, attrs) {
+    var node = document.createElementNS(SVG_NS, tag);
+    for (var k in attrs) node.setAttribute(k, attrs[k]);
+    return node;
+  }
+  function css(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  // Returns gridline values plus the axis top. The top is rounded UP past the
+  // data max — a scale that stops below its own maximum pushes marks off the plot.
+  function niceScale(max) {
+    if (max <= 0) return { ticks: [0], top: 1 };
+    var raw = max / 4;
+    var mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    var step = [1, 1.5, 2, 2.5, 3, 4, 5, 10].map(function (m) { return m * mag; })
+                .filter(function (s) { return s >= raw; })[0] || 10 * mag;
+    var top = Math.ceil(max / step) * step;
+    var ticks = [];
+    for (var v = 0; v <= top + step * 0.001; v += step) ticks.push(v);
+    return { ticks: ticks, top: top };
+  }
+
+  function drawBars(host, tip, byYear, ageByYear) {
+    host.style.minHeight = "300px";
+    host.querySelectorAll("svg").forEach(function (n) { n.remove(); });
+    var years = Object.keys(byYear).map(Number).sort(function (a, b) { return a - b; });
+    if (!years.length) return;
+
+    var W = Math.max(host.clientWidth, 280), H = 300;
+    var M = { t: 36, r: 10, b: 34, l: 54 };
+    var iw = W - M.l - M.r, ih = H - M.t - M.b;
+
+    var totals = years.map(function (y) { return CATS.reduce(function (s, c) { return s + (byYear[y][c] || 0); }, 0); });
+    var max = Math.max.apply(null, totals);
+    var scale = niceScale(max), ticks = scale.ticks, top = scale.top;
+
+    var band = iw / years.length;
+    var barW = Math.max(4, Math.min(26, band * 0.62));
+    var y = function (v) { return M.t + ih - (v / top) * ih; };
+
+    var svg = svgEl("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H, role: "img",
+                             "aria-label": "Stacked bar chart of benefits received each calendar year, split by category" });
+
+    var inkMuted = css("--ink-3"), rule = css("--rule"), surface = css("--card");
+    var colours = {}; colours[CASH] = css("--cash"); colours[EDU] = css("--edu"); colours[HEALTH] = css("--health");
+
+    // recessive grid + value axis
+    ticks.forEach(function (t) {
+      svg.appendChild(svgEl("line", { x1: M.l, x2: W - M.r, y1: y(t), y2: y(t),
+                                      stroke: rule, "stroke-width": 1 }));
+      var label = svgEl("text", { x: M.l - 9, y: y(t) + 4, "text-anchor": "end",
+                                  fill: inkMuted, "font-size": 10.5,
+                                  "font-family": "IBM Plex Mono, monospace" });
+      label.textContent = t === 0 ? "0" : "$" + Math.round(t / 100) / 10 + "k";
+      svg.appendChild(label);
+    });
+
+    // one stack per year, 2px surface gap between segments
+    var maxIndex = totals.indexOf(max);
+    years.forEach(function (yr, i) {
+      var cx = M.l + band * i + band / 2;
+      var cursor = M.t + ih;
+      var stack = CATS.filter(function (c) { return (byYear[yr][c] || 0) > 0; });
+
+      stack.forEach(function (cat, si) {
+        var value = byYear[yr][cat];
+        var h = (value / top) * ih;
+        var isTop = si === stack.length - 1;
+        var drawH = Math.max(1, h - (si > 0 ? 2 : 0));
+        var yTop = cursor - h;
+        var r = isTop ? Math.min(4, drawH / 2, barW / 2) : 0;
+
+        // rounded only on the outer end of the stack, anchored to the baseline
+        var d = isTop
+          ? "M" + (cx - barW / 2) + "," + (yTop + drawH) +
+            "L" + (cx - barW / 2) + "," + (yTop + r) +
+            "Q" + (cx - barW / 2) + "," + yTop + " " + (cx - barW / 2 + r) + "," + yTop +
+            "L" + (cx + barW / 2 - r) + "," + yTop +
+            "Q" + (cx + barW / 2) + "," + yTop + " " + (cx + barW / 2) + "," + (yTop + r) +
+            "L" + (cx + barW / 2) + "," + (yTop + drawH) + "Z"
+          : "M" + (cx - barW / 2) + "," + yTop + "h" + barW + "v" + drawH + "h" + (-barW) + "Z";
+
+        svg.appendChild(svgEl("path", { d: d, fill: colours[cat] }));
+        cursor -= h;
+      });
+
+      // one direct label, on the biggest year only
+      if (i === maxIndex) {
+        var lx = Math.min(Math.max(cx, M.l + 26), W - M.r - 26);
+        var lab = svgEl("text", { x: lx, y: y(totals[i]) - 8, "text-anchor": "middle",
+                                  fill: css("--ink"), "font-size": 11, "font-weight": 600,
+                                  "font-family": "IBM Plex Mono, monospace" });
+        lab.textContent = money(totals[i]);
+        svg.appendChild(lab);
+      }
+    });
+
+    // year axis — thin out labels so they never collide
+    var every = Math.max(1, Math.ceil(years.length / Math.floor(iw / 42)));
+    years.forEach(function (yr, i) {
+      if (i % every !== 0 && i !== years.length - 1) return;
+      var t = svgEl("text", { x: M.l + band * i + band / 2, y: H - 12, "text-anchor": "middle",
+                              fill: inkMuted, "font-size": 10.5,
+                              "font-family": "IBM Plex Mono, monospace" });
+      t.textContent = yr;
+      svg.appendChild(t);
+    });
+
+    // hover layer: full-height targets, larger than the bars
+    years.forEach(function (yr, i) {
+      var hit = svgEl("rect", { x: M.l + band * i, y: M.t, width: band, height: ih,
+                                fill: "transparent", style: "cursor:crosshair" });
+      hit.addEventListener("mouseenter", function () {
+        var rows = CATS.filter(function (c) { return (byYear[yr][c] || 0) > 0; }).map(function (c) {
+          return '<div class="t-row"><span class="l"><i class="sw ' + CAT_VAR[c] + '"></i>' + c +
+                 '</span><span class="n">' + money(byYear[yr][c]) + "</span></div>";
+        }).join("");
+        tip.innerHTML = '<div class="t-yr">' + yr + "</div>" +
+          '<div class="t-age">' + (ageByYear[yr] || "") + "</div>" + rows +
+          '<div class="t-tot"><span>Total</span><span class="n">' + money(totals[i]) + "</span></div>";
+        tip.classList.add("on");
+        var left = Math.min(Math.max(M.l + band * i + band / 2 - 85, 4), W - 175);
+        tip.style.left = left + "px";
+        tip.style.top = Math.max(y(totals[i]) - 12, 4) + "px";
+      });
+      hit.addEventListener("mouseleave", function () { tip.classList.remove("on"); });
+      svg.appendChild(hit);
+    });
+
+    host.insertBefore(svg, tip);
+  }
+
+  function drawLine(host, tip, byYear) {
+    host.style.minHeight = "300px";
+    host.querySelectorAll("svg").forEach(function (n) { n.remove(); });
+    var years = Object.keys(byYear).map(Number).sort(function (a, b) { return a - b; });
+    if (!years.length) return;
+
+    var running = 0;
+    var pts = years.map(function (yr) {
+      running += CATS.reduce(function (s, c) { return s + (byYear[yr][c] || 0); }, 0);
+      return { year: yr, value: running };
+    });
+
+    var W = Math.max(host.clientWidth, 260), H = 300;
+    var M = { t: 36, r: 12, b: 34, l: 54 };
+    var iw = W - M.l - M.r, ih = H - M.t - M.b;
+    var scale = niceScale(running), ticks = scale.ticks, top = scale.top;
+    var x = function (i) { return years.length === 1 ? M.l + iw / 2 : M.l + (i / (years.length - 1)) * iw; };
+    var y = function (v) { return M.t + ih - (v / top) * ih; };
+
+    var svg = svgEl("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H, role: "img",
+                             "aria-label": "Area chart of cumulative benefits received over time" });
+    var inkMuted = css("--ink-3"), rule = css("--rule"), accent = css("--cash"), surface = css("--card");
+
+    ticks.forEach(function (t) {
+      svg.appendChild(svgEl("line", { x1: M.l, x2: W - M.r, y1: y(t), y2: y(t), stroke: rule, "stroke-width": 1 }));
+      var label = svgEl("text", { x: M.l - 9, y: y(t) + 4, "text-anchor": "end", fill: inkMuted,
+                                  "font-size": 10.5, "font-family": "IBM Plex Mono, monospace" });
+      label.textContent = t === 0 ? "0" : "$" + Math.round(t / 100) / 10 + "k";
+      svg.appendChild(label);
+    });
+
+    var path = pts.map(function (p, i) { return (i ? "L" : "M") + x(i) + "," + y(p.value); }).join("");
+    svg.appendChild(svgEl("path", { d: path + "L" + x(pts.length - 1) + "," + (M.t + ih) + "L" + x(0) + "," + (M.t + ih) + "Z",
+                                    fill: accent, "fill-opacity": 0.13 }));
+    svg.appendChild(svgEl("path", { d: path, fill: "none", stroke: accent, "stroke-width": 2,
+                                    "stroke-linejoin": "round", "stroke-linecap": "round" }));
+
+    // emphasised endpoint, ringed against the surface
+    var lastX = x(pts.length - 1), lastY = y(running);
+    svg.appendChild(svgEl("circle", { cx: lastX, cy: lastY, r: 5, fill: accent, stroke: surface, "stroke-width": 2 }));
+    var endLabel = svgEl("text", { x: lastX, y: lastY - 13, "text-anchor": "end", fill: css("--ink"),
+                                   "font-size": 11, "font-weight": 600, "font-family": "IBM Plex Mono, monospace" });
+    endLabel.textContent = money(running);
+    svg.appendChild(endLabel);
+
+    [0, years.length - 1].forEach(function (i) {
+      var t = svgEl("text", { x: x(i), y: H - 12, "text-anchor": i === 0 ? "start" : "end",
+                              fill: inkMuted, "font-size": 10.5, "font-family": "IBM Plex Mono, monospace" });
+      t.textContent = years[i];
+      svg.appendChild(t);
+    });
+
+    var cross = svgEl("line", { x1: 0, x2: 0, y1: M.t, y2: M.t + ih, stroke: css("--rule-strong"),
+                                "stroke-width": 1, opacity: 0 });
+    var dot = svgEl("circle", { r: 4.5, fill: accent, stroke: surface, "stroke-width": 2, opacity: 0 });
+    svg.appendChild(cross); svg.appendChild(dot);
+
+    var overlay = svgEl("rect", { x: M.l, y: M.t, width: iw, height: ih, fill: "transparent", style: "cursor:crosshair" });
+    overlay.addEventListener("mousemove", function (ev) {
+      var rect = svg.getBoundingClientRect();
+      var px = ev.clientX - rect.left;
+      var i = years.length === 1 ? 0 : Math.round(((px - M.l) / iw) * (years.length - 1));
+      i = Math.max(0, Math.min(years.length - 1, i));
+      var p = pts[i];
+      cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i)); cross.setAttribute("opacity", 1);
+      dot.setAttribute("cx", x(i)); dot.setAttribute("cy", y(p.value)); dot.setAttribute("opacity", 1);
+      tip.innerHTML = '<div class="t-yr">By end of ' + p.year + "</div>" +
+        '<div class="t-tot" style="border:none;margin:0;padding:0"><span>Received to date</span><span class="n">' +
+        money(p.value) + "</span></div>";
+      tip.classList.add("on");
+      tip.style.left = Math.min(Math.max(x(i) - 80, 4), W - 172) + "px";
+      tip.style.top = Math.max(y(p.value) - 14, 4) + "px";
+    });
+    overlay.addEventListener("mouseleave", function () {
+      tip.classList.remove("on"); cross.setAttribute("opacity", 0); dot.setAttribute("opacity", 0);
+    });
+    svg.appendChild(overlay);
+
+    host.insertBefore(svg, tip);
+  }
+
+  /* ============================================================
+     7. Render
+     ============================================================ */
+
+  var MAPPING = [
+    { old: "Baby Bonus Cash Gift &mdash; $11,000 (1st/2nd child) or $13,000 (3rd+), dripped out until age 6.5",
+      neu: "Baby Gift &mdash; $10,000 for every child, in 2 tranches within 12 months of birth",
+      note: "Same amount whatever the birth order, and it arrives when costs are highest." },
+    { old: "Nothing &mdash; cash support stopped at age 6.5",
+      neu: "Child Credits &mdash; $2,000 a year for 16 years, $32,000 in total",
+      note: "Brand new, and the largest single component. Cash now runs the whole way through school." },
+    { old: "CDA First Step Grant &mdash; $5,000, plus $5,000 more for a 3rd+ child",
+      neu: "CDA First Step Grant &mdash; $5,000 for every child",
+      note: "The large-family top-up is discontinued; the base grant is unchanged." },
+    { old: "CDA co-matching capped at $4,000 / $7,000 / $9,000 / $15,000 by birth order",
+      neu: "CDA co-matching capped at a uniform $5,000",
+      note: "Existing caps are honoured until 30 Sep 2027, then move to $5,000." },
+    { old: "Nothing",
+      neu: "PSEA top-up &mdash; $10,000 in June of the year the child turns 17",
+      note: "Brand new. Aimed at polytechnic, ITE, JC and university costs." },
+    { old: "Large Family LifeSG Credits &mdash; $6,000 for a 3rd+ child",
+      neu: "Discontinued, folded into flat per-child support",
+      note: "Removed, but every child now gets the full $32,000 in Child Credits." },
+    { old: "Childcare Leave &mdash; 6 days a year while the youngest is 6 or below, then 2 days",
+      neu: "Childcare Leave &mdash; 8, 10 or 12 days by number of children aged 12 and below",
+      note: "A couple with three primary-school children goes from 4 days a year to 24." }
+  ];
+
+  function renderKids() {
+    var list = document.getElementById("kidList");
+    list.innerHTML = "";
+    var kids = ordered();
+    if (!kids.length) {
+      var empty = el("p", "hint", "Add a child to see their benefits.");
+      empty.style.margin = "0 0 12px";
+      list.appendChild(empty);
+      return;
+    }
+    kids.forEach(function (kid) {
+      var row = el("div", "kid");
+      row.appendChild(el("div", "nm", kid.name));
+      var remove = el("button", null, "Remove");
+      remove.type = "button";
+      remove.setAttribute("aria-label", "Remove " + kid.name);
+      remove.addEventListener("click", function () {
+        state.kids = state.kids.filter(function (k) {
+          return !(k.name === kid.name && key(k.dob) === key(kid.dob));
+        });
+        save(); render();
+      });
+      row.appendChild(remove);
+      row.appendChild(el("div", "meta", dateLabel(kid.dob) + " · " + ageLabel(kid)));
+      list.appendChild(row);
+    });
+  }
+
+  function render() {
+    renderKids();
+
+    var kids = ordered();
+    var lines = project(kids, state.ratio);
+
+    // ---- headline figures
+    var total = 0, past = 0, future = 0, byCat = {};
+    CATS.forEach(function (c) { byCat[c] = 0; });
+    lines.forEach(function (l) {
+      total += l.amount;
+      byCat[l.category] += l.amount;
+      if (l.status === RECEIVED) past += l.amount; else future += l.amount;
+    });
+
+    document.getElementById("figTotal").textContent = money(total);
+    document.getElementById("figPast").textContent = money(past);
+    document.getElementById("figFuture").textContent = money(future);
+    document.getElementById("figCash").textContent = money(byCat[CASH]);
+    document.getElementById("figEdu").textContent = money(byCat[EDU]);
+    document.getElementById("figHealth").textContent = money(byCat[HEALTH]);
+
+    var years = {}, ageStr = {};
+    lines.forEach(function (l) {
+      if (!years[l.year]) { years[l.year] = {}; CATS.forEach(function (c) { years[l.year][c] = 0; }); }
+      years[l.year][l.category] += l.amount;
+    });
+    var yearList = Object.keys(years).map(Number).sort(function (a, b) { return a - b; });
+
+    yearList.forEach(function (yr) {
+      ageStr[yr] = kids.map(function (k) {
+        var age = yr - k.dob.y;
+        return age < 0 ? k.name + " not born" : k.name + " " + age;
+      }).join(" · ");
+    });
+
+    document.getElementById("figSub").textContent = kids.length
+      ? kids.length + (kids.length === 1 ? " child" : " children") + ", across " +
+        yearList.length + " calendar years"
+      : "No children entered";
+
+    document.getElementById("chartNote").textContent = kids.length
+      ? "Two big spikes shape every family's timeline: the year of birth, when the Baby Gift, " +
+        "CDA grant and MediSave grant all land at once, and the year the child turns 17, when the " +
+        "$10,000 PSEA top-up arrives. Between them, $2,000 of Child Credits arrives every single year."
+      : "Add a child to see the timeline.";
+
+    // ---- charts
+    requestAnimationFrame(function () {
+      drawBars(document.getElementById("barHost"), document.getElementById("barTip"), years, ageStr);
+      drawLine(document.getElementById("lineHost"), document.getElementById("lineTip"), years);
+    });
+
+    // ---- year table
+    var tbody = document.querySelector("#yearTable tbody");
+    var tfoot = document.querySelector("#yearTable tfoot");
+    tbody.innerHTML = ""; tfoot.innerHTML = "";
+    yearList.forEach(function (yr) {
+      var row = el("tr");
+      if (yr < THIS_YEAR) row.className = "is-past";
+      if (yr === THIS_YEAR) row.className = "now";
+      row.appendChild(el("td", "yr", String(yr)));
+      row.appendChild(el("td", "ages", ageStr[yr]));
+      var rowTotal = 0;
+      CATS.forEach(function (c) {
+        var v = years[yr][c];
+        rowTotal += v;
+        var cell = el("td", v > 0 ? "num" : "num zero", moneyOrDash(v));
+        row.appendChild(cell);
+      });
+      row.appendChild(el("td", "num", money(rowTotal)));
+      tbody.appendChild(row);
+    });
+    if (yearList.length) {
+      var foot = el("tr");
+      foot.appendChild(el("td", null, "All years"));
+      foot.appendChild(el("td", null, ""));
+      CATS.forEach(function (c) { foot.appendChild(el("td", "num", money(byCat[c]))); });
+      foot.appendChild(el("td", "num", money(total)));
+      tfoot.appendChild(foot);
+    }
+
+    // ---- benefit table
+    var benefits = {};
+    lines.forEach(function (l) {
+      var k = l.benefit;
+      if (!benefits[k]) benefits[k] = { name: k, cat: l.category, vehicle: l.vehicle,
+                                        total: 0, first: l.year, last: l.year };
+      benefits[k].total += l.amount;
+      benefits[k].first = Math.min(benefits[k].first, l.year);
+      benefits[k].last = Math.max(benefits[k].last, l.year);
+    });
+    var bbody = document.querySelector("#benefitTable tbody");
+    bbody.innerHTML = "";
+    Object.keys(benefits).map(function (k) { return benefits[k]; })
+      .sort(function (a, b) { return b.total - a.total; })
+      .forEach(function (b) {
+        var row = el("tr");
+        var nameCell = el("td");
+        var tag = el("span", "tag");
+        tag.appendChild(el("i", "sw " + CAT_VAR[b.cat]));
+        tag.appendChild(document.createTextNode(b.name));
+        tag.style.color = "var(--ink)";
+        tag.style.fontWeight = "500";
+        nameCell.appendChild(tag);
+        row.appendChild(nameCell);
+        row.appendChild(el("td", null, b.vehicle));
+        row.appendChild(el("td", "ages", b.first === b.last ? String(b.first) : b.first + "–" + b.last));
+        row.appendChild(el("td", "num", money(b.total)));
+        bbody.appendChild(row);
+      });
+
+    // ---- leave
+    var rows = leaveSchedule(kids);
+    var currentRow = rows.filter(function (r) { return r.year === THIS_YEAR; })[0];
+    var liveCount = currentRow ? currentRow.count : 0;
+
+    var bands = document.getElementById("bands");
+    bands.innerHTML = "";
+    [[1, "1 child"], [2, "2 children"], [3, "3 or more children"]].forEach(function (spec) {
+      var days = cclNew(spec[0]);
+      var card = el("div", "band" + (liveCount === spec[0] || (spec[0] === 3 && liveCount >= 3) ? " live" : ""));
+      card.appendChild(el("div", "cnt", spec[1] + " aged 12 and below"));
+      var d = el("div", "days");
+      d.appendChild(document.createTextNode(days + " "));
+      d.appendChild(el("small", null, "days"));
+      card.appendChild(d);
+      card.appendChild(el("div", "per", "per working parent, per year · " + days * 2 + " days for the household"));
+      if (liveCount === spec[0] || (spec[0] === 3 && liveCount >= 3)) {
+        card.appendChild(el("span", "now-tag", "Your family in " + THIS_YEAR));
+      }
+      bands.appendChild(card);
+    });
+
+    var lbody = document.querySelector("#leaveTable tbody");
+    lbody.innerHTML = "";
+    rows.forEach(function (r) {
+      var row = el("tr");
+      if (r.year < THIS_YEAR) row.className = "is-past";
+      if (r.year === THIS_YEAR) row.className = "now";
+      row.appendChild(el("td", "yr", String(r.year)));
+      row.appendChild(el("td", null, String(r.count)));
+      row.appendChild(el("td", "num", String(r.days)));
+      row.appendChild(el("td", "num", String(r.household)));
+      row.appendChild(el("td", r.gain > 0 ? "num" : "num zero", r.gain > 0 ? "+" + r.gain + " days" : "–"));
+      lbody.appendChild(row);
+    });
+
+    var blbody = document.querySelector("#birthLeave tbody");
+    blbody.innerHTML = "";
+    kids.forEach(function (kid) {
+      var spl = splWeeks(kid.dob);
+      var row = el("tr");
+      row.appendChild(el("td", null, kid.name));
+      row.appendChild(el("td", "num", String(MATERNITY)));
+      row.appendChild(el("td", "num", String(PATERNITY)));
+      row.appendChild(el("td", spl ? "num" : "num zero", spl ? String(spl) : "–"));
+      row.appendChild(el("td", "num", String(MATERNITY + PATERNITY + spl)));
+      blbody.appendChild(row);
+    });
+
+    // ---- mapping
+    var map = document.getElementById("mapping");
+    map.innerHTML = "";
+    MAPPING.forEach(function (m) {
+      var row = el("div", "map-row");
+      var oldCell = el("div", "map-old");
+      oldCell.innerHTML = "<s>" + m.old + "</s>";
+      var arrow = el("div", "map-arrow", "→");
+      var newCell = el("div", "map-new");
+      newCell.innerHTML = "<b>" + m.neu + "</b><div class='map-note'>" + m.note + "</div>";
+      row.appendChild(oldCell); row.appendChild(arrow); row.appendChild(newCell);
+      map.appendChild(row);
+    });
+  }
+
+  /* ============================================================
+     8. Wire up
+     ============================================================ */
+
+  state.kids = load();
+
+  document.getElementById("addForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var name = document.getElementById("kidName").value.trim();
+    var dob = document.getElementById("kidDob").value;
+    if (!name || !dob) return;
+    var parts = dob.split("-").map(Number);
+    state.kids.push({ name: name, dob: { y: parts[0], m: parts[1], d: parts[2] } });
+    save();
+    ev.target.reset();
+    render();
+  });
+
+  var range = document.getElementById("cdaRange");
+  range.addEventListener("input", function () {
+    state.ratio = Number(range.value) / 100;
+    document.getElementById("cdaVal").textContent = range.value + "%";
+    render();
+  });
+
+  var resizeTimer;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(render, 140);
+  });
+
+  if (window.matchMedia) {
+    var scheme = window.matchMedia("(prefers-color-scheme: dark)");
+    if (scheme.addEventListener) scheme.addEventListener("change", render);
+  }
+
+  render();
+})();
+</script>
