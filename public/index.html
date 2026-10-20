@@ -2339,6 +2339,10 @@
   }
   window.addEventListener("hashchange", route);
 
+  // An embedding viewer (such as a Claude artifact) sandboxes the page and blocks
+  // downloads, so the button would silently do nothing. The text backup still works.
+  if (window.self !== window.top) document.querySelector('[data-action="backup-download"]').hidden = true;
+
   route();
 })();
 </script>
