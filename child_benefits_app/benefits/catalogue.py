@@ -137,6 +137,14 @@ LFS_EXTRA_CDA_FSG = 5_000        # discontinued
 LFS_MEDISAVE_GRANT = 5_000       # retained; extension to other large families under study
 LARGE_FAMILY_MIN_CHILDREN = 3
 
+# LifeSG credits - spendable at merchants that accept PayNow UEN QR or NETS QR,
+# credited to the CDA trustee's LifeSG app and valid for about 12 months.
+# Keyed by the tranche year. No tranches beyond 2026 have been announced.
+CHILD_LIFESG_CREDITS = {2025: 500, 2026: 500}   # each SC child aged 0 to 12
+CHILD_LIFESG_MAX_AGE = 12
+LARGE_FAMILY_LIFESG_CREDITS = {2025: 1_000, 2026: 1_000}  # each 3rd+ child aged 1 to 6
+LARGE_FAMILY_LIFESG_AGES = (1, 6)
+
 # ---------------------------------------------------------------------------
 # Old scheme -> new scheme mapping (for the "What changed" view)
 # ---------------------------------------------------------------------------
@@ -173,9 +181,9 @@ SCHEME_MAPPING = [
         "Category": EDUCATION,
     },
     {
-        "Old (Baby Bonus / Large Families Scheme)": "Large Family LifeSG Credits - $6,000 for the 3rd+ child",
-        "New (SG Child Support Package)": "Discontinued - folded into the flat per-child support",
-        "What changed": "Removed, but every child now gets $32,000 in Child Credits regardless of birth order.",
+        "Old (Baby Bonus / Large Families Scheme)": "Large Family LifeSG Credits - $1,000 a year for each 3rd+ child aged 1 to 6",
+        "New (SG Child Support Package)": "Discontinued after the 2026 tranche - folded into the flat per-child support",
+        "What changed": "No disbursements from 2027, but every child now gets $32,000 in Child Credits regardless of birth order.",
         "Category": CASH,
     },
     {
@@ -265,6 +273,15 @@ BENEFIT_CARDS = [
         "when": "$230 a year from age 7 to 12, $290 a year from age 13 to 16",
         "who": "Every Singapore Citizen child of school-going age.",
         "detail": "Pays for enrichment programmes, second-tier miscellaneous fees and school activities. Sits outside the $62,000 package.",
+    },
+    {
+        "name": "Child LifeSG Credits",
+        "category": CASH,
+        "vehicle": "LifeSG credits",
+        "headline": "$500 a year",
+        "when": "2025 and 2026 tranches; valid about 12 months from crediting",
+        "who": "Every Singapore Citizen child aged 0 to 12 in the tranche year. Credited to the CDA trustee's LifeSG app; children born in the tranche year receive it the following April.",
+        "detail": "Spend at merchants that accept PayNow UEN QR or NETS QR. Unused credits expire and cannot be carried forward - the 2025 tranche expired on 6 Jul 2026.",
     },
     {
         "name": "Large Family MediSave Grant",

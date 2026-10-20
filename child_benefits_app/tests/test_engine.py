@@ -156,3 +156,30 @@ def test_shared_parental_leave_phases_in():
     assert leave.spl_weeks(date(2024, 6, 1)) == 0
     assert leave.spl_weeks(date(2025, 6, 1)) == 6
     assert leave.spl_weeks(date(2026, 6, 1)) == 10
+
+
+# --- LifeSG credits ---------------------------------------------------------
+
+def test_child_lifesg_credits_for_children_aged_12_and_below():
+    by_benefit, frame = _totals([engine.Child("Pri", date(2018, 5, 1))])
+    assert by_benefit["Child LifeSG Credits"] == 1_000   # 2025 and 2026 tranches
+    assert set(frame[frame["benefit"] == "Child LifeSG Credits"]["year"]) == {2025, 2026}
+
+
+def test_no_child_lifesg_credits_outside_the_age_band():
+    teen, _ = _totals([engine.Child("Teen", date(2011, 5, 1))])      # 14 in 2025
+    assert "Child LifeSG Credits" not in teen
+    future, _ = _totals([engine.Child("Future", date(2028, 1, 1))])  # after the tranches
+    assert "Child LifeSG Credits" not in future
+
+
+def test_large_family_lifesg_credits_go_to_the_third_child_only():
+    kids = [
+        engine.Child("First", date(2016, 1, 1)),
+        engine.Child("Second", date(2018, 1, 1)),
+        engine.Child("Third", date(2022, 1, 1)),   # aged 3 and 4 in 2025-26
+    ]
+    frame = engine.project(kids)
+    lflc = frame[frame["benefit"] == "Large Family LifeSG Credits"]
+    assert set(lflc["child"]) == {"Third"}
+    assert lflc["amount"].sum() == 2_000

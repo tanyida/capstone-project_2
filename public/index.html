@@ -34,14 +34,18 @@
     --rule:         #dde4ea;
     --rule-strong:  #c4cfd9;
     --accent:       #1d4f8f;
+    --accent-2:     #7ea6d8;
     --accent-soft:  #e7eef7;
     --on-accent:    #ffffff;
     --cash:         #2a78d6;
     --edu:          #eb6834;
     --health:       #1baf7a;
-    --cash-soft:    #e3edfa;
-    --edu-soft:     #fceae2;
-    --health-soft:  #ddf3ea;
+    --good:         #2b6e3f;
+    --good-soft:    #e3f1e7;
+    --warn:         #8a5a00;
+    --warn-soft:    #fbf0d9;
+    --crit:         #b42828;
+    --crit-soft:    #fbe5e5;
     --shadow:       0 1px 2px rgba(19,26,33,.06), 0 8px 24px -16px rgba(19,26,33,.28);
   }
   @media (prefers-color-scheme: dark) {
@@ -56,15 +60,18 @@
       --rule:         #262e37;
       --rule-strong:  #38424e;
       --accent:       #7fb0ee;
+      --accent-2:     #3f6b9f;
       --accent-soft:  #1a2634;
-    --on-accent:    #0f1317;
       --on-accent:    #0f1317;
       --cash:         #3987e5;
       --edu:          #d95926;
       --health:       #199e70;
-      --cash-soft:    #16273c;
-      --edu-soft:     #33190f;
-      --health-soft:  #10281f;
+      --good:         #7fcf98;
+      --good-soft:    #15281c;
+      --warn:         #e8b45a;
+      --warn-soft:    #2e2412;
+      --crit:         #f08080;
+      --crit-soft:    #341819;
       --shadow:       0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
     }
   }
@@ -79,14 +86,18 @@
     --rule:         #262e37;
     --rule-strong:  #38424e;
     --accent:       #7fb0ee;
+    --accent-2:     #3f6b9f;
     --accent-soft:  #1a2634;
     --on-accent:    #0f1317;
     --cash:         #3987e5;
     --edu:          #d95926;
     --health:       #199e70;
-    --cash-soft:    #16273c;
-    --edu-soft:     #33190f;
-    --health-soft:  #10281f;
+    --good:         #7fcf98;
+    --good-soft:    #15281c;
+    --warn:         #e8b45a;
+    --warn-soft:    #2e2412;
+    --crit:         #f08080;
+    --crit-soft:    #341819;
     --shadow:       0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
   }
 
@@ -102,18 +113,27 @@
   }
 
   .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px 96px; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
 
-  /* ---------- masthead ---------- */
+  /* ---------- masthead + navigation ---------- */
   .masthead {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px; flex-wrap: wrap;
-    padding: 18px 0 16px;
-    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; gap: 12px 24px; flex-wrap: wrap;
+    padding: 16px 0 14px; border-bottom: 1px solid var(--rule);
   }
-  .brand { display: flex; align-items: baseline; gap: 10px; }
+  .brand { display: flex; align-items: baseline; gap: 10px; color: var(--ink); text-decoration: none; }
   .brand b {
     font-family: "Newsreader", Georgia, serif;
     font-size: 21px; font-weight: 600; letter-spacing: -.01em;
+  }
+  .nav { display: flex; gap: 2px; flex-wrap: wrap; flex: 1; }
+  .nav a {
+    font-size: 14px; font-weight: 500; color: var(--ink-2); text-decoration: none;
+    padding: 7px 12px; border-radius: 6px;
+  }
+  .nav a:hover { color: var(--ink); background: var(--card-sunk); }
+  .nav a[aria-current="page"] {
+    color: var(--ink); background: var(--card);
+    box-shadow: inset 0 0 0 1px var(--rule-strong);
   }
   .chip {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
@@ -125,8 +145,9 @@
   }
   .chip.warn { border-color: var(--edu); color: var(--edu); }
 
-  /* ---------- intro ---------- */
-  .intro { padding: 44px 0 30px; max-width: 40rem; }
+  /* ---------- type ---------- */
+  .intro { padding: 44px 0 30px; max-width: 42rem; }
+  .intro.compact { padding: 36px 0 22px; }
   .eyebrow {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
     font-size: 11px; letter-spacing: .13em; text-transform: uppercase;
@@ -138,152 +159,192 @@
     line-height: 1.06; letter-spacing: -.022em; font-weight: 500;
     margin: 0 0 16px; text-wrap: balance;
   }
+  .intro.compact h1 { font-size: clamp(30px, 4.2vw, 44px); }
   h1 em { font-style: italic; color: var(--accent); }
   .standfirst { font-size: 17px; color: var(--ink-2); margin: 0; text-wrap: pretty; }
-
   h2 {
     font-family: "Newsreader", Georgia, serif;
     font-size: 26px; font-weight: 500; letter-spacing: -.015em;
     margin: 0 0 4px; text-wrap: balance;
   }
-  h3 {
-    font-size: 13px; font-weight: 600; letter-spacing: .02em;
-    margin: 0 0 10px; color: var(--ink);
-  }
+  h3 { font-size: 13px; font-weight: 600; letter-spacing: .02em; margin: 0 0 10px; color: var(--ink); }
   .section { padding-top: 52px; }
   .section-note { color: var(--ink-2); font-size: 14px; margin: 0 0 20px; max-width: 46rem; }
-
-  /* ---------- children editor ---------- */
-  .console {
-    display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
-    gap: 20px; align-items: start;
+  .hint { font-size: 12.5px; color: var(--ink-2); margin: 6px 0 0; }
+  .hint b { color: var(--ink); }
+  .lbl {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3);
   }
-  @media (max-width: 860px) { .console { grid-template-columns: 1fr; } }
+  a.inline { color: var(--accent); }
 
+  /* ---------- surfaces ---------- */
   .panel {
     background: var(--card); border: 1px solid var(--rule);
     border-radius: 10px; padding: 18px; box-shadow: var(--shadow);
   }
-  .kid-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
-  .kid {
-    display: grid; grid-template-columns: 1fr auto; gap: 4px 10px;
-    align-items: center;
-    padding: 10px 12px; border-radius: 7px;
-    background: var(--card-sunk);
-  }
-  .kid .nm { font-weight: 600; font-size: 14px; }
-  .kid .meta {
-    grid-column: 1; font-size: 12px; color: var(--ink-2);
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-  }
-  .kid button {
-    grid-row: 1 / span 2; align-self: center;
-    background: none; border: 1px solid var(--rule-strong); color: var(--ink-2);
-    border-radius: 5px; padding: 4px 9px; font-size: 12px; cursor: pointer;
-    font-family: inherit;
-  }
-  .kid button:hover { border-color: var(--edu); color: var(--edu); }
+  .two-up { display: grid; grid-template-columns: 1.55fr 1fr; gap: 20px; }
+  .two-up.even { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 900px) { .two-up, .two-up.even { grid-template-columns: 1fr; } }
+  /* Grid and flex children default to min-width:auto, which lets a wide table
+     push the page sideways instead of scrolling inside its own container. */
+  .two-up > *, .console > *, .panel, .grid3 > *, .parents > * { min-width: 0; }
 
-  form.add { display: grid; grid-template-columns: 1fr; gap: 9px; }
-  label.fld { display: grid; gap: 4px; }
-  label.fld span {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3);
+  .banner {
+    display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap;
+    padding: 12px 16px; border-radius: 8px; margin-bottom: 18px;
+    background: var(--accent-soft); color: var(--ink); font-size: 13.5px;
   }
-  input[type="text"], input[type="date"] {
+  .banner a { color: var(--accent); font-weight: 600; }
+
+  /* ---------- controls ---------- */
+  input[type="text"], input[type="date"], input[type="number"], select, textarea {
     font: inherit; font-size: 14px; color: var(--ink);
     background: var(--paper); border: 1px solid var(--rule-strong);
     border-radius: 6px; padding: 8px 10px; width: 100%;
   }
-  input:focus-visible, button:focus-visible, .legend-item:focus-visible {
+  textarea { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; min-height: 96px; resize: vertical; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible,
+  button:focus-visible, a:focus-visible, summary:focus-visible {
     outline: 2px solid var(--accent); outline-offset: 2px;
   }
+  label.fld { display: grid; gap: 4px; }
+  label.fld > span {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3);
+  }
+  .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 12px; }
+  .form-grid .full { grid-column: 1 / -1; }
+  @media (max-width: 520px) { .form-grid { grid-template-columns: 1fr; } }
   .btn {
     font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
     background: var(--accent); color: var(--on-accent);
     border: 1px solid var(--accent); border-radius: 6px; padding: 9px 14px;
   }
-  .btn.ghost {
-    background: none; color: var(--ink-2); border-color: var(--rule-strong); font-weight: 500;
-  }
+  .btn.ghost { background: none; color: var(--ink-2); border-color: var(--rule-strong); font-weight: 500; }
   .btn.ghost:hover { color: var(--ink); border-color: var(--ink-3); }
+  .btn.small { font-size: 12.5px; padding: 5px 10px; }
+  .btn.danger { background: none; color: var(--crit); border-color: var(--crit); font-weight: 500; }
+  .linkbtn {
+    font: inherit; font-size: 12.5px; background: none; border: 0; padding: 0;
+    color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
+  }
+  .x {
+    font: inherit; font-size: 12px; cursor: pointer; white-space: nowrap;
+    background: none; border: 1px solid var(--rule-strong); color: var(--ink-2);
+    border-radius: 5px; padding: 3px 8px;
+  }
+  .x:hover, .x.arm { border-color: var(--crit); color: var(--crit); }
+  .row-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .form-msg { font-size: 12.5px; color: var(--crit); min-height: 1em; margin: 0; }
 
+  .seg { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 3px; border-radius: 8px; background: var(--card-sunk); }
+  .seg button {
+    font: inherit; font-size: 13px; cursor: pointer; border: 0; background: transparent;
+    color: var(--ink-2); padding: 6px 12px; border-radius: 6px;
+  }
+  .seg button:hover { color: var(--ink); }
+  .seg button[aria-pressed="true"] { background: var(--card); color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgba(19,26,33,.12); }
+  .toolbar { display: flex; gap: 12px 18px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+  .toolbar .spacer { flex: 1; }
+  .check { display: inline-flex; gap: 7px; align-items: center; font-size: 13px; color: var(--ink-2); cursor: pointer; }
+  .check input { accent-color: var(--accent); width: 16px; height: 16px; }
+
+  .stepper { display: inline-flex; align-items: center; gap: 4px; }
+  .stepper button {
+    font: inherit; font-size: 15px; width: 32px; height: 32px; cursor: pointer;
+    border: 1px solid var(--rule-strong); background: var(--card); color: var(--ink); border-radius: 6px;
+  }
+  .stepper output {
+    font-family: "Newsreader", Georgia, serif; font-size: 24px; font-weight: 500;
+    min-width: 76px; text-align: center; font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- status ---------- */
+  .pill {
+    display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+    font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+    background: var(--card-sunk); color: var(--ink-2);
+  }
+  .pill.good { background: var(--good-soft); color: var(--good); }
+  .pill.warn { background: var(--warn-soft); color: var(--warn); }
+  .pill.crit { background: var(--crit-soft); color: var(--crit); }
+  .pill.info { background: var(--accent-soft); color: var(--accent); }
+
+  .meter { display: flex; gap: 2px; height: 8px; border-radius: 999px; background: var(--card-sunk); overflow: hidden; }
+  .meter > i { display: block; height: 100%; background: var(--accent); }
+  .meter > i.p2 { background: var(--accent-2); }
+  .meter > i.over { background: var(--crit); }
+
+  .alerts { display: grid; gap: 8px; margin-bottom: 20px; }
+  .alert {
+    display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start;
+    padding: 10px 14px; border-radius: 8px; font-size: 13.5px;
+    background: var(--card); border: 1px solid var(--rule);
+  }
+  .alert .ic {
+    width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center;
+    font-size: 12px; font-weight: 700; margin-top: 1px;
+  }
+  .alert.warn { border-color: var(--warn); }
+  .alert.warn .ic { background: var(--warn-soft); color: var(--warn); }
+  .alert.crit { border-color: var(--crit); }
+  .alert.crit .ic { background: var(--crit-soft); color: var(--crit); }
+  .alert.info .ic { background: var(--accent-soft); color: var(--accent); }
+
+  /* ---------- overview: children + headline ---------- */
+  .console { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 20px; align-items: start; }
+  @media (max-width: 860px) { .console { grid-template-columns: 1fr; } }
+  .kid-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .kid {
+    display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center;
+    padding: 10px 12px; border-radius: 7px; background: var(--card-sunk);
+  }
+  .kid .nm { font-weight: 600; font-size: 14px; }
+  .kid .meta { grid-column: 1; font-size: 12px; color: var(--ink-2); font-family: "IBM Plex Mono", ui-monospace, monospace; }
+  .kid .x { grid-row: 1 / span 2; grid-column: 2; }
+  form.add { display: grid; gap: 9px; }
   .slider-row { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule); }
   .slider-row .hd { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
-  .slider-row .val {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 13px; font-weight: 600; color: var(--accent);
-  }
+  .slider-row .val { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 13px; font-weight: 600; color: var(--accent); }
   input[type="range"] { width: 100%; accent-color: var(--accent); margin-top: 6px; }
-  .hint { font-size: 12.5px; color: var(--ink-2); margin: 6px 0 0; }
 
-  /* ---------- headline figures ---------- */
-  .headline {
-    background: var(--card); border: 1px solid var(--rule);
-    border-radius: 10px; box-shadow: var(--shadow); overflow: hidden;
-  }
+  .headline { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; box-shadow: var(--shadow); overflow: hidden; }
   .headline .total {
     padding: 22px 24px 20px; border-bottom: 1px solid var(--rule);
-    display: flex; align-items: flex-end; justify-content: space-between;
-    gap: 20px; flex-wrap: wrap;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;
   }
-  .total .lbl {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
-    color: var(--ink-3); margin-bottom: 2px;
-  }
-  .total .fig {
+  .fig {
     font-family: "Newsreader", Georgia, serif;
     font-size: clamp(40px, 6vw, 58px); font-weight: 500;
-    line-height: 1; letter-spacing: -.03em;
-    font-variant-numeric: tabular-nums;
+    line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums;
   }
   .total .sub { font-size: 13.5px; color: var(--ink-2); margin-top: 6px; }
   .split { display: flex; gap: 26px; flex-wrap: wrap; }
-  .split div .k {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3);
-  }
-  .split div .v {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 19px; font-weight: 500; font-variant-numeric: tabular-nums;
-  }
-
+  .split .v { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 19px; font-weight: 500; font-variant-numeric: tabular-nums; }
   .cats { display: grid; grid-template-columns: repeat(3, 1fr); }
-  @media (max-width: 620px) { .cats { grid-template-columns: 1fr; } }
   .cat { padding: 16px 24px 18px; border-right: 1px solid var(--rule); }
   .cat:last-child { border-right: none; }
   @media (max-width: 620px) {
+    .cats { grid-template-columns: 1fr; }
     .cat { border-right: none; border-bottom: 1px solid var(--rule); }
     .cat:last-child { border-bottom: none; }
   }
   .swatch-row { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; }
-  .sw { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+  .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; flex: none; }
   .sw.cash { background: var(--cash); }
   .sw.edu { background: var(--edu); }
   .sw.health { background: var(--health); }
   .cat .nm { font-size: 13px; font-weight: 600; }
-  .cat .amt {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 23px; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1.2;
-  }
+  .cat .amt { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 23px; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1.2; }
   .cat .desc { font-size: 12.5px; color: var(--ink-2); margin-top: 5px; }
 
   /* ---------- charts ---------- */
-  .chart-card {
-    background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
-    padding: 20px 20px 14px; box-shadow: var(--shadow);
-  }
-  .chart-head {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    gap: 16px; flex-wrap: wrap; margin-bottom: 14px;
-  }
+  .chart-card { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 20px 20px 14px; box-shadow: var(--shadow); }
+  .chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
   .legend { display: flex; gap: 14px; flex-wrap: wrap; }
-  .legend-item {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 12.5px; color: var(--ink-2);
-  }
-  .chart-host { position: relative; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--ink-2); }
+  .chart-host { position: relative; min-height: 300px; }
   .chart-host svg { display: block; width: 100%; overflow: hidden; }
   .tip {
     position: absolute; pointer-events: none; opacity: 0; transition: opacity .11s;
@@ -293,119 +354,163 @@
   }
   .tip.on { opacity: 1; }
   .tip .t-yr { font-weight: 600; font-size: 13px; margin-bottom: 1px; }
-  .tip .t-age {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 11px; color: var(--ink-3); margin-bottom: 7px;
-  }
-  .tip .t-row {
-    display: flex; align-items: center; gap: 7px;
-    justify-content: space-between; margin-top: 3px;
-  }
+  .tip .t-age { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; color: var(--ink-3); margin-bottom: 7px; }
+  .tip .t-row { display: flex; align-items: center; gap: 7px; justify-content: space-between; margin-top: 3px; }
   .tip .t-row .l { display: flex; align-items: center; gap: 6px; color: var(--ink-2); }
-  .tip .t-row .n {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-variant-numeric: tabular-nums; font-weight: 500;
-  }
-  .tip .t-tot {
-    margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--rule);
-    display: flex; justify-content: space-between; gap: 10px; font-weight: 600;
-  }
-  .tip .t-tot .n { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
-
-  .two-up { display: grid; grid-template-columns: 1.55fr 1fr; gap: 20px; }
-  @media (max-width: 900px) { .two-up { grid-template-columns: 1fr; } }
+  .tip .n { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; font-weight: 500; }
+  .tip .t-tot { margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 10px; font-weight: 600; }
 
   /* ---------- tables ---------- */
-  /* Grid and flex children default to min-width:auto, which lets a wide table
-     push the page sideways instead of scrolling inside its own container. */
-  .two-up > *, .console > *, .panel { min-width: 0; }
   .tbl-wrap {
     overflow-x: auto; max-width: 100%;
     border: 1px solid var(--rule); border-radius: 10px;
     background: var(--card); box-shadow: var(--shadow);
   }
+  .tbl-wrap.flat { border: none; box-shadow: none; border-radius: 0; }
   table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
-  th, td { padding: 9px 14px; text-align: left; border-bottom: 1px solid var(--rule); }
+  th, td { padding: 9px 14px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; }
   thead th {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
     font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--ink-3); font-weight: 500; white-space: nowrap;
-    background: var(--card-sunk);
+    color: var(--ink-3); font-weight: 500; white-space: nowrap; background: var(--card-sunk);
   }
   tbody tr:last-child td { border-bottom: none; }
   tbody tr.is-past td { color: var(--ink-2); }
   tbody tr.now td { background: var(--accent-soft); }
-  td.num, th.num {
-    text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-variant-numeric: tabular-nums; white-space: nowrap;
-  }
+  td.num, th.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; white-space: nowrap; }
   td.zero { color: var(--ink-3); }
   td.yr { font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 500; white-space: nowrap; }
   td.ages { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; color: var(--ink-2); white-space: nowrap; }
+  td.nowrap { white-space: nowrap; }
   tfoot td { font-weight: 600; border-top: 2px solid var(--rule-strong); background: var(--card-sunk); }
-  .tag {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 11.5px; color: var(--ink-2); white-space: nowrap;
+  td small, .sub-line { display: block; font-size: 11.5px; color: var(--ink-3); font-weight: 400; }
+  .tag { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink); font-weight: 500; white-space: nowrap; }
+  .empty { padding: 22px 16px; text-align: center; color: var(--ink-2); font-size: 13.5px; }
+
+  /* the year-by-year ledger */
+  .yt td, .yt th { vertical-align: middle; }
+  .yt tbody td { background: var(--card); }
+  .yt tbody tr.now > td { background: var(--accent-soft); }
+  .yt tbody tr.detail > td { background: var(--card-sunk); padding: 0; }
+  .yt thead th:first-child, .yt td.yr-cell, .yt tfoot td:first-child { position: sticky; left: 0; z-index: 1; }
+  .yt thead th:first-child { z-index: 2; }
+  .yr-btn {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    font: inherit; font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 600; font-size: 14px;
+    background: none; border: 0; padding: 2px 0; color: var(--ink);
   }
+  .yr-btn .car { display: inline-block; width: 10px; color: var(--ink-3); transition: transform .12s; }
+  .yr-btn[aria-expanded="true"] .car { transform: rotate(90deg); }
+  .yr-cell .pill { margin-top: 4px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px 8px; }
+  .kchip {
+    display: inline-flex; align-items: baseline; gap: 5px; white-space: nowrap;
+    font-size: 12px; padding: 2px 7px; border-radius: 4px; background: var(--card-sunk);
+  }
+  tr.now .kchip { background: var(--card); }
+  .kchip b { font-weight: 600; }
+  .kchip span { color: var(--ink-2); }
+  .bchip { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--ink-2); white-space: nowrap; }
+  .bchip.big { color: var(--ink); font-weight: 600; }
+  .mini { width: 100%; font-size: 13px; }
+  .mini td, .mini th { padding: 7px 14px; border-bottom: 1px solid var(--rule); }
+  .mini th { background: transparent; }
+  .mini td:first-child { padding-left: 38px; }
+  .mini th:first-child { padding-left: 38px; }
 
   /* ---------- leave ---------- */
   .bands { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
   @media (max-width: 760px) { .bands { grid-template-columns: 1fr; } }
-  .band {
-    background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
-    padding: 16px 18px; box-shadow: var(--shadow);
-  }
+  .band { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; box-shadow: var(--shadow); }
   .band.live { border-color: var(--accent); }
-  .band .cnt {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3);
-  }
-  .band .days {
-    font-family: "Newsreader", Georgia, serif;
-    font-size: 34px; font-weight: 500; line-height: 1.15; letter-spacing: -.02em;
-    font-variant-numeric: tabular-nums;
-  }
+  .band .days { font-family: "Newsreader", Georgia, serif; font-size: 34px; font-weight: 500; line-height: 1.15; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
   .band .days small { font-size: 15px; font-family: "IBM Plex Sans", sans-serif; color: var(--ink-2); }
   .band .per { font-size: 12.5px; color: var(--ink-2); margin-top: 4px; }
-  .band .now-tag {
-    display: inline-block; margin-top: 9px;
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--accent); background: var(--accent-soft);
-    padding: 2px 7px; border-radius: 3px;
+  .band .pill { margin-top: 9px; }
+
+  .parents { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 780px) { .parents { grid-template-columns: 1fr; } }
+  .parent-card { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; box-shadow: var(--shadow); overflow: hidden; }
+  .parent-card header {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+    padding: 14px 18px; border-bottom: 1px solid var(--rule); background: var(--card-sunk);
   }
+  .parent-card header b { font-family: "Newsreader", Georgia, serif; font-size: 20px; font-weight: 500; }
+  .who-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; background: var(--accent); vertical-align: 1px; }
+  .who-dot.p2 { background: var(--accent-2); }
+  .bal { padding: 14px 18px; border-bottom: 1px solid var(--rule); display: grid; gap: 7px; }
+  .bal:last-child { border-bottom: none; }
+  .bal .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .bal .name { font-weight: 600; font-size: 14px; }
+  .bal .left { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 18px; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .bal .left small { font-family: "IBM Plex Sans", sans-serif; font-size: 12px; color: var(--ink-2); font-weight: 400; }
+  .bal .cap { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 12px; color: var(--ink-2); }
+
+  .birth-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  @media (max-width: 780px) { .birth-grid { grid-template-columns: 1fr; } }
+  .birth-grid > .parent-card:only-child { grid-column: 1 / -1; }
+
+  /* ---------- benefits ---------- */
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--card); border: 1px solid var(--rule); border-radius: 10px; box-shadow: var(--shadow); margin-bottom: 22px; }
+  .tile { padding: 16px 20px; border-right: 1px solid var(--rule); }
+  .tile:last-child { border-right: none; }
+  .tile .v { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1.25; }
+  .tile .s { font-size: 12px; color: var(--ink-2); margin-top: 2px; }
+  @media (max-width: 860px) {
+    .tiles { grid-template-columns: 1fr 1fr; }
+    .tile:nth-child(2) { border-right: none; }
+    .tile:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+  }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 980px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .grid3 { grid-template-columns: 1fr; } }
+  .acct { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; box-shadow: var(--shadow); padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .acct .hd { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .acct .ttl { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 7px; }
+  .acct .via { font-size: 12px; color: var(--ink-3); }
+  .acct .big { font-family: "Newsreader", Georgia, serif; font-size: 32px; font-weight: 500; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .acct .big small { font-family: "IBM Plex Sans", sans-serif; font-size: 12.5px; color: var(--ink-2); letter-spacing: 0; }
+  .kv { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; font-size: 13px; }
+  .kv dt { color: var(--ink-2); }
+  .kv dd { margin: 0; text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  .acct .nxt { font-size: 12.5px; color: var(--ink-2); padding-top: 8px; border-top: 1px solid var(--rule); margin-top: auto; }
+  .acct .nxt b { color: var(--ink); }
 
   /* ---------- mapping ---------- */
-  .map-row {
-    display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: start;
-    padding: 16px 0; border-bottom: 1px solid var(--rule);
-  }
+  .map-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--rule); }
   .map-row:last-child { border-bottom: none; }
-  @media (max-width: 780px) { .map-row { grid-template-columns: 1fr; gap: 8px; } }
+  @media (max-width: 780px) { .map-row { grid-template-columns: 1fr; gap: 8px; } .map-arrow { display: none; } }
   .map-old { color: var(--ink-2); }
   .map-old s { text-decoration-color: var(--rule-strong); }
   .map-arrow { color: var(--ink-3); font-family: "IBM Plex Mono", monospace; padding-top: 1px; }
-  @media (max-width: 780px) { .map-arrow { display: none; } }
   .map-new b { font-weight: 600; }
   .map-note { font-size: 12.5px; color: var(--ink-2); margin-top: 3px; }
 
   /* ---------- footer ---------- */
-  .foot { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink-2); }
-  .foot a { color: var(--accent); }
-  .foot ul { margin: 8px 0 0; padding-left: 18px; }
-  .foot li { margin-bottom: 3px; }
-  .disclaimer {
-    margin-top: 22px; padding: 14px 16px; border-radius: 8px;
-    background: var(--card-sunk); border: 1px solid var(--rule);
-    font-size: 12.5px; color: var(--ink-2);
+  .site-foot { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink-2); }
+  .site-foot a { color: var(--accent); }
+  .site-foot ul { margin: 8px 0 0; padding-left: 18px; }
+  .site-foot li { margin-bottom: 3px; }
+  .disclaimer { margin-top: 22px; padding: 14px 16px; border-radius: 8px; background: var(--card-sunk); border: 1px solid var(--rule); font-size: 12.5px; color: var(--ink-2); }
+  details.data { margin-top: 22px; }
+  details.data summary { cursor: pointer; font-weight: 600; color: var(--ink); font-size: 13.5px; }
+  details.data .panel { margin-top: 12px; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(12px);
+    background: var(--ink); color: var(--paper); font-size: 13.5px; font-weight: 500;
+    padding: 10px 16px; border-radius: 8px; box-shadow: var(--shadow);
+    opacity: 0; pointer-events: none; transition: opacity .16s, transform .16s; z-index: 50;
+    max-width: calc(100vw - 32px);
   }
+  .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   @media (max-width: 620px) {
     .wrap { padding: 0 16px 72px; }
     th, td { padding: 8px 10px; }
     .total, .cat { padding-left: 18px; padding-right: 18px; }
+    .mini td:first-child, .mini th:first-child { padding-left: 14px; }
   }
-
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
   }
@@ -415,1010 +520,1826 @@
 <div class="wrap">
 
   <header class="masthead">
-    <div class="brand">
-      <b>Little Wins</b>
-      <span class="chip">Singapore</span>
-    </div>
+    <a class="brand" href="#overview"><b>Little Wins</b><span class="chip">Singapore</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#overview" data-nav="overview">Overview</a>
+      <a href="#leave" data-nav="leave">Leave tracker</a>
+      <a href="#benefits" data-nav="benefits">Benefit tracker</a>
+    </nav>
     <span class="chip warn">Unofficial &middot; educational prototype</span>
   </header>
 
-  <section class="intro">
-    <div class="eyebrow">SG Child Support Package &middot; NDR 2026</div>
-    <h1>Every benefit your child is owed, <em>year by year</em>.</h1>
-    <p class="standfirst">
-      The Baby Bonus Scheme and the Large Families Scheme have been replaced by a flat
-      $62,000 per Singapore Citizen child. Enter your children below to see what lands,
-      when it lands, and which account it lands in &mdash; from birth to age 17.
-    </p>
-  </section>
+  <!-- ===================================================== OVERVIEW -->
+  <main data-view="overview">
+    <section class="intro">
+      <div class="eyebrow">SG Child Support Package &middot; NDR 2026</div>
+      <h1>Every benefit your child is owed, <em>year by year</em>.</h1>
+      <p class="standfirst">
+        The Baby Bonus Scheme and the Large Families Scheme have been replaced by a flat
+        $62,000 per Singapore Citizen child. Enter your children below to see what lands,
+        when it lands, and which account it lands in &mdash; from birth to age 17.
+      </p>
+    </section>
 
-  <section class="console">
-    <div class="panel">
-      <h3>Your children</h3>
-      <div class="kid-list" id="kidList"></div>
-      <form class="add" id="addForm">
-        <label class="fld">
-          <span>Child's name</span>
-          <input type="text" id="kidName" placeholder="e.g. Amelia" autocomplete="off" required>
-        </label>
-        <label class="fld">
-          <span>Date of birth or due date</span>
-          <input type="date" id="kidDob" required>
-        </label>
-        <button class="btn" type="submit">Add child</button>
-      </form>
-
-      <div class="slider-row">
-        <div class="hd">
-          <span style="font-size:12.5px;color:var(--ink-2)">CDA co-matching you expect to earn</span>
-          <span class="val" id="cdaVal">100%</span>
-        </div>
-        <input type="range" id="cdaRange" min="0" max="100" step="10" value="100"
-               aria-label="Share of the $5,000 CDA co-matching cap you expect to earn">
-        <p class="hint">
-          The Government matches your Child Development Account savings dollar for dollar
-          up to $5,000. It is the one benefit that only arrives if you save.
-        </p>
-      </div>
-    </div>
-
-    <div class="headline">
-      <div class="total">
-        <div>
-          <div class="lbl">Total projected benefits</div>
-          <div class="fig" id="figTotal">$0</div>
-          <div class="sub" id="figSub">&nbsp;</div>
-        </div>
-        <div class="split">
-          <div>
-            <div class="k">Already received</div>
-            <div class="v" id="figPast">$0</div>
-          </div>
-          <div>
-            <div class="k">Still to come</div>
-            <div class="v" id="figFuture">$0</div>
-          </div>
-        </div>
-      </div>
-      <div class="cats">
-        <div class="cat">
-          <div class="swatch-row"><i class="sw cash"></i><span class="nm">Cash</span></div>
-          <div class="amt" id="figCash">$0</div>
-          <div class="desc">Paid to your bank account. Spend it on anything.</div>
-        </div>
-        <div class="cat">
-          <div class="swatch-row"><i class="sw edu"></i><span class="nm">Education</span></div>
-          <div class="amt" id="figEdu">$0</div>
-          <div class="desc">Ring-fenced in the CDA, Edusave and PSEA.</div>
-        </div>
-        <div class="cat">
-          <div class="swatch-row"><i class="sw health"></i><span class="nm">Healthcare</span></div>
-          <div class="amt" id="figHealth">$0</div>
-          <div class="desc">Credited to your child's MediSave account.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>The payout timeline</h2>
-    <p class="section-note" id="chartNote"></p>
-    <div class="two-up">
-      <div class="chart-card">
-        <div class="chart-head">
-          <div>
-            <h3 style="margin:0">Benefits received each calendar year</h3>
-            <div style="font-size:12.5px;color:var(--ink-2)">Hover a year for the breakdown</div>
-          </div>
-          <div class="legend">
-            <span class="legend-item"><i class="sw cash"></i>Cash</span>
-            <span class="legend-item"><i class="sw edu"></i>Education</span>
-            <span class="legend-item"><i class="sw health"></i>Healthcare</span>
-          </div>
-        </div>
-        <div class="chart-host" id="barHost"><div class="tip" id="barTip"></div></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-head">
-          <div>
-            <h3 style="margin:0">Cumulative total</h3>
-            <div style="font-size:12.5px;color:var(--ink-2)">Everything banked to date</div>
-          </div>
-        </div>
-        <div class="chart-host" id="lineHost"><div class="tip" id="lineTip"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Year by year</h2>
-    <p class="section-note">
-      Every calendar year from the first payout to the last. The current year is highlighted;
-      earlier rows are money already disbursed.
-    </p>
-    <div class="tbl-wrap">
-      <table id="yearTable">
-        <thead>
-          <tr>
-            <th>Year</th><th>Ages</th>
-            <th class="num">Cash</th><th class="num">Education</th>
-            <th class="num">Healthcare</th><th class="num">Total</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-        <tfoot></tfoot>
-      </table>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Where it comes from</h2>
-    <p class="section-note">
-      Each scheme, what it is worth to your family, and the account it is paid into.
-      Only the cash rows can be spent on anything.
-    </p>
-    <div class="tbl-wrap">
-      <table id="benefitTable">
-        <thead>
-          <tr>
-            <th>Benefit</th><th>Paid into</th><th>Years</th><th class="num">Total</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Government-paid leave</h2>
-    <p class="section-note">
-      Childcare Leave and Extended Childcare Leave merge into one scheme that scales with
-      the number of Singapore Citizen children aged 12 and below. The start date has not
-      been announced &mdash; implementation details are due in early 2027.
-    </p>
-    <div class="bands" id="bands"></div>
-    <div class="tbl-wrap">
-      <table id="leaveTable">
-        <thead>
-          <tr>
-            <th>Year</th><th>Children aged 12 and below</th>
-            <th class="num">Days per parent</th>
-            <th class="num">Household, both parents</th>
-            <th class="num">vs today's rules</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <div class="two-up" style="margin-top:20px">
+    <section class="console">
       <div class="panel">
-        <h3>Paid leave in the child's first year</h3>
-        <div class="tbl-wrap" style="border:none;box-shadow:none">
-          <table id="birthLeave">
-            <thead>
-              <tr>
-                <th>Child</th><th class="num">Maternity</th><th class="num">Paternity</th>
-                <th class="num">Shared</th><th class="num">Total</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+        <h3>Your children</h3>
+        <div class="kid-list" id="kidList"></div>
+        <form class="add" id="addKid" novalidate>
+          <label class="fld">
+            <span>Child's name</span>
+            <input type="text" id="kidName" placeholder="e.g. Amelia" autocomplete="off" maxlength="40">
+          </label>
+          <label class="fld">
+            <span>Date of birth or due date</span>
+            <input type="date" id="kidDob" min="2005-01-01" max="2035-12-31">
+          </label>
+          <p class="form-msg" id="kidMsg" role="alert"></p>
+          <button class="btn" type="submit">Add child</button>
+        </form>
+        <div class="slider-row">
+          <div class="hd">
+            <span style="font-size:12.5px;color:var(--ink-2)">CDA co-matching you expect to earn</span>
+            <span class="val" id="cdaVal">100%</span>
+          </div>
+          <input type="range" id="cdaRange" min="0" max="100" step="10" value="100"
+                 aria-label="Share of the $5,000 CDA co-matching cap you expect to earn">
+          <p class="hint">The Government matches your Child Development Account savings dollar for
+            dollar up to $5,000. It only arrives if you save &mdash; track your actual deposits in the
+            <a class="inline" href="#benefits">Benefit tracker</a>.</p>
         </div>
-        <p class="hint">
-          Shared Parental Leave phased in at 6 weeks for children born on or after 1 Apr 2025
-          and 10 weeks from 1 Apr 2026. Weeks, per birth.
-        </p>
       </div>
+
+      <div class="headline">
+        <div class="total">
+          <div>
+            <div class="lbl">Total projected benefits</div>
+            <div class="fig" id="figTotal">$0</div>
+            <div class="sub" id="figSub">&nbsp;</div>
+          </div>
+          <div class="split">
+            <div><div class="lbl">Already received</div><div class="v" id="figPast">$0</div></div>
+            <div><div class="lbl">Still to come</div><div class="v" id="figFuture">$0</div></div>
+          </div>
+        </div>
+        <div class="cats">
+          <div class="cat">
+            <div class="swatch-row"><i class="sw cash"></i><span class="nm">Cash</span></div>
+            <div class="amt" id="figCash">$0</div>
+            <div class="desc">Paid to your bank account, or as LifeSG credits to spend at shops.</div>
+          </div>
+          <div class="cat">
+            <div class="swatch-row"><i class="sw edu"></i><span class="nm">Education</span></div>
+            <div class="amt" id="figEdu">$0</div>
+            <div class="desc">Ring-fenced in the CDA, Edusave and PSEA.</div>
+          </div>
+          <div class="cat">
+            <div class="swatch-row"><i class="sw health"></i><span class="nm">Healthcare</span></div>
+            <div class="amt" id="figHealth">$0</div>
+            <div class="desc">Credited to your child's MediSave account.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>The payout timeline</h2>
+      <p class="section-note" id="chartNote"></p>
+      <div class="two-up">
+        <div class="chart-card">
+          <div class="chart-head">
+            <div>
+              <h3 style="margin:0">Benefits for each calendar year</h3>
+              <div style="font-size:12.5px;color:var(--ink-2)">Hover a year for the breakdown</div>
+            </div>
+            <div class="legend">
+              <span class="legend-item"><i class="sw cash"></i>Cash</span>
+              <span class="legend-item"><i class="sw edu"></i>Education</span>
+              <span class="legend-item"><i class="sw health"></i>Healthcare</span>
+            </div>
+          </div>
+          <div class="chart-host" id="barHost"><div class="tip" id="barTip"></div></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-head">
+            <div>
+              <h3 style="margin:0">Cumulative total</h3>
+              <div style="font-size:12.5px;color:var(--ink-2)">Everything banked to date</div>
+            </div>
+          </div>
+          <div class="chart-host" id="lineHost"><div class="tip" id="lineTip"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="yearByYear">
+      <h2>Year by year</h2>
+      <p class="section-note">
+        One row per year, with what stage each child is at. Open a year to see every payout in it,
+        the date it lands and the account it goes to.
+      </p>
+      <div class="toolbar">
+        <div class="seg" id="ytFilter" role="group" aria-label="Show benefits for"></div>
+        <span class="spacer"></span>
+        <label class="check"><input type="checkbox" id="ytHidePast"> Hide past years</label>
+        <button class="btn ghost small" type="button" id="ytExpand">Open all years</button>
+      </div>
+      <div class="tbl-wrap">
+        <table class="yt" id="yearTable">
+          <thead>
+            <tr>
+              <th>Year</th><th>Your children</th><th>What lands</th>
+              <th class="num">Cash</th><th class="num">Education</th><th class="num">Healthcare</th>
+              <th class="num">Year total</th><th class="num">Running total</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Where it comes from</h2>
+      <p class="section-note">Each scheme, what it is worth to your family, and the account it is paid into.</p>
+      <div class="tbl-wrap">
+        <table id="benefitTable">
+          <thead><tr><th>Benefit</th><th>Paid into</th><th>Years</th><th class="num">Total</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Government-paid leave</h2>
+      <p class="section-note">
+        Childcare Leave and Extended Childcare Leave merge into one scheme that scales with the number of
+        Singapore Citizen children aged 12 and below. The start date has not been announced &mdash; this page
+        assumes 2027. <a class="inline" href="#leave">Track the leave you take &rarr;</a>
+      </p>
+      <div class="bands" id="bands"></div>
+      <div class="tbl-wrap">
+        <table id="leaveTable">
+          <thead>
+            <tr>
+              <th>Year</th><th>Children aged 12 and below</th><th class="num">Days per parent</th>
+              <th class="num">Household, both parents</th><th class="num">vs today's rules</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What changed</h2>
+      <p class="section-note">Every Singapore Citizen child now receives the same support regardless of birth order.</p>
+      <div class="panel" id="mapping"></div>
+    </section>
+
+    <section class="section">
+      <h2>Transition rules</h2>
+      <p class="section-note">For children born before 1 April 2027, who are not starting from scratch.</p>
       <div class="panel">
-        <h3>Also available</h3>
-        <p class="hint" style="margin-top:0">
-          <b style="color:var(--ink)">Adoption leave</b> &mdash; 12 weeks for adoptive mothers,
-          for a child under 12 months at the point of application.
-        </p>
-        <p class="hint">
-          <b style="color:var(--ink)">Unpaid infant care leave</b> &mdash; 12 days per working
-          parent per year, in each of the child's first two years. Unpaid but job-protected.
-        </p>
-        <p class="hint">
-          <b style="color:var(--ink)">Employer cost</b> &mdash; the Government covers all
-          child-related leave for every birth order, up to the reimbursement cap.
-        </p>
+        <ul style="margin:0;padding-left:18px;font-size:14px;color:var(--ink-2);display:grid;gap:8px">
+          <li>Children still receiving <b style="color:var(--ink)">Baby Bonus Cash Gift</b> payouts keep them until
+            31 Mar 2027, then get a top-up by 30 Apr 2027 bringing the total to $10,000.</li>
+          <li><b style="color:var(--ink)">Child Credits</b> are backdated. Children who turn 1 to 16 in 2026 receive their
+            2026 tranche of $2,000 by 30 Apr 2027; children with January to April birthdays also get their 2027 tranche
+            by then. From 2028 the credits arrive on the child's birthday.</li>
+          <li><b style="color:var(--ink)">CDA co-matching caps</b> for children born between 1 Jan 2015 and 31 Mar 2027
+            are kept until 30 Sep 2027, then move to the uniform $5,000 cap.</li>
+          <li>The <b style="color:var(--ink)">PSEA top-up</b> of $10,000 goes to children turning 17 from 2026 onwards;
+            those who turned 17 in 2026 receive it in June 2027.</li>
+          <li><b style="color:var(--ink)">Large Family LifeSG Credits</b> ($1,000 a year for a third or later child aged
+            1 to 6) end after the 2026 tranche, as does the extra $5,000 CDA First Step Grant for large families.
+            The $5,000 Large Family MediSave Grant stays.</li>
+        </ul>
       </div>
+    </section>
+  </main>
+
+  <!-- ===================================================== LEAVE TRACKER -->
+  <main data-view="leave" hidden>
+    <section class="intro compact">
+      <div class="eyebrow">Leave tracker</div>
+      <h1>Your leave, <em>used and left</em>.</h1>
+      <p class="standfirst">
+        Log leave as you take it. Entitlements are worked out from your children's dates of birth and
+        reset each calendar year &mdash; childcare leave does not carry over, so use it or lose it.
+      </p>
+    </section>
+
+    <div id="leaveBanner"></div>
+
+    <div class="toolbar">
+      <div class="stepper" aria-label="Year">
+        <button type="button" data-action="year-prev" aria-label="Previous year">&lsaquo;</button>
+        <output id="leaveYear"></output>
+        <button type="button" data-action="year-next" aria-label="Next year">&rsaquo;</button>
+      </div>
+      <span class="spacer"></span>
+      <label class="fld" style="width:150px"><span>Mother</span><input type="text" id="p1Name" maxlength="20"></label>
+      <label class="fld" style="width:150px"><span>Father</span><input type="text" id="p2Name" maxlength="20"></label>
     </div>
-  </section>
 
-  <section class="section">
-    <h2>What changed</h2>
-    <p class="section-note">
-      Every Singapore Citizen child now receives the same support regardless of birth order.
-      Here is the old scheme mapped onto the new one.
-    </p>
-    <div class="panel" id="mapping"></div>
-  </section>
+    <section>
+      <h2 id="leaveYearTitle"></h2>
+      <p class="section-note">Leave that comes round every year, for each working parent.</p>
+      <div class="parents" id="leaveParents"></div>
+    </section>
 
-  <section class="section">
-    <h2>Transition rules</h2>
-    <p class="section-note">For children born before 1 April 2027, who are not starting from scratch.</p>
-    <div class="panel">
-      <ul style="margin:0;padding-left:18px;font-size:14px;color:var(--ink-2)">
-        <li style="margin-bottom:8px">Children still receiving <b style="color:var(--ink)">Baby Bonus Cash Gift</b>
-          payouts keep them until 31 Mar 2027, then get a top-up by 30 Apr 2027 bringing the total to $10,000.</li>
-        <li style="margin-bottom:8px"><b style="color:var(--ink)">Child Credits</b> are backdated. Children who turn
-          1 to 16 in 2026 receive their 2026 tranche of $2,000 by 30 Apr 2027; children with January to April
-          birthdays also get their 2027 tranche by then. From 2028 the credits arrive on the child's birthday.</li>
-        <li style="margin-bottom:8px"><b style="color:var(--ink)">CDA co-matching caps</b> for children born between
-          1 Jan 2015 and 31 Mar 2027 are kept until 30 Sep 2027, then move to the uniform $5,000 cap.</li>
-        <li style="margin-bottom:8px">The <b style="color:var(--ink)">PSEA top-up</b> of $10,000 goes to children
-          turning 17 from 2026 onwards; those who turned 17 in 2026 receive it in June 2027.</li>
-        <li>Discontinued for large families: the extra $5,000 CDA First Step Grant and the $6,000 Large Family
-          LifeSG Credits for the third and later child. The $5,000 Large Family MediSave Grant stays.</li>
-      </ul>
+    <section class="section">
+      <h2>Leave around each birth</h2>
+      <p class="section-note">
+        Maternity, paternity and Shared Parental Leave belong to a particular child and must be used within
+        12 months of the birth. Maternity leave can start up to 4 weeks before. Counted in working days &mdash;
+        5 days make a week.
+      </p>
+      <div class="birth-grid" id="birthCards"></div>
+    </section>
+
+    <section class="section">
+      <div class="two-up">
+        <div class="panel">
+          <h3>Log leave</h3>
+          <form id="leaveForm" class="form-grid" novalidate>
+            <label class="fld"><span>Who took it</span><select id="lfParent"></select></label>
+            <label class="fld"><span>Type of leave</span><select id="lfType"></select></label>
+            <label class="fld full" id="lfChildWrap"><span>For which child</span><select id="lfChild"></select></label>
+            <label class="fld"><span>From</span><input type="date" id="lfFrom"></label>
+            <label class="fld"><span>To (optional)</span><input type="date" id="lfTo"></label>
+            <label class="fld"><span>Working days</span><input type="number" id="lfDays" min="0.5" max="200" step="0.5"></label>
+            <label class="fld"><span>Note (optional)</span><input type="text" id="lfNote" maxlength="80" placeholder="e.g. sick at home"></label>
+            <p class="form-msg full" id="lfMsg" role="alert"></p>
+            <div class="full row-actions"><button class="btn" type="submit">Log leave</button>
+              <span class="hint" style="margin:0">Weekends are skipped automatically. Adjust for public holidays.</span></div>
+          </form>
+        </div>
+        <div class="panel">
+          <h3>Other leave you want to track</h3>
+          <p class="hint" style="margin:0 0 12px">Add any leave with a yearly allowance &mdash; annual leave,
+            sick leave, or adoption leave (12 weeks = 60 working days). Each parent gets their own balance.</p>
+          <div id="customList" style="display:grid;gap:6px;margin-bottom:12px"></div>
+          <form id="customForm" class="form-grid" novalidate>
+            <label class="fld"><span>Name</span><input type="text" id="cfName" maxlength="30" placeholder="e.g. Annual leave"></label>
+            <label class="fld"><span>Days per year</span><input type="number" id="cfDays" min="0.5" max="365" step="0.5" placeholder="14"></label>
+            <p class="form-msg full" id="cfMsg" role="alert"></p>
+            <div class="full"><button class="btn ghost" type="submit">Add leave type</button></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Leave log</h2>
+      <p class="section-note" id="leaveLogNote"></p>
+      <div class="tbl-wrap">
+        <table id="leaveLog">
+          <thead><tr><th>Dates</th><th>Who</th><th>Leave</th><th>For</th><th class="num">Days</th><th>Note</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================== BENEFIT TRACKER -->
+  <main data-view="benefits" hidden>
+    <section class="intro compact">
+      <div class="eyebrow">Benefit tracker</div>
+      <h1>What's arrived, what's left, <em>what's expiring</em>.</h1>
+      <p class="standfirst">
+        Tick off payouts as they reach your bank, and log what you spend from each account. Balances are
+        worked out from the official schedule plus what you record here.
+      </p>
+    </section>
+
+    <div id="benefitBanner"></div>
+
+    <div class="toolbar">
+      <div class="seg" id="btFilter" role="group" aria-label="Show accounts for"></div>
     </div>
-  </section>
 
-  <footer class="foot">
-    <strong style="color:var(--ink)">Sources</strong>
+    <div class="alerts" id="btAlerts"></div>
+    <div class="tiles" id="btTiles"></div>
+    <div class="grid3" id="btAccounts"></div>
+
+    <section class="section">
+      <h2>LifeSG credits</h2>
+      <p class="section-note">
+        Credited to the CDA trustee's LifeSG app and spendable at shops that accept PayNow UEN QR or NETS QR.
+        Each tranche lasts about 12 months, and unused credits are lost &mdash; spending here is matched to the
+        tranche that expires first.
+      </p>
+      <div class="tbl-wrap">
+        <table id="lifesgTable">
+          <thead><tr><th>Child</th><th>Tranche</th><th>Credited</th><th>Expires</th><th class="num">Amount</th><th class="num">Spent</th><th class="num">Left</th><th>Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Cash payouts</h2>
+      <div class="toolbar" style="margin-bottom:10px">
+        <p class="section-note" style="margin:0;flex:1;min-width:240px">
+          Baby Gift, Baby Bonus and Child Credits go straight to your bank account. Tick each one once you've
+          seen it arrive.
+        </p>
+        <button class="btn ghost small" type="button" data-action="confirm-all">Mark all past payouts as received</button>
+      </div>
+      <div class="tbl-wrap">
+        <table id="cashTable">
+          <thead><tr><th>Due</th><th>Child</th><th>Payout</th><th class="num">Amount</th><th>Status</th><th>Received</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="two-up">
+        <div class="panel" id="txPanel">
+          <h3>Log a transaction</h3>
+          <form id="txForm" class="form-grid" novalidate>
+            <label class="fld"><span>Child</span><select id="txChild"></select></label>
+            <label class="fld"><span>Account</span><select id="txAccount">
+              <option value="cda">Child Development Account</option>
+              <option value="lifesg">LifeSG credits</option>
+              <option value="edusave">Edusave</option>
+              <option value="psea">Post-Secondary Education Account</option>
+              <option value="medisave">MediSave</option>
+            </select></label>
+            <label class="fld"><span>What happened</span><select id="txKind"></select></label>
+            <label class="fld"><span>Amount ($)</span><input type="number" id="txAmount" min="0.01" step="0.01" placeholder="0.00"></label>
+            <label class="fld"><span>Date</span><input type="date" id="txDate"></label>
+            <label class="fld"><span>Note (optional)</span><input type="text" id="txNote" maxlength="80" placeholder="e.g. infant care fees"></label>
+            <p class="form-msg full" id="txMsg" role="alert"></p>
+            <div class="full"><button class="btn" type="submit">Add transaction</button></div>
+          </form>
+        </div>
+        <div class="panel">
+          <h3>Where to find the real numbers</h3>
+          <p class="hint" style="margin-top:0"><b>CDA</b> &mdash; your bank's CDA statement, or the Baby Bonus Online
+            portal. Log each deposit you make: the Government match is worked out from them.</p>
+          <p class="hint"><b>LifeSG credits</b> &mdash; "My Benefits" in the LifeSG app, which shows each tranche's
+            exact expiry date.</p>
+          <p class="hint"><b>Edusave and PSEA</b> &mdash; the MOE Edusave and PSEA statements. Unused Edusave moves
+            to the PSEA in the year your child turns 17.</p>
+          <p class="hint"><b>MediSave</b> &mdash; your child's CPF statement. MediShield Life premiums are deducted
+            automatically each year.</p>
+          <p class="hint">Use <b>Other credit or correction</b> to bring a balance in line with a statement.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Transactions</h2>
+      <div class="tbl-wrap">
+        <table id="txTable">
+          <thead><tr><th>Date</th><th>Child</th><th>Account</th><th>What</th><th class="num">Amount</th><th>Note</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <details class="data" id="dataPanel">
+      <summary>Your data &mdash; back up or restore</summary>
+      <div class="panel">
+        <p class="hint" style="margin-top:0">Everything you enter is kept in this browser only and is never sent
+          anywhere. That means it will not follow you to another phone or computer, and clearing your browser data
+          erases it. Keep a backup.</p>
+        <div class="row-actions" style="margin:12px 0">
+          <button class="btn ghost small" type="button" data-action="backup-download">Download backup file</button>
+          <button class="btn ghost small" type="button" data-action="backup-show">Show backup as text</button>
+          <label class="btn ghost small" style="cursor:pointer">Restore from file
+            <input type="file" id="restoreFile" accept="application/json,.json" hidden></label>
+        </div>
+        <label class="fld"><span>Backup text &mdash; copy it somewhere safe, or paste one here to restore</span>
+          <textarea id="backupText" spellcheck="false"></textarea></label>
+        <div class="row-actions" style="margin-top:10px">
+          <button class="btn ghost small" type="button" data-action="backup-restore">Restore from text</button>
+          <span class="spacer" style="flex:1"></span>
+          <button class="btn danger small" type="button" data-action="wipe">Erase all my data</button>
+        </div>
+        <p class="form-msg" id="dataMsg" role="alert"></p>
+      </div>
+    </details>
+
+    <div style="margin-top:22px"><strong style="color:var(--ink)">Sources</strong></div>
     <ul>
       <li><a href="https://go.gov.sg/ndr2026supportingfamilies" target="_blank" rel="noopener">NDR 2026 &mdash; Supporting Families</a></li>
       <li><a href="https://www.life.gov.sg/family-parenting/benefits-support/sg-child-support-package" target="_blank" rel="noopener">SG Child Support Package (LifeSG)</a></li>
+      <li><a href="https://supportgowhere.life.gov.sg/schemes/GNAgZJDj/child-lifesg-credits" target="_blank" rel="noopener">Child LifeSG Credits (SupportGoWhere)</a></li>
+      <li><a href="https://www.msf.gov.sg/media-room/article/eligible-families-to-receive--500-child-lifesg-credits-from-14-july-2026" target="_blank" rel="noopener">MSF &mdash; $500 Child LifeSG Credits from 14 July 2026</a></li>
       <li><a href="https://www.cpf.gov.sg/member/infohub/educational-resources/baby-bonus-benefits-and-support-for-new-parents" target="_blank" rel="noopener">CPF &mdash; Baby Bonus benefits and support for new parents</a></li>
       <li><a href="https://www.mom.gov.sg/employment-practices/leave" target="_blank" rel="noopener">MOM &mdash; Leave schemes</a></li>
       <li><a href="https://www.moe.gov.sg/financial-matters/edusave-account" target="_blank" rel="noopener">MOE &mdash; Edusave Account</a></li>
     </ul>
     <div class="disclaimer">
       <b style="color:var(--ink)">This is not a government service.</b>
-      It is a prototype built for educational purposes and is not affiliated with, endorsed by,
-      or operated by any Singapore government agency. Benefit rules are modelled from public
-      announcements and may be incomplete or out of date &mdash; fuller implementation details
-      are expected in early 2027. Figures are in today's dollars with no inflation adjustment,
-      and exclude means-tested subsidies and tax reliefs. Do not rely on this for financial
-      decisions; check the official sources above. Children's names and dates of birth are kept
-      in your own browser and are never sent anywhere.
+      It is a prototype built for educational purposes and is not affiliated with, endorsed by, or operated by any
+      Singapore government agency. Benefit and leave rules are modelled from public announcements and may be
+      incomplete or out of date &mdash; fuller implementation details are expected in early 2027. Some payout and
+      expiry dates are estimates; the LifeSG app, your CPF and CDA statements and your employer's HR records are
+      the authority. Figures are in today's dollars and exclude means-tested subsidies and tax reliefs.
     </div>
   </footer>
 </div>
 
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
-(function () {
+(() => {
   "use strict";
 
-  /* ============================================================
-     1. Scheme rules — the single source of truth.
-        Dates are plain YYYYMMDD integers so no timezone can
-        shift a cohort boundary.
-     ============================================================ */
+  /* ================================================================
+     1. Scheme rules — the single source of truth for this page.
+        Dates are ISO strings (YYYY-MM-DD), which compare correctly as
+        plain strings and cannot be shifted by a timezone.
+     ================================================================ */
 
-  var CASH = "Cash", EDU = "Education", HEALTH = "Healthcare";
-  var CATS = [CASH, EDU, HEALTH];
-  var CAT_VAR = {}; CAT_VAR[CASH] = "cash"; CAT_VAR[EDU] = "edu"; CAT_VAR[HEALTH] = "health";
+  const CASH = "Cash", EDU = "Education", HEALTH = "Healthcare";
+  const CATS = [CASH, EDU, HEALTH];
+  const CAT_CLASS = { [CASH]: "cash", [EDU]: "edu", [HEALTH]: "health" };
 
-  var BABY_GIFT_START = 20270401;   // new Baby Gift applies to births from here
-  var PACKAGE_FIRST_BIRTH_YEAR = 2009; // a child turning 17 in 2026
-  var CREDIT_FIRST_YEAR = 2026;
-  var CATCH_UP_YEAR = 2027;
+  const BABY_GIFT_START = "2027-04-01";
+  const PACKAGE_FIRST_BIRTH_YEAR = 2009;     // a child turning 17 in 2026
+  const CREDIT_FIRST_YEAR = 2026;
+  const CATCH_UP_YEAR = 2027;
+  const CATCH_UP_DATE = "2027-04-30";
 
-  var BABY_GIFT = 10000;
-  var CREDIT_PER_YEAR = 2000, CREDIT_FIRST_AGE = 1, CREDIT_LAST_AGE = 16;
-  var CDA_FSG = 5000, CDA_CAP = 5000, CDA_SPREAD_LAST_AGE = 6;
-  var PSEA = 10000, PSEA_AGE = 17;
-  var EDUSAVE_PRI = 230, EDUSAVE_SEC = 290;
-  var BBCG_FRONT_LOADED = 9000;     // $3,000 at birth + $1,500 at 6, 12, 15, 18 months
+  const BABY_GIFT = 10000;
+  const CREDIT_PER_YEAR = 2000, CREDIT_FIRST_AGE = 1, CREDIT_LAST_AGE = 16;
+  const CDA_FSG = 5000, CDA_CAP = 5000, CDA_SPREAD_LAST_AGE = 6, CDA_MATCH_LAST_AGE = 12;
+  const PSEA = 10000, PSEA_AGE = 17;
+  const EDUSAVE_PRI = 230, EDUSAVE_SEC = 290;
+  const BBCG_FRONT_LOADED = 9000;            // $3,000 at birth + $1,500 at 6, 12, 15, 18 months
 
-  // Cohort tiers, newest first: [effectiveFrom, firstOrSecond, thirdPlus]
-  var BBCG_TIERS = [[20230214, 11000, 13000], [20150101, 8000, 10000], [0, 6000, 8000]];
-  var FSG_TIERS  = [[20250218, 5000, 10000], [20230214, 5000, 5000], [0, 3000, 3000]];
-  var MGN_TIERS  = [[20250401, 5000, 5000], [20230101, 4000, 4000], [0, 3000, 3000]];
+  // Cohort tiers, newest first: [effective from, 1st/2nd child, 3rd+ child]
+  const BBCG_TIERS = [["2023-02-14", 11000, 13000], ["2015-01-01", 8000, 10000], ["0000-01-01", 6000, 8000]];
+  const FSG_TIERS  = [["2025-02-18", 5000, 10000], ["2023-02-14", 5000, 5000], ["0000-01-01", 3000, 3000]];
+  const MGN_TIERS  = [["2025-04-01", 5000, 5000], ["2023-01-01", 4000, 4000], ["0000-01-01", 3000, 3000]];
 
-  var RECEIVED = "Received", UPCOMING = "Upcoming";
+  // Child LifeSG Credits: each SC child aged 0-12 in the tranche year. Children born
+  // in the tranche year are paid the following April. No tranche after 2026 announced.
+  const CHILD_LIFESG = {
+    2025: { amount: 500, credited: "2025-07-07", expires: "2026-07-06" },
+    2026: { amount: 500, credited: "2026-07-14", expires: "2027-07-13" },
+  };
+  const CHILD_LIFESG_MAX_AGE = 12;
+  // Large Family LifeSG Credits: each 3rd+ child aged 1-6. None from 2027.
+  const LARGE_FAMILY_LIFESG = {
+    2025: { amount: 1000, credited: "2025-09-01" },
+    2026: { amount: 1000, credited: "2026-04-01" },
+  };
 
-  var NOW = new Date();
-  var THIS_YEAR = NOW.getFullYear(), THIS_MONTH = NOW.getMonth() + 1;
+  // Leave
+  const WEEK = 5;                            // working days in a week of leave
+  const MATERNITY_WEEKS = 16;
+  const CCL_NEW = { 1: 8, 2: 10 }, CCL_NEW_MANY = 12, CCL_MAX_AGE = 12;
+  const CCL_TODAY = 6, CCL_TODAY_MAX_AGE = 6, ECL_TODAY = 2;
+  const NEW_CCL_FROM = 2027;                 // start year not announced; working assumption
+  const ULIC_DAYS = 12;
 
-  /* Leave rules */
-  var MATERNITY = 16, PATERNITY = 4;
-  var SPL_PHASES = [[20260401, 10], [20250401, 6], [0, 0]];
-  var CCL_NEW = { 1: 8, 2: 10 }, CCL_NEW_MANY = 12, CCL_MAX_AGE = 12;
-  var CCL_TODAY = 6, CCL_TODAY_MAX_AGE = 6, ECL_TODAY = 2, ECL_MAX_AGE = 12;
-  var NEW_CCL_FROM = 2027;   // start year not announced; working assumption
+  /* ================================================================
+     2. Dates and formatting
+     ================================================================ */
 
-  function tier(tiers, key, thirdPlus) {
-    for (var i = 0; i < tiers.length; i++) {
-      if (key >= tiers[i][0]) return thirdPlus ? tiers[i][2] : tiers[i][1];
+  const pad = (n) => String(n).padStart(2, "0");
+  const iso = (y, m, d) => `${y}-${pad(m)}-${pad(d)}`;
+  const parts = (s) => { const [y, m, d] = s.split("-").map(Number); return { y, m, d }; };
+  const daysInMonth = (y, m) => new Date(Date.UTC(y, m, 0)).getUTCDate();
+  const isIsoDate = (s) => typeof s === "string" && /^\d{4}-\d{2}-\d{2}$/.test(s);
+
+  function addMonths(s, n) {
+    const { y, m, d } = parts(s);
+    const t = y * 12 + (m - 1) + n;
+    const ny = Math.floor(t / 12), nm = (t % 12) + 1;
+    return iso(ny, nm, Math.min(d, daysInMonth(ny, nm)));
+  }
+  function addDays(s, n) {
+    const { y, m, d } = parts(s);
+    const dt = new Date(Date.UTC(y, m - 1, d + n));
+    return iso(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate());
+  }
+  function daysBetween(a, b) {
+    const A = parts(a), B = parts(b);
+    return Math.round((Date.UTC(B.y, B.m - 1, B.d) - Date.UTC(A.y, A.m - 1, A.d)) / 86400000);
+  }
+  function workingDays(a, b) {
+    if (!isIsoDate(a)) return 0;
+    if (!isIsoDate(b) || b < a) b = a;
+    let n = 0;
+    for (let cur = a, guard = 0; cur <= b && guard < 800; cur = addDays(cur, 1), guard++) {
+      const { y, m, d } = parts(cur);
+      const wd = new Date(Date.UTC(y, m - 1, d)).getUTCDay();
+      if (wd !== 0 && wd !== 6) n++;
     }
+    return n;
+  }
+  function monthsUntil(dob, target) {
+    const A = parts(dob), B = parts(target);
+    let months = (B.y - A.y) * 12 + (B.m - A.m);
+    if (B.d < A.d) months -= 1;
+    return months;
+  }
+  const birthdayIn = (dob, year) => { const { m, d } = parts(dob); return iso(year, m, Math.min(d, daysInMonth(year, m))); };
+
+  const NOW = new Date();
+  const TODAY = iso(NOW.getFullYear(), NOW.getMonth() + 1, NOW.getDate());
+  const THIS_YEAR = NOW.getFullYear();
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const fmtDate = (s) => { const { y, m, d } = parts(s); return `${d} ${MONTHS[m - 1]} ${y}`; };
+  const fmtShort = (s) => { const { m, d } = parts(s); return `${d} ${MONTHS[m - 1]}`; };
+  const fmtMonth = (s) => { const { y, m } = parts(s); return `${MONTHS[m - 1]} ${y}`; };
+
+  const money = (n) => (n < 0 ? "−$" : "$") + Math.round(Math.abs(n)).toLocaleString("en-SG");
+  const money2 = (n) => (n < 0 ? "−$" : "$") + Math.abs(n).toLocaleString("en-SG", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  const dash = (n) => (n > 0 ? money(n) : "–");
+  const num = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
+  const weeks = (days) => num(days / WEEK);
+  const sum = (arr, f) => arr.reduce((s, x) => s + (f ? f(x) : x), 0);
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+  const newId = () => Math.random().toString(36).slice(2, 8) + Date.now().toString(36).slice(-4);
+
+  function tier(tiers, dob, thirdPlus) {
+    for (const [from, a, b] of tiers) if (dob >= from) return thirdPlus ? b : a;
     return tiers[tiers.length - 1][1];
   }
 
-  /* ============================================================
-     2. Projection engine
-     ============================================================ */
-
-  function key(d) { return d.y * 10000 + d.m * 100 + d.d; }
-
-  function monthsUntil(dob, target) {
-    var m = (target.y - dob.y) * 12 + (target.m - dob.m);
-    if (target.d < dob.d) m -= 1;
-    return m;
+  // School stage by the age a child turns in a calendar year — how Singapore
+  // schooling is organised, and how parents think about the years.
+  function stage(age) {
+    if (age < 0) return "not born";
+    if (age === 0) return "Newborn";
+    if (age === 1) return "Infant";
+    if (age === 2) return "Playgroup";
+    if (age <= 4) return "N" + (age - 2);
+    if (age <= 6) return "K" + (age - 4);
+    if (age <= 12) return "P" + (age - 6);
+    if (age <= 16) return "Sec " + (age - 12);
+    if (age === 17) return "JC / Poly / ITE";
+    return "Age " + age;
   }
 
-  function status(year, month) {
-    if (year < THIS_YEAR) return RECEIVED;
-    if (year > THIS_YEAR) return UPCOMING;
-    return (month || 12) <= THIS_MONTH ? RECEIVED : UPCOMING;
-  }
+  /* ================================================================
+     3. Projection engine — mirrors child_benefits_app/benefits/engine.py
+     ================================================================ */
 
-  function line(kid, year, age, benefit, cat, vehicle, amount, st) {
-    return { child: kid, year: year, age: age, benefit: benefit,
-             category: cat, vehicle: vehicle, amount: amount, status: st };
+  const RECEIVED = "Received", UPCOMING = "Upcoming";
+
+  function line(kid, year, benefit, category, account, vehicle, amount, payDate, whenDate, whenNote, extra) {
+    return Object.assign({
+      id: `${kid.id}|${benefit}|${year}|${payDate}`,
+      childId: kid.id, child: kid.name, year, age: year - kid.by,
+      benefit, category, account, vehicle, amount, payDate, whenDate, whenNote,
+      status: payDate <= TODAY ? RECEIVED : UPCOMING,
+    }, extra || {});
   }
 
   function babyGift(kid, out) {
-    var by = kid.dob.y, k = key(kid.dob);
-
-    if (k >= BABY_GIFT_START) {
-      var half = BABY_GIFT / 2;
-      var secondYear = kid.dob.m <= 6 ? by : by + 1;
-      out.push(line(kid.name, by, 0, "Baby Gift", CASH, "Cash to parent", half, status(by, kid.dob.m)));
-      out.push(line(kid.name, secondYear, secondYear - by, "Baby Gift", CASH, "Cash to parent", half, status(secondYear)));
+    const by = kid.by;
+    if (kid.dob >= BABY_GIFT_START) {
+      const half = BABY_GIFT / 2;
+      const second = addMonths(kid.dob, 6);
+      const secondYear = kid.m <= 6 ? by : by + 1;
+      out.push(line(kid, by, "Baby Gift", CASH, "cash", "Cash to parent", half, kid.dob,
+        fmtDate(kid.dob), "First of two tranches, after birth registration"));
+      out.push(line(kid, secondYear, "Baby Gift", CASH, "cash", "Cash to parent", half, second,
+        "By " + fmtDate(addMonths(kid.dob, 12)), "Second tranche, within 12 months of birth"));
       return;
     }
-
-    var legacy = tier(BBCG_TIERS, k, kid.order >= 3);
-    var stillPaying = monthsUntil(kid.dob, { y: 2027, m: 3, d: 31 }) < 78; // under 6.5
-
+    const legacy = tier(BBCG_TIERS, kid.dob, kid.order >= 3);
+    const stillPaying = monthsUntil(kid.dob, "2027-03-31") < 78;   // under 6½
     if (!stillPaying) {
-      out.push(line(kid.name, by, 0, "Baby Bonus Cash Gift", CASH, "Cash to parent", legacy, status(by, kid.dob.m)));
+      out.push(line(kid, by, "Baby Bonus Cash Gift", CASH, "cash", "Cash to parent", legacy, kid.dob,
+        fmtDate(kid.dob), "Paid in instalments from birth to age 6½ under the old scheme"));
       return;
     }
-    var front = Math.min(BBCG_FRONT_LOADED, legacy);
-    out.push(line(kid.name, by, 0, "Baby Bonus Cash Gift", CASH, "Cash to parent", front, status(by, kid.dob.m)));
-    var topUp = BABY_GIFT - front;
+    const front = Math.min(BBCG_FRONT_LOADED, legacy);
+    out.push(line(kid, by, "Baby Bonus Cash Gift", CASH, "cash", "Cash to parent", front, kid.dob,
+      fmtDate(kid.dob), "$3,000 at birth, then $1,500 at 6, 12, 15 and 18 months"));
+    const topUp = BABY_GIFT - front;
     if (topUp > 0) {
-      out.push(line(kid.name, CATCH_UP_YEAR, CATCH_UP_YEAR - by, "Baby Gift top-up", CASH, "Cash to parent", topUp, UPCOMING));
+      out.push(line(kid, CATCH_UP_YEAR, "Baby Gift top-up", CASH, "cash", "Cash to parent", topUp, CATCH_UP_DATE,
+        "By 30 Apr 2027", "Tops the cash gift up to $10,000"));
+    }
+  }
+
+  function lifesg(kid, out) {
+    for (const [ys, t] of Object.entries(CHILD_LIFESG)) {
+      const year = Number(ys), age = year - kid.by;
+      if (age < 0 || age > CHILD_LIFESG_MAX_AGE) continue;
+      if (age === 0) {
+        const credited = iso(year + 1, 4, 15);
+        out.push(line(kid, year, "Child LifeSG Credits", CASH, "lifesg", "LifeSG credits", t.amount, credited,
+          "Around Apr " + (year + 1), "Born in the tranche year — paid the following April",
+          { expires: addDays(addMonths(credited, 12), -1), approx: true, tranche: year }));
+      } else {
+        out.push(line(kid, year, "Child LifeSG Credits", CASH, "lifesg", "LifeSG credits", t.amount, t.credited,
+          fmtDate(t.credited), "Expires " + fmtDate(t.expires), { expires: t.expires, tranche: year }));
+      }
+    }
+    if (kid.order >= 3) {
+      for (const [ys, t] of Object.entries(LARGE_FAMILY_LIFESG)) {
+        const year = Number(ys), age = year - kid.by;
+        if (age < 1 || age > 6) continue;
+        const expires = addDays(addMonths(t.credited, 12), -1);
+        out.push(line(kid, year, "Large Family LifeSG Credits", CASH, "lifesg", "LifeSG credits", t.amount, t.credited,
+          fmtMonth(t.credited), "Expires around " + fmtMonth(expires), { expires, approx: true, tranche: year }));
+      }
     }
   }
 
   function childCredits(kid, out) {
-    for (var age = CREDIT_FIRST_AGE; age <= CREDIT_LAST_AGE; age++) {
-      var year = kid.dob.y + age;
+    for (let age = CREDIT_FIRST_AGE; age <= CREDIT_LAST_AGE; age++) {
+      const year = kid.by + age;
       if (year < CREDIT_FIRST_YEAR) continue;
-      var st = year <= CATCH_UP_YEAR ? UPCOMING : status(year, kid.dob.m);
-      out.push(line(kid.name, year, age, "Child Credits", CASH, "Cash to parent", CREDIT_PER_YEAR, st));
+      let pay, whenDate, whenNote;
+      if (year === CREDIT_FIRST_YEAR || (year === CATCH_UP_YEAR && kid.m <= 4)) {
+        pay = CATCH_UP_DATE; whenDate = "By 30 Apr 2027";
+        whenNote = year === CREDIT_FIRST_YEAR ? "Backdated 2026 tranche" : "Paid early with the backdated tranche";
+      } else {
+        pay = birthdayIn(kid.dob, year); whenDate = fmtDate(pay); whenNote = "On the birthday";
+      }
+      out.push(line(kid, year, "Child Credits", CASH, "cash", "Cash to parent", CREDIT_PER_YEAR, pay, whenDate, whenNote));
     }
   }
 
   function cda(kid, ratio, out) {
-    var by = kid.dob.y, k = key(kid.dob);
-    var fsg = k >= BABY_GIFT_START ? CDA_FSG : tier(FSG_TIERS, k, kid.order >= 3);
-    out.push(line(kid.name, by, 0, "CDA First Step Grant", EDU, "Child Development Account", fsg, status(by, kid.dob.m)));
-
-    var matched = CDA_CAP * ratio;
+    const fsg = kid.dob >= BABY_GIFT_START ? CDA_FSG : tier(FSG_TIERS, kid.dob, kid.order >= 3);
+    out.push(line(kid, kid.by, "CDA First Step Grant", EDU, "cda", "Child Development Account", fsg, kid.dob,
+      fmtDate(kid.dob), "When the CDA is opened"));
+    const matched = CDA_CAP * ratio;
     if (matched <= 0) return;
-    var years = CDA_SPREAD_LAST_AGE + 1;
-    for (var i = 0; i < years; i++) {
-      out.push(line(kid.name, by + i, i, "CDA Co-Matching", EDU, "Child Development Account", matched / years, status(by + i)));
+    const years = CDA_SPREAD_LAST_AGE + 1;
+    for (let i = 0; i < years; i++) {
+      const y = kid.by + i;
+      out.push(line(kid, y, "CDA Co-Matching", EDU, "cda", "Child Development Account", matched / years, iso(y, 12, 31),
+        "During " + y, "Only if you save — matched dollar for dollar", { projected: true }));
     }
   }
 
   function psea(kid, out) {
-    var year = kid.dob.y + PSEA_AGE;
+    const year = kid.by + PSEA_AGE;
     if (year < CREDIT_FIRST_YEAR) return;
-    var payYear = Math.max(year, CATCH_UP_YEAR);
-    out.push(line(kid.name, payYear, PSEA_AGE, "PSEA Top-Up", EDU, "Post-Secondary Education Account", PSEA, status(payYear, 6)));
+    const payYear = Math.max(year, CATCH_UP_YEAR);
+    out.push(line(kid, payYear, "PSEA Top-Up", EDU, "psea", "Post-Secondary Education Account", PSEA, iso(payYear, 6, 1),
+      "Jun " + payYear, "For polytechnic, ITE, JC and university costs", { age: PSEA_AGE }));
   }
 
   function medisave(kid, out) {
-    var amount = tier(MGN_TIERS, key(kid.dob), false);
-    out.push(line(kid.name, kid.dob.y, 0, "MediSave Grant for Newborns", HEALTH, "Child's MediSave", amount, status(kid.dob.y, kid.dob.m)));
+    out.push(line(kid, kid.by, "MediSave Grant for Newborns", HEALTH, "medisave", "Child's MediSave",
+      tier(MGN_TIERS, kid.dob, false), kid.dob, fmtDate(kid.dob), "At birth"));
   }
 
   function edusave(kid, out) {
-    for (var age = 7; age <= 16; age++) {
-      var amount = age <= 12 ? EDUSAVE_PRI : EDUSAVE_SEC;
-      var year = kid.dob.y + age;
-      out.push(line(kid.name, year, age, "Edusave Contribution", EDU, "Edusave account", amount, status(year)));
+    for (let age = 7; age <= 16; age++) {
+      const y = kid.by + age;
+      out.push(line(kid, y, "Edusave Contribution", EDU, "edusave", "Edusave account",
+        age <= 12 ? EDUSAVE_PRI : EDUSAVE_SEC, iso(y, 12, 31), "During " + y, stage(age) + " contribution"));
     }
   }
 
-  function project(kids, ratio) {
-    var out = [];
-    kids.forEach(function (kid) {
+  function project(K, ratio) {
+    const out = [];
+    for (const kid of K) {
       babyGift(kid, out);
+      lifesg(kid, out);
       cda(kid, ratio, out);
-      if (kid.dob.y >= PACKAGE_FIRST_BIRTH_YEAR) { childCredits(kid, out); psea(kid, out); }
+      if (kid.by >= PACKAGE_FIRST_BIRTH_YEAR) { childCredits(kid, out); psea(kid, out); }
       medisave(kid, out);
       edusave(kid, out);
-    });
+    }
     return out;
   }
 
-  /* ============================================================
-     3. Leave
-     ============================================================ */
+  /* ================================================================
+     4. Leave rules
+     ================================================================ */
 
-  function splWeeks(dob) {
-    var k = key(dob);
-    for (var i = 0; i < SPL_PHASES.length; i++) if (k >= SPL_PHASES[i][0]) return SPL_PHASES[i][1];
-    return 0;
-  }
-
-  function cclNew(count) {
-    if (count <= 0) return 0;
-    return CCL_NEW[count] !== undefined ? CCL_NEW[count] : CCL_NEW_MANY;
-  }
+  const paternityWeeks = (dob) => (dob >= "2024-01-01" ? 4 : 2);
+  const splWeeks = (dob) => (dob >= "2026-04-01" ? 10 : dob >= "2025-04-01" ? 6 : 0);
+  const cclNew = (n) => (n <= 0 ? 0 : CCL_NEW[n] !== undefined ? CCL_NEW[n] : CCL_NEW_MANY);
 
   function cclToday(ages) {
-    var eligible = ages.filter(function (a) { return a >= 0 && a <= ECL_MAX_AGE; });
+    const eligible = ages.filter((a) => a >= 0 && a <= CCL_MAX_AGE);
     if (!eligible.length) return 0;
-    return Math.min.apply(null, eligible) <= CCL_TODAY_MAX_AGE ? CCL_TODAY : ECL_TODAY;
+    return Math.min(...eligible) <= CCL_TODAY_MAX_AGE ? CCL_TODAY : ECL_TODAY;
   }
+  function cclFor(K, year) {
+    const ages = K.filter((k) => k.by <= year).map((k) => year - k.by);
+    const young = ages.filter((a) => a <= CCL_MAX_AGE);
+    if (!young.length) return 0;
+    return year >= NEW_CCL_FROM ? cclNew(young.length) : cclToday(ages);
+  }
+  // 12 days a year for each parent while any child is under 2 at some point in the year.
+  const ulicFor = (K, year) => (K.some((k) => k.by <= year && addMonths(k.dob, 24) > iso(year, 1, 1)) ? ULIC_DAYS : 0);
 
-  function leaveSchedule(kids) {
-    if (!kids.length) return [];
-    var first = Math.min.apply(null, kids.map(function (k) { return k.dob.y; }));
-    var last = Math.max.apply(null, kids.map(function (k) { return k.dob.y + CCL_MAX_AGE; }));
-    var rows = [];
-    for (var year = first; year <= last; year++) {
-      var ages = kids.filter(function (k) { return k.dob.y <= year; })
-                     .map(function (k) { return year - k.dob.y; });
-      var young = ages.filter(function (a) { return a <= CCL_MAX_AGE; });
+  function leaveSchedule(K) {
+    if (!K.length) return [];
+    const first = Math.min(...K.map((k) => k.by)), last = Math.max(...K.map((k) => k.by + CCL_MAX_AGE));
+    const rows = [];
+    for (let year = first; year <= last; year++) {
+      const ages = K.filter((k) => k.by <= year).map((k) => year - k.by);
+      const young = ages.filter((a) => a <= CCL_MAX_AGE);
       if (!young.length) continue;
-      var today = cclToday(ages);
-      var days = year >= NEW_CCL_FROM ? cclNew(young.length) : today;
-      rows.push({ year: year, count: young.length, days: days, today: today,
-                  household: days * 2, gain: (days - today) * 2 });
+      const today = cclToday(ages), days = cclFor(K, year);
+      rows.push({ year, count: young.length, days, household: days * 2, gain: (days - today) * 2 });
     }
     return rows;
   }
 
-  /* ============================================================
-     4. State
-     ============================================================ */
+  function birthWindow(kid) {
+    return { from: addDays(kid.dob, -28), end: addDays(addMonths(kid.dob, 12), -1) };
+  }
 
-  var STORE = "little-wins-children-v1";
-  var state = { kids: [], ratio: 1 };
-
-  function seed() {
-    return [
-      { name: "Amelia", dob: { y: 2019, m: 3, d: 4 } },
-      { name: "Ben", dob: { y: 2024, m: 11, d: 20 } }
+  const BIRTH_TYPES = ["gpml", "gppl", "spl"];
+  function leaveTypes() {
+    const base = [
+      { id: "gpml", name: "Maternity leave", who: "p1", scope: "birth" },
+      { id: "gppl", name: "Paternity leave", who: "p2", scope: "birth" },
+      { id: "spl", name: "Shared Parental Leave", who: "both", scope: "birth" },
+      { id: "ccl", name: "Childcare leave", who: "both", scope: "year" },
+      { id: "ulic", name: "Unpaid infant care leave", who: "both", scope: "year" },
     ];
+    return base.concat(track.custom.map((c) => ({ id: "c:" + c.id, name: c.name, who: "both", scope: "year", days: c.days })));
+  }
+  const typeName = (id) => (leaveTypes().find((t) => t.id === id) || { name: "Removed leave type" }).name;
+
+  /* ================================================================
+     5. State — children and tracker data, kept in this browser
+     ================================================================ */
+
+  const KIDS_KEY = "little-wins-children-v1";
+  const TRACK_KEY = "little-wins-tracker-v1";
+  const EXAMPLE_IDS = ["example-amelia", "example-ben"];
+
+  const exampleKids = () => [
+    { id: "example-amelia", name: "Amelia", dob: "2019-03-04" },
+    { id: "example-ben", name: "Ben", dob: "2024-11-20" },
+  ];
+  const emptyTrack = () => ({ parents: { p1: "Mum", p2: "Dad" }, leave: [], custom: [], tx: [], confirmed: [] });
+
+  function normaliseKids(raw) {
+    if (!Array.isArray(raw)) return null;
+    return raw.map((k) => {
+      let dob = k && k.dob;
+      if (dob && typeof dob === "object") dob = iso(dob.y, dob.m, dob.d);   // v1 stored {y, m, d}
+      if (!isIsoDate(dob) || !k.name) return null;
+      const example = exampleKids().find((e) => e.name === k.name && e.dob === dob);
+      const id = typeof k.id === "string" ? k.id : example ? example.id : newId();
+      return { id, name: String(k.name).slice(0, 40), dob };
+    }).filter(Boolean);
+  }
+  function normaliseTrack(raw) {
+    const t = emptyTrack();
+    if (!raw || typeof raw !== "object") return t;
+    if (raw.parents) {
+      t.parents.p1 = String(raw.parents.p1 || "Mum").slice(0, 20);
+      t.parents.p2 = String(raw.parents.p2 || "Dad").slice(0, 20);
+    }
+    t.leave = (Array.isArray(raw.leave) ? raw.leave : []).filter((e) =>
+      e && isIsoDate(e.start) && (e.parent === "p1" || e.parent === "p2") && Number(e.days) > 0)
+      .map((e) => ({ id: e.id || newId(), parent: e.parent, type: String(e.type), childId: e.childId || null,
+        start: e.start, end: isIsoDate(e.end) ? e.end : e.start, days: Number(e.days), note: String(e.note || "").slice(0, 80) }));
+    t.custom = (Array.isArray(raw.custom) ? raw.custom : []).filter((c) => c && c.name && Number(c.days) > 0)
+      .map((c) => ({ id: c.id || newId(), name: String(c.name).slice(0, 30), days: Number(c.days) }));
+    t.tx = (Array.isArray(raw.tx) ? raw.tx : []).filter((x) =>
+      x && isIsoDate(x.date) && Number(x.amount) > 0 && ["cda", "lifesg", "edusave", "psea", "medisave"].includes(x.account)
+      && ["spent", "deposit", "credit"].includes(x.kind))
+      .map((x) => ({ id: x.id || newId(), childId: x.childId, account: x.account, kind: x.kind,
+        amount: Math.round(Number(x.amount) * 100) / 100, date: x.date, note: String(x.note || "").slice(0, 80) }));
+    t.confirmed = (Array.isArray(raw.confirmed) ? raw.confirmed : []).filter((s) => typeof s === "string");
+    return t;
   }
 
-  function load() {
-    try {
-      var raw = localStorage.getItem(STORE);
-      if (raw) {
-        var parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length) return parsed;
-      }
-    } catch (e) { /* private mode, blocked storage — fall through to the examples */ }
-    return seed();
+  function readJSON(key) {
+    try { const raw = localStorage.getItem(key); return raw === null ? undefined : JSON.parse(raw); }
+    catch (e) { return undefined; }   // blocked storage or corrupt value — fall back to defaults
+  }
+  function writeJSON(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch (e) { return false; }
   }
 
-  function save() {
-    try { localStorage.setItem(STORE, JSON.stringify(state.kids)); } catch (e) { /* not essential */ }
-  }
+  let kids = normaliseKids(readJSON(KIDS_KEY)) || exampleKids();
+  let track = normaliseTrack(readJSON(TRACK_KEY));
+  const saveKids = () => writeJSON(KIDS_KEY, kids);
+  const saveTrack = () => writeJSON(TRACK_KEY, track);
+
+  const ui = {
+    view: "overview", ratio: 1,
+    ytFilter: "all", ytHidePast: false, ytOpen: new Set(),
+    leaveYear: THIS_YEAR, btFilter: "all", cashAll: false,
+    leaveDaysTouched: false,
+  };
 
   function ordered() {
-    var sorted = state.kids.slice().sort(function (a, b) { return key(a.dob) - key(b.dob); });
-    sorted.forEach(function (k, i) { k.order = i + 1; });
-    return sorted;
+    return kids.slice().sort((a, b) => (a.dob < b.dob ? -1 : a.dob > b.dob ? 1 : 0))
+      .map((k, i) => Object.assign({}, k, { order: i + 1, by: parts(k.dob).y, m: parts(k.dob).m }));
+  }
+  const kidById = (K, id) => K.find((k) => k.id === id);
+  const parentName = (p) => track.parents[p] || (p === "p1" ? "Mum" : "Dad");
+  const hasExamples = () => kids.some((k) => EXAMPLE_IDS.includes(k.id));
+
+  /* ================================================================
+     6. Small UI helpers
+     ================================================================ */
+
+  const $ = (id) => document.getElementById(id);
+  let toastTimer;
+  function toast(msg) {
+    const t = $("toast");
+    t.textContent = msg; t.classList.add("on");
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("on"), 2600);
+  }
+  const pill = (cls, text) => `<span class="pill ${cls}">${esc(text)}</span>`;
+  const swatch = (cat) => `<i class="sw ${CAT_CLASS[cat]}"></i>`;
+
+  function meter(segments, total) {
+    // segments: [{value, cls}] — renders used leave against an allowance
+    const used = sum(segments, (s) => s.value);
+    if (used > total) return `<div class="meter" aria-hidden="true"><i class="over" style="width:100%"></i></div>`;
+    if (total <= 0) return `<div class="meter" aria-hidden="true"></div>`;
+    const parts_ = segments.filter((s) => s.value > 0)
+      .map((s) => `<i class="${s.cls || ""}" style="width:${(s.value / total) * 100}%"></i>`).join("");
+    return `<div class="meter" aria-hidden="true">${parts_}</div>`;
   }
 
-  /* ============================================================
-     5. Formatting
-     ============================================================ */
-
-  function money(n) { return "$" + Math.round(n).toLocaleString("en-SG"); }
-  function moneyOrDash(n) { return n > 0 ? money(n) : "–"; }
-
-  var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  function dateLabel(d) { return d.d + " " + MONTHS[d.m - 1] + " " + d.y; }
-
-  function ageLabel(kid) {
-    var k = key(kid.dob);
-    var today = NOW.getFullYear() * 10000 + (NOW.getMonth() + 1) * 100 + NOW.getDate();
-    if (k > today) return "due " + MONTHS[kid.dob.m - 1] + " " + kid.dob.y;
-    var age = THIS_YEAR - kid.dob.y;
-    return age === 0 ? "born this year" : "turns " + age + " in " + THIS_YEAR;
+  // Two-step removal: the first click arms the button, the second within 4s removes.
+  function armOrRun(btn, run) {
+    if (btn.classList.contains("arm")) { run(); return; }
+    btn.classList.add("arm");
+    const label = btn.textContent;
+    btn.textContent = "Confirm";
+    setTimeout(() => { if (btn.isConnected) { btn.classList.remove("arm"); btn.textContent = label; } }, 4000);
   }
 
-  function el(tag, cls, text) {
-    var node = document.createElement(tag);
-    if (cls) node.className = cls;
-    if (text !== undefined) node.textContent = text;
-    return node;
+  function exampleBanner(where) {
+    if (!hasExamples()) return "";
+    return `<div class="banner"><span>You're looking at an <b>example family</b> (Amelia and Ben).
+      Replace them with your own children to make this ${where} yours.</span>
+      <a href="#overview">Edit children &rarr;</a></div>`;
   }
 
-  /* ============================================================
-     6. Charts — laid out in real pixels, redrawn on resize,
-        so labels stay crisp and never collide.
-     ============================================================ */
+  /* ================================================================
+     7. Charts — laid out in real pixels and redrawn on resize
+     ================================================================ */
 
-  var SVG_NS = "http://www.w3.org/2000/svg";
+  const SVG_NS = "http://www.w3.org/2000/svg";
   function svgEl(tag, attrs) {
-    var node = document.createElementNS(SVG_NS, tag);
-    for (var k in attrs) node.setAttribute(k, attrs[k]);
+    const node = document.createElementNS(SVG_NS, tag);
+    for (const k in attrs) node.setAttribute(k, attrs[k]);
     return node;
   }
-  function css(name) {
-    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  }
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-  // Returns gridline values plus the axis top. The top is rounded UP past the
-  // data max — a scale that stops below its own maximum pushes marks off the plot.
+  // The axis top is rounded UP past the data max: a scale that stops below its own
+  // maximum pushes marks off the plot.
   function niceScale(max) {
     if (max <= 0) return { ticks: [0], top: 1 };
-    var raw = max / 4;
-    var mag = Math.pow(10, Math.floor(Math.log10(raw)));
-    var step = [1, 1.5, 2, 2.5, 3, 4, 5, 10].map(function (m) { return m * mag; })
-                .filter(function (s) { return s >= raw; })[0] || 10 * mag;
-    var top = Math.ceil(max / step) * step;
-    var ticks = [];
-    for (var v = 0; v <= top + step * 0.001; v += step) ticks.push(v);
-    return { ticks: ticks, top: top };
+    const raw = max / 4;
+    const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    const step = [1, 1.5, 2, 2.5, 3, 4, 5, 10].map((m) => m * mag).find((s) => s >= raw) || 10 * mag;
+    const top = Math.ceil(max / step) * step;
+    const ticks = [];
+    for (let v = 0; v <= top + step * 0.001; v += step) ticks.push(v);
+    return { ticks, top };
+  }
+  const kLabel = (t) => (t === 0 ? "0" : "$" + Math.round(t / 100) / 10 + "k");
+
+  function axis(svg, ticks, y, M, W) {
+    const muted = css("--ink-3"), rule = css("--rule");
+    for (const t of ticks) {
+      svg.appendChild(svgEl("line", { x1: M.l, x2: W - M.r, y1: y(t), y2: y(t), stroke: rule, "stroke-width": 1 }));
+      const label = svgEl("text", { x: M.l - 9, y: y(t) + 4, "text-anchor": "end", fill: muted, "font-size": 10.5, "font-family": "IBM Plex Mono, monospace" });
+      label.textContent = kLabel(t);
+      svg.appendChild(label);
+    }
   }
 
   function drawBars(host, tip, byYear, ageByYear) {
-    host.style.minHeight = "300px";
-    host.querySelectorAll("svg").forEach(function (n) { n.remove(); });
-    var years = Object.keys(byYear).map(Number).sort(function (a, b) { return a - b; });
+    host.querySelectorAll("svg").forEach((n) => n.remove());
+    const years = Object.keys(byYear).map(Number).sort((a, b) => a - b);
     if (!years.length) return;
+    const W = Math.max(host.clientWidth, 280), H = 300, M = { t: 36, r: 10, b: 34, l: 54 };
+    const iw = W - M.l - M.r, ih = H - M.t - M.b;
+    const totals = years.map((yr) => sum(CATS, (c) => byYear[yr][c] || 0));
+    const max = Math.max(...totals), { ticks, top } = niceScale(max);
+    const band = iw / years.length, barW = Math.max(4, Math.min(26, band * 0.62));
+    const y = (v) => M.t + ih - (v / top) * ih;
+    const svg = svgEl("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: "img",
+      "aria-label": "Stacked bar chart of benefits for each calendar year, split by category" });
+    axis(svg, ticks, y, M, W);
+    const colours = { [CASH]: css("--cash"), [EDU]: css("--edu"), [HEALTH]: css("--health") };
+    const maxIndex = totals.indexOf(max);
 
-    var W = Math.max(host.clientWidth, 280), H = 300;
-    var M = { t: 36, r: 10, b: 34, l: 54 };
-    var iw = W - M.l - M.r, ih = H - M.t - M.b;
-
-    var totals = years.map(function (y) { return CATS.reduce(function (s, c) { return s + (byYear[y][c] || 0); }, 0); });
-    var max = Math.max.apply(null, totals);
-    var scale = niceScale(max), ticks = scale.ticks, top = scale.top;
-
-    var band = iw / years.length;
-    var barW = Math.max(4, Math.min(26, band * 0.62));
-    var y = function (v) { return M.t + ih - (v / top) * ih; };
-
-    var svg = svgEl("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H, role: "img",
-                             "aria-label": "Stacked bar chart of benefits received each calendar year, split by category" });
-
-    var inkMuted = css("--ink-3"), rule = css("--rule"), surface = css("--card");
-    var colours = {}; colours[CASH] = css("--cash"); colours[EDU] = css("--edu"); colours[HEALTH] = css("--health");
-
-    // recessive grid + value axis
-    ticks.forEach(function (t) {
-      svg.appendChild(svgEl("line", { x1: M.l, x2: W - M.r, y1: y(t), y2: y(t),
-                                      stroke: rule, "stroke-width": 1 }));
-      var label = svgEl("text", { x: M.l - 9, y: y(t) + 4, "text-anchor": "end",
-                                  fill: inkMuted, "font-size": 10.5,
-                                  "font-family": "IBM Plex Mono, monospace" });
-      label.textContent = t === 0 ? "0" : "$" + Math.round(t / 100) / 10 + "k";
-      svg.appendChild(label);
-    });
-
-    // one stack per year, 2px surface gap between segments
-    var maxIndex = totals.indexOf(max);
-    years.forEach(function (yr, i) {
-      var cx = M.l + band * i + band / 2;
-      var cursor = M.t + ih;
-      var stack = CATS.filter(function (c) { return (byYear[yr][c] || 0) > 0; });
-
-      stack.forEach(function (cat, si) {
-        var value = byYear[yr][cat];
-        var h = (value / top) * ih;
-        var isTop = si === stack.length - 1;
-        var drawH = Math.max(1, h - (si > 0 ? 2 : 0));
-        var yTop = cursor - h;
-        var r = isTop ? Math.min(4, drawH / 2, barW / 2) : 0;
-
-        // rounded only on the outer end of the stack, anchored to the baseline
-        var d = isTop
-          ? "M" + (cx - barW / 2) + "," + (yTop + drawH) +
-            "L" + (cx - barW / 2) + "," + (yTop + r) +
-            "Q" + (cx - barW / 2) + "," + yTop + " " + (cx - barW / 2 + r) + "," + yTop +
-            "L" + (cx + barW / 2 - r) + "," + yTop +
-            "Q" + (cx + barW / 2) + "," + yTop + " " + (cx + barW / 2) + "," + (yTop + r) +
-            "L" + (cx + barW / 2) + "," + (yTop + drawH) + "Z"
-          : "M" + (cx - barW / 2) + "," + yTop + "h" + barW + "v" + drawH + "h" + (-barW) + "Z";
-
-        svg.appendChild(svgEl("path", { d: d, fill: colours[cat] }));
+    years.forEach((yr, i) => {
+      const cx = M.l + band * i + band / 2;
+      let cursor = M.t + ih;
+      const stack = CATS.filter((c) => (byYear[yr][c] || 0) > 0);
+      stack.forEach((cat, si) => {
+        const h = (byYear[yr][cat] / top) * ih, isTop = si === stack.length - 1;
+        const drawH = Math.max(1, h - (si > 0 ? 2 : 0)), yTop = cursor - h;
+        const r = isTop ? Math.min(4, drawH / 2, barW / 2) : 0, x0 = cx - barW / 2, x1 = cx + barW / 2;
+        const d = isTop
+          ? `M${x0},${yTop + drawH}L${x0},${yTop + r}Q${x0},${yTop} ${x0 + r},${yTop}L${x1 - r},${yTop}Q${x1},${yTop} ${x1},${yTop + r}L${x1},${yTop + drawH}Z`
+          : `M${x0},${yTop}h${barW}v${drawH}h${-barW}Z`;
+        svg.appendChild(svgEl("path", { d, fill: colours[cat] }));
         cursor -= h;
       });
-
-      // one direct label, on the biggest year only
       if (i === maxIndex) {
-        var lx = Math.min(Math.max(cx, M.l + 26), W - M.r - 26);
-        var lab = svgEl("text", { x: lx, y: y(totals[i]) - 8, "text-anchor": "middle",
-                                  fill: css("--ink"), "font-size": 11, "font-weight": 600,
-                                  "font-family": "IBM Plex Mono, monospace" });
+        const lx = Math.min(Math.max(cx, M.l + 26), W - M.r - 26);
+        const lab = svgEl("text", { x: lx, y: y(totals[i]) - 8, "text-anchor": "middle", fill: css("--ink"), "font-size": 11, "font-weight": 600, "font-family": "IBM Plex Mono, monospace" });
         lab.textContent = money(totals[i]);
         svg.appendChild(lab);
       }
     });
 
-    // year axis — thin out labels so they never collide
-    var every = Math.max(1, Math.ceil(years.length / Math.floor(iw / 42)));
-    years.forEach(function (yr, i) {
+    const every = Math.max(1, Math.ceil(years.length / Math.floor(iw / 42)));
+    years.forEach((yr, i) => {
       if (i % every !== 0 && i !== years.length - 1) return;
-      var t = svgEl("text", { x: M.l + band * i + band / 2, y: H - 12, "text-anchor": "middle",
-                              fill: inkMuted, "font-size": 10.5,
-                              "font-family": "IBM Plex Mono, monospace" });
+      const t = svgEl("text", { x: M.l + band * i + band / 2, y: H - 12, "text-anchor": "middle", fill: css("--ink-3"), "font-size": 10.5, "font-family": "IBM Plex Mono, monospace" });
       t.textContent = yr;
       svg.appendChild(t);
     });
 
-    // hover layer: full-height targets, larger than the bars
-    years.forEach(function (yr, i) {
-      var hit = svgEl("rect", { x: M.l + band * i, y: M.t, width: band, height: ih,
-                                fill: "transparent", style: "cursor:crosshair" });
-      hit.addEventListener("mouseenter", function () {
-        var rows = CATS.filter(function (c) { return (byYear[yr][c] || 0) > 0; }).map(function (c) {
-          return '<div class="t-row"><span class="l"><i class="sw ' + CAT_VAR[c] + '"></i>' + c +
-                 '</span><span class="n">' + money(byYear[yr][c]) + "</span></div>";
-        }).join("");
-        tip.innerHTML = '<div class="t-yr">' + yr + "</div>" +
-          '<div class="t-age">' + (ageByYear[yr] || "") + "</div>" + rows +
-          '<div class="t-tot"><span>Total</span><span class="n">' + money(totals[i]) + "</span></div>";
+    years.forEach((yr, i) => {
+      const hit = svgEl("rect", { x: M.l + band * i, y: M.t, width: band, height: ih, fill: "transparent", style: "cursor:crosshair" });
+      hit.addEventListener("mouseenter", () => {
+        const rows = CATS.filter((c) => (byYear[yr][c] || 0) > 0).map((c) =>
+          `<div class="t-row"><span class="l">${swatch(c)}${c}</span><span class="n">${money(byYear[yr][c])}</span></div>`).join("");
+        tip.innerHTML = `<div class="t-yr">${yr}</div><div class="t-age">${esc(ageByYear[yr] || "")}</div>${rows}
+          <div class="t-tot"><span>Total</span><span class="n">${money(totals[i])}</span></div>`;
         tip.classList.add("on");
-        var left = Math.min(Math.max(M.l + band * i + band / 2 - 85, 4), W - 175);
-        tip.style.left = left + "px";
+        tip.style.left = Math.min(Math.max(M.l + band * i + band / 2 - 85, 4), W - 175) + "px";
         tip.style.top = Math.max(y(totals[i]) - 12, 4) + "px";
       });
-      hit.addEventListener("mouseleave", function () { tip.classList.remove("on"); });
+      hit.addEventListener("mouseleave", () => tip.classList.remove("on"));
       svg.appendChild(hit);
     });
-
     host.insertBefore(svg, tip);
   }
 
   function drawLine(host, tip, byYear) {
-    host.style.minHeight = "300px";
-    host.querySelectorAll("svg").forEach(function (n) { n.remove(); });
-    var years = Object.keys(byYear).map(Number).sort(function (a, b) { return a - b; });
+    host.querySelectorAll("svg").forEach((n) => n.remove());
+    const years = Object.keys(byYear).map(Number).sort((a, b) => a - b);
     if (!years.length) return;
-
-    var running = 0;
-    var pts = years.map(function (yr) {
-      running += CATS.reduce(function (s, c) { return s + (byYear[yr][c] || 0); }, 0);
-      return { year: yr, value: running };
-    });
-
-    var W = Math.max(host.clientWidth, 260), H = 300;
-    var M = { t: 36, r: 12, b: 34, l: 54 };
-    var iw = W - M.l - M.r, ih = H - M.t - M.b;
-    var scale = niceScale(running), ticks = scale.ticks, top = scale.top;
-    var x = function (i) { return years.length === 1 ? M.l + iw / 2 : M.l + (i / (years.length - 1)) * iw; };
-    var y = function (v) { return M.t + ih - (v / top) * ih; };
-
-    var svg = svgEl("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H, role: "img",
-                             "aria-label": "Area chart of cumulative benefits received over time" });
-    var inkMuted = css("--ink-3"), rule = css("--rule"), accent = css("--cash"), surface = css("--card");
-
-    ticks.forEach(function (t) {
-      svg.appendChild(svgEl("line", { x1: M.l, x2: W - M.r, y1: y(t), y2: y(t), stroke: rule, "stroke-width": 1 }));
-      var label = svgEl("text", { x: M.l - 9, y: y(t) + 4, "text-anchor": "end", fill: inkMuted,
-                                  "font-size": 10.5, "font-family": "IBM Plex Mono, monospace" });
-      label.textContent = t === 0 ? "0" : "$" + Math.round(t / 100) / 10 + "k";
-      svg.appendChild(label);
-    });
-
-    var path = pts.map(function (p, i) { return (i ? "L" : "M") + x(i) + "," + y(p.value); }).join("");
-    svg.appendChild(svgEl("path", { d: path + "L" + x(pts.length - 1) + "," + (M.t + ih) + "L" + x(0) + "," + (M.t + ih) + "Z",
-                                    fill: accent, "fill-opacity": 0.13 }));
-    svg.appendChild(svgEl("path", { d: path, fill: "none", stroke: accent, "stroke-width": 2,
-                                    "stroke-linejoin": "round", "stroke-linecap": "round" }));
-
-    // emphasised endpoint, ringed against the surface
-    var lastX = x(pts.length - 1), lastY = y(running);
+    let running = 0;
+    const pts = years.map((yr) => { running += sum(CATS, (c) => byYear[yr][c] || 0); return { year: yr, value: running }; });
+    const W = Math.max(host.clientWidth, 260), H = 300, M = { t: 36, r: 12, b: 34, l: 54 };
+    const iw = W - M.l - M.r, ih = H - M.t - M.b;
+    const { ticks, top } = niceScale(running);
+    const x = (i) => (years.length === 1 ? M.l + iw / 2 : M.l + (i / (years.length - 1)) * iw);
+    const y = (v) => M.t + ih - (v / top) * ih;
+    const svg = svgEl("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Area chart of cumulative benefits over time" });
+    axis(svg, ticks, y, M, W);
+    const accent = css("--cash"), surface = css("--card");
+    const path = pts.map((p, i) => (i ? "L" : "M") + x(i) + "," + y(p.value)).join("");
+    svg.appendChild(svgEl("path", { d: `${path}L${x(pts.length - 1)},${M.t + ih}L${x(0)},${M.t + ih}Z`, fill: accent, "fill-opacity": 0.13 }));
+    svg.appendChild(svgEl("path", { d: path, fill: "none", stroke: accent, "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }));
+    const lastX = x(pts.length - 1), lastY = y(running);
     svg.appendChild(svgEl("circle", { cx: lastX, cy: lastY, r: 5, fill: accent, stroke: surface, "stroke-width": 2 }));
-    var endLabel = svgEl("text", { x: lastX, y: lastY - 13, "text-anchor": "end", fill: css("--ink"),
-                                   "font-size": 11, "font-weight": 600, "font-family": "IBM Plex Mono, monospace" });
-    endLabel.textContent = money(running);
-    svg.appendChild(endLabel);
-
-    [0, years.length - 1].forEach(function (i) {
-      var t = svgEl("text", { x: x(i), y: H - 12, "text-anchor": i === 0 ? "start" : "end",
-                              fill: inkMuted, "font-size": 10.5, "font-family": "IBM Plex Mono, monospace" });
+    const end = svgEl("text", { x: lastX, y: lastY - 13, "text-anchor": "end", fill: css("--ink"), "font-size": 11, "font-weight": 600, "font-family": "IBM Plex Mono, monospace" });
+    end.textContent = money(running);
+    svg.appendChild(end);
+    [0, years.length - 1].forEach((i) => {
+      const t = svgEl("text", { x: x(i), y: H - 12, "text-anchor": i === 0 ? "start" : "end", fill: css("--ink-3"), "font-size": 10.5, "font-family": "IBM Plex Mono, monospace" });
       t.textContent = years[i];
       svg.appendChild(t);
     });
-
-    var cross = svgEl("line", { x1: 0, x2: 0, y1: M.t, y2: M.t + ih, stroke: css("--rule-strong"),
-                                "stroke-width": 1, opacity: 0 });
-    var dot = svgEl("circle", { r: 4.5, fill: accent, stroke: surface, "stroke-width": 2, opacity: 0 });
+    const cross = svgEl("line", { x1: 0, x2: 0, y1: M.t, y2: M.t + ih, stroke: css("--rule-strong"), "stroke-width": 1, opacity: 0 });
+    const dot = svgEl("circle", { r: 4.5, fill: accent, stroke: surface, "stroke-width": 2, opacity: 0 });
     svg.appendChild(cross); svg.appendChild(dot);
-
-    var overlay = svgEl("rect", { x: M.l, y: M.t, width: iw, height: ih, fill: "transparent", style: "cursor:crosshair" });
-    overlay.addEventListener("mousemove", function (ev) {
-      var rect = svg.getBoundingClientRect();
-      var px = ev.clientX - rect.left;
-      var i = years.length === 1 ? 0 : Math.round(((px - M.l) / iw) * (years.length - 1));
+    const overlay = svgEl("rect", { x: M.l, y: M.t, width: iw, height: ih, fill: "transparent", style: "cursor:crosshair" });
+    overlay.addEventListener("mousemove", (ev) => {
+      const px = ev.clientX - svg.getBoundingClientRect().left;
+      let i = years.length === 1 ? 0 : Math.round(((px - M.l) / iw) * (years.length - 1));
       i = Math.max(0, Math.min(years.length - 1, i));
-      var p = pts[i];
+      const p = pts[i];
       cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i)); cross.setAttribute("opacity", 1);
       dot.setAttribute("cx", x(i)); dot.setAttribute("cy", y(p.value)); dot.setAttribute("opacity", 1);
-      tip.innerHTML = '<div class="t-yr">By end of ' + p.year + "</div>" +
-        '<div class="t-tot" style="border:none;margin:0;padding:0"><span>Received to date</span><span class="n">' +
-        money(p.value) + "</span></div>";
+      tip.innerHTML = `<div class="t-yr">By end of ${p.year}</div><div class="t-tot" style="border:none;margin:0;padding:0"><span>To date</span><span class="n">${money(p.value)}</span></div>`;
       tip.classList.add("on");
       tip.style.left = Math.min(Math.max(x(i) - 80, 4), W - 172) + "px";
       tip.style.top = Math.max(y(p.value) - 14, 4) + "px";
     });
-    overlay.addEventListener("mouseleave", function () {
-      tip.classList.remove("on"); cross.setAttribute("opacity", 0); dot.setAttribute("opacity", 0);
-    });
+    overlay.addEventListener("mouseleave", () => { tip.classList.remove("on"); cross.setAttribute("opacity", 0); dot.setAttribute("opacity", 0); });
     svg.appendChild(overlay);
-
     host.insertBefore(svg, tip);
   }
 
-  /* ============================================================
-     7. Render
-     ============================================================ */
+  /* ================================================================
+     8. Overview
+     ================================================================ */
 
-  var MAPPING = [
-    { old: "Baby Bonus Cash Gift &mdash; $11,000 (1st/2nd child) or $13,000 (3rd+), dripped out until age 6.5",
-      neu: "Baby Gift &mdash; $10,000 for every child, in 2 tranches within 12 months of birth",
-      note: "Same amount whatever the birth order, and it arrives when costs are highest." },
-    { old: "Nothing &mdash; cash support stopped at age 6.5",
-      neu: "Child Credits &mdash; $2,000 a year for 16 years, $32,000 in total",
-      note: "Brand new, and the largest single component. Cash now runs the whole way through school." },
-    { old: "CDA First Step Grant &mdash; $5,000, plus $5,000 more for a 3rd+ child",
-      neu: "CDA First Step Grant &mdash; $5,000 for every child",
-      note: "The large-family top-up is discontinued; the base grant is unchanged." },
-    { old: "CDA co-matching capped at $4,000 / $7,000 / $9,000 / $15,000 by birth order",
-      neu: "CDA co-matching capped at a uniform $5,000",
-      note: "Existing caps are honoured until 30 Sep 2027, then move to $5,000." },
-    { old: "Nothing",
-      neu: "PSEA top-up &mdash; $10,000 in June of the year the child turns 17",
-      note: "Brand new. Aimed at polytechnic, ITE, JC and university costs." },
-    { old: "Large Family LifeSG Credits &mdash; $6,000 for a 3rd+ child",
-      neu: "Discontinued, folded into flat per-child support",
-      note: "Removed, but every child now gets the full $32,000 in Child Credits." },
-    { old: "Childcare Leave &mdash; 6 days a year while the youngest is 6 or below, then 2 days",
-      neu: "Childcare Leave &mdash; 8, 10 or 12 days by number of children aged 12 and below",
-      note: "A couple with three primary-school children goes from 4 days a year to 24." }
+  const SHORT = {
+    "Baby Gift": "Baby Gift", "Baby Bonus Cash Gift": "Baby Bonus", "Baby Gift top-up": "Baby Gift top-up",
+    "Child Credits": "Child Credits", "Child LifeSG Credits": "LifeSG credits",
+    "Large Family LifeSG Credits": "Large Family LifeSG", "CDA First Step Grant": "CDA grant",
+    "CDA Co-Matching": "CDA match", "PSEA Top-Up": "PSEA top-up",
+    "MediSave Grant for Newborns": "MediSave grant", "Edusave Contribution": "Edusave",
+  };
+
+  const MAPPING = [
+    ["Baby Bonus Cash Gift — $11,000 (1st/2nd child) or $13,000 (3rd+), dripped out until age 6.5",
+     "Baby Gift — $10,000 for every child, in 2 tranches within 12 months of birth",
+     "Same amount whatever the birth order, and it arrives when costs are highest."],
+    ["Nothing — cash support stopped at age 6.5",
+     "Child Credits — $2,000 a year for 16 years, $32,000 in total",
+     "Brand new, and the largest single component. Cash now runs the whole way through school."],
+    ["CDA First Step Grant — $5,000, plus $5,000 more for a 3rd+ child",
+     "CDA First Step Grant — $5,000 for every child",
+     "The large-family top-up is discontinued; the base grant is unchanged."],
+    ["CDA co-matching capped at $4,000 / $7,000 / $9,000 / $15,000 by birth order",
+     "CDA co-matching capped at a uniform $5,000",
+     "Existing caps are honoured until 30 Sep 2027, then move to $5,000."],
+    ["Nothing",
+     "PSEA top-up — $10,000 in June of the year the child turns 17",
+     "Brand new. Aimed at polytechnic, ITE, JC and university costs."],
+    ["Large Family LifeSG Credits — $1,000 a year for each 3rd+ child aged 1 to 6",
+     "Ends after the 2026 tranche, folded into flat per-child support",
+     "No disbursements from 2027, but every child now gets the full $32,000 in Child Credits."],
+    ["Childcare Leave — 6 days a year while the youngest is 6 or below, then 2 days",
+     "Childcare Leave — 8, 10 or 12 days by number of children aged 12 and below",
+     "A couple with three primary-school children goes from 4 days a year to 24."],
   ];
 
-  function renderKids() {
-    var list = document.getElementById("kidList");
-    list.innerHTML = "";
-    var kids = ordered();
-    if (!kids.length) {
-      var empty = el("p", "hint", "Add a child to see their benefits.");
-      empty.style.margin = "0 0 12px";
-      list.appendChild(empty);
+  function renderKidList(K) {
+    const list = $("kidList");
+    if (!K.length) {
+      list.innerHTML = `<p class="hint" style="margin:0 0 4px">No children yet. Add one below &mdash; a due date works too.</p>`;
       return;
     }
-    kids.forEach(function (kid) {
-      var row = el("div", "kid");
-      row.appendChild(el("div", "nm", kid.name));
-      var remove = el("button", null, "Remove");
-      remove.type = "button";
-      remove.setAttribute("aria-label", "Remove " + kid.name);
-      remove.addEventListener("click", function () {
-        state.kids = state.kids.filter(function (k) {
-          return !(k.name === kid.name && key(k.dob) === key(kid.dob));
-        });
-        save(); render();
-      });
-      row.appendChild(remove);
-      row.appendChild(el("div", "meta", dateLabel(kid.dob) + " · " + ageLabel(kid)));
-      list.appendChild(row);
-    });
+    list.innerHTML = K.map((k) => {
+      const age = THIS_YEAR - k.by;
+      const when = k.dob > TODAY ? "due " + fmtMonth(k.dob) : age === 0 ? "born this year" : `${stage(age)} in ${THIS_YEAR}`;
+      const ex = EXAMPLE_IDS.includes(k.id) ? ` <span class="pill">example</span>` : "";
+      return `<div class="kid"><div class="nm">${esc(k.name)}${ex}</div>
+        <button class="x" type="button" data-action="kid-remove" data-id="${esc(k.id)}" aria-label="Remove ${esc(k.name)}">Remove</button>
+        <div class="meta">${fmtDate(k.dob)} · ${esc(when)}</div></div>`;
+    }).join("");
   }
 
-  function render() {
-    renderKids();
-
-    var kids = ordered();
-    var lines = project(kids, state.ratio);
-
-    // ---- headline figures
-    var total = 0, past = 0, future = 0, byCat = {};
-    CATS.forEach(function (c) { byCat[c] = 0; });
-    lines.forEach(function (l) {
-      total += l.amount;
-      byCat[l.category] += l.amount;
-      if (l.status === RECEIVED) past += l.amount; else future += l.amount;
-    });
-
-    document.getElementById("figTotal").textContent = money(total);
-    document.getElementById("figPast").textContent = money(past);
-    document.getElementById("figFuture").textContent = money(future);
-    document.getElementById("figCash").textContent = money(byCat[CASH]);
-    document.getElementById("figEdu").textContent = money(byCat[EDU]);
-    document.getElementById("figHealth").textContent = money(byCat[HEALTH]);
-
-    var years = {}, ageStr = {};
-    lines.forEach(function (l) {
-      if (!years[l.year]) { years[l.year] = {}; CATS.forEach(function (c) { years[l.year][c] = 0; }); }
+  function groupByYear(lines) {
+    const years = {};
+    for (const l of lines) {
+      if (!years[l.year]) years[l.year] = { [CASH]: 0, [EDU]: 0, [HEALTH]: 0, lines: [] };
       years[l.year][l.category] += l.amount;
-    });
-    var yearList = Object.keys(years).map(Number).sort(function (a, b) { return a - b; });
+      years[l.year].lines.push(l);
+    }
+    return years;
+  }
 
-    yearList.forEach(function (yr) {
-      ageStr[yr] = kids.map(function (k) {
-        var age = yr - k.dob.y;
-        return age < 0 ? k.name + " not born" : k.name + " " + age;
-      }).join(" · ");
-    });
+  function renderOverview() {
+    const K = ordered();
+    renderKidList(K);
+    const lines = project(K, ui.ratio);
 
-    document.getElementById("figSub").textContent = kids.length
-      ? kids.length + (kids.length === 1 ? " child" : " children") + ", across " +
-        yearList.length + " calendar years"
+    let total = 0, past = 0, future = 0;
+    const byCat = { [CASH]: 0, [EDU]: 0, [HEALTH]: 0 };
+    for (const l of lines) {
+      total += l.amount; byCat[l.category] += l.amount;
+      if (l.status === RECEIVED) past += l.amount; else future += l.amount;
+    }
+    $("figTotal").textContent = money(total);
+    $("figPast").textContent = money(past);
+    $("figFuture").textContent = money(future);
+    $("figCash").textContent = money(byCat[CASH]);
+    $("figEdu").textContent = money(byCat[EDU]);
+    $("figHealth").textContent = money(byCat[HEALTH]);
+
+    const years = groupByYear(lines);
+    const yearList = Object.keys(years).map(Number).sort((a, b) => a - b);
+    $("figSub").textContent = K.length
+      ? `${K.length} ${K.length === 1 ? "child" : "children"}, across ${yearList.length} calendar years`
       : "No children entered";
-
-    document.getElementById("chartNote").textContent = kids.length
-      ? "Two big spikes shape every family's timeline: the year of birth, when the Baby Gift, " +
-        "CDA grant and MediSave grant all land at once, and the year the child turns 17, when the " +
-        "$10,000 PSEA top-up arrives. Between them, $2,000 of Child Credits arrives every single year."
+    $("chartNote").textContent = K.length
+      ? "Two spikes shape every family's timeline: the year of birth, when the Baby Gift, CDA grant and MediSave grant land together, and the year the child turns 17, when the $10,000 PSEA top-up arrives. Between them, $2,000 of Child Credits arrives every year."
       : "Add a child to see the timeline.";
 
-    // ---- charts
-    requestAnimationFrame(function () {
-      drawBars(document.getElementById("barHost"), document.getElementById("barTip"), years, ageStr);
-      drawLine(document.getElementById("lineHost"), document.getElementById("lineTip"), years);
+    const ageStr = {};
+    for (const yr of yearList) {
+      ageStr[yr] = K.map((k) => (yr - k.by < 0 ? `${k.name} not born` : `${k.name} · ${stage(yr - k.by)}`)).join("  ");
+    }
+    requestAnimationFrame(() => {
+      if (ui.view !== "overview") return;
+      drawBars($("barHost"), $("barTip"), years, ageStr);
+      drawLine($("lineHost"), $("lineTip"), years);
     });
 
-    // ---- year table
-    var tbody = document.querySelector("#yearTable tbody");
-    var tfoot = document.querySelector("#yearTable tfoot");
-    tbody.innerHTML = ""; tfoot.innerHTML = "";
-    yearList.forEach(function (yr) {
-      var row = el("tr");
-      if (yr < THIS_YEAR) row.className = "is-past";
-      if (yr === THIS_YEAR) row.className = "now";
-      row.appendChild(el("td", "yr", String(yr)));
-      row.appendChild(el("td", "ages", ageStr[yr]));
-      var rowTotal = 0;
-      CATS.forEach(function (c) {
-        var v = years[yr][c];
-        rowTotal += v;
-        var cell = el("td", v > 0 ? "num" : "num zero", moneyOrDash(v));
-        row.appendChild(cell);
-      });
-      row.appendChild(el("td", "num", money(rowTotal)));
-      tbody.appendChild(row);
-    });
-    if (yearList.length) {
-      var foot = el("tr");
-      foot.appendChild(el("td", null, "All years"));
-      foot.appendChild(el("td", null, ""));
-      CATS.forEach(function (c) { foot.appendChild(el("td", "num", money(byCat[c]))); });
-      foot.appendChild(el("td", "num", money(total)));
-      tfoot.appendChild(foot);
+    renderYearTable(K, lines);
+    renderBenefitTable(lines);
+    renderLeaveSummary(K);
+    if (!$("mapping").childElementCount) {
+      $("mapping").innerHTML = MAPPING.map(([o, n, note]) =>
+        `<div class="map-row"><div class="map-old"><s>${esc(o)}</s></div><div class="map-arrow">→</div>
+         <div class="map-new"><b>${esc(n)}</b><div class="map-note">${esc(note)}</div></div></div>`).join("");
+    }
+  }
+
+  function renderYearTable(K, lines) {
+    if (ui.ytFilter !== "all" && !kidById(K, ui.ytFilter)) ui.ytFilter = "all";
+    $("ytFilter").innerHTML = [["all", "All children"]].concat(K.map((k) => [k.id, k.name]))
+      .map(([id, label]) => `<button type="button" data-action="yt-filter" data-id="${esc(id)}" aria-pressed="${ui.ytFilter === id}">${esc(label)}</button>`).join("");
+
+    const shown = ui.ytFilter === "all" ? lines : lines.filter((l) => l.childId === ui.ytFilter);
+    const rowKids = ui.ytFilter === "all" ? K : K.filter((k) => k.id === ui.ytFilter);
+    const years = groupByYear(shown);
+    const yearList = Object.keys(years).map(Number).sort((a, b) => a - b);
+    const body = $("yearTable").tBodies[0], foot = $("yearTable").tFoot;
+    $("ytExpand").textContent = ui.ytOpen.size && yearList.every((y) => ui.ytOpen.has(y)) ? "Close all years" : "Open all years";
+
+    if (!yearList.length) {
+      body.innerHTML = `<tr><td colspan="8" class="empty">Add a child to see their year-by-year benefits.</td></tr>`;
+      foot.innerHTML = "";
+      return;
     }
 
-    // ---- benefit table
-    var benefits = {};
-    lines.forEach(function (l) {
-      var k = l.benefit;
-      if (!benefits[k]) benefits[k] = { name: k, cat: l.category, vehicle: l.vehicle,
-                                        total: 0, first: l.year, last: l.year };
-      benefits[k].total += l.amount;
-      benefits[k].first = Math.min(benefits[k].first, l.year);
-      benefits[k].last = Math.max(benefits[k].last, l.year);
-    });
-    var bbody = document.querySelector("#benefitTable tbody");
-    bbody.innerHTML = "";
-    Object.keys(benefits).map(function (k) { return benefits[k]; })
-      .sort(function (a, b) { return b.total - a.total; })
-      .forEach(function (b) {
-        var row = el("tr");
-        var nameCell = el("td");
-        var tag = el("span", "tag");
-        tag.appendChild(el("i", "sw " + CAT_VAR[b.cat]));
-        tag.appendChild(document.createTextNode(b.name));
-        tag.style.color = "var(--ink)";
-        tag.style.fontWeight = "500";
-        nameCell.appendChild(tag);
-        row.appendChild(nameCell);
-        row.appendChild(el("td", null, b.vehicle));
-        row.appendChild(el("td", "ages", b.first === b.last ? String(b.first) : b.first + "–" + b.last));
-        row.appendChild(el("td", "num", money(b.total)));
-        bbody.appendChild(row);
-      });
+    let running = 0, hiddenCount = 0, hiddenTotal = 0;
+    const rows = [];
+    for (const yr of yearList) {
+      const Y = years[yr];
+      const yTotal = Y[CASH] + Y[EDU] + Y[HEALTH];
+      running += yTotal;
+      if (ui.ytHidePast && yr < THIS_YEAR) { hiddenCount++; hiddenTotal += yTotal; continue; }
 
-    // ---- leave
-    var rows = leaveSchedule(kids);
-    var currentRow = rows.filter(function (r) { return r.year === THIS_YEAR; })[0];
-    var liveCount = currentRow ? currentRow.count : 0;
+      const open = ui.ytOpen.has(yr);
+      const cls = yr < THIS_YEAR ? "is-past" : yr === THIS_YEAR ? "now" : "";
+      // benefits run to 17, so older children drop out of the row
+      const kidChips = rowKids.filter((k) => k.by <= yr && yr - k.by <= PSEA_AGE)
+        .map((k) => `<span class="kchip"><b>${esc(k.name)}</b><span>${esc(stage(yr - k.by))}</span></span>`).join("");
 
-    var bands = document.getElementById("bands");
-    bands.innerHTML = "";
-    [[1, "1 child"], [2, "2 children"], [3, "3 or more children"]].forEach(function (spec) {
-      var days = cclNew(spec[0]);
-      var card = el("div", "band" + (liveCount === spec[0] || (spec[0] === 3 && liveCount >= 3) ? " live" : ""));
-      card.appendChild(el("div", "cnt", spec[1] + " aged 12 and below"));
-      var d = el("div", "days");
-      d.appendChild(document.createTextNode(days + " "));
-      d.appendChild(el("small", null, "days"));
-      card.appendChild(d);
-      card.appendChild(el("div", "per", "per working parent, per year · " + days * 2 + " days for the household"));
-      if (liveCount === spec[0] || (spec[0] === 3 && liveCount >= 3)) {
-        card.appendChild(el("span", "now-tag", "Your family in " + THIS_YEAR));
+      const byBenefit = {};
+      for (const l of Y.lines) {
+        const b = byBenefit[l.benefit] || (byBenefit[l.benefit] = { n: 0, amt: 0, cat: l.category });
+        b.n++; b.amt += l.amount;
       }
-      bands.appendChild(card);
-    });
+      const benefitChips = Object.entries(byBenefit).sort((a, b) => b[1].amt - a[1].amt).map(([name, b]) =>
+        `<span class="bchip${b.amt >= 5000 ? " big" : ""}">${swatch(b.cat)}${esc(SHORT[name] || name)}${b.n > 1 ? " ×" + b.n : ""}</span>`).join("");
 
-    var lbody = document.querySelector("#leaveTable tbody");
-    lbody.innerHTML = "";
-    rows.forEach(function (r) {
-      var row = el("tr");
-      if (r.year < THIS_YEAR) row.className = "is-past";
-      if (r.year === THIS_YEAR) row.className = "now";
-      row.appendChild(el("td", "yr", String(r.year)));
-      row.appendChild(el("td", null, String(r.count)));
-      row.appendChild(el("td", "num", String(r.days)));
-      row.appendChild(el("td", "num", String(r.household)));
-      row.appendChild(el("td", r.gain > 0 ? "num" : "num zero", r.gain > 0 ? "+" + r.gain + " days" : "–"));
-      lbody.appendChild(row);
-    });
+      const label = yr === THIS_YEAR ? pill("info", "This year") : "";
+      rows.push(`<tr class="${cls}">
+        <td class="yr-cell"><button class="yr-btn" type="button" data-action="yt-toggle" data-year="${yr}" aria-expanded="${open}">
+          <span class="car" aria-hidden="true">▸</span>${yr}</button>${label ? "<br>" + label : ""}</td>
+        <td><div class="chips">${kidChips || '<span class="hint" style="margin:0">—</span>'}</div></td>
+        <td><div class="chips">${benefitChips}</div></td>
+        <td class="num ${Y[CASH] ? "" : "zero"}">${dash(Y[CASH])}</td>
+        <td class="num ${Y[EDU] ? "" : "zero"}">${dash(Y[EDU])}</td>
+        <td class="num ${Y[HEALTH] ? "" : "zero"}">${dash(Y[HEALTH])}</td>
+        <td class="num"><b>${money(yTotal)}</b></td>
+        <td class="num" style="color:var(--ink-2)">${money(running)}</td></tr>`);
 
-    var blbody = document.querySelector("#birthLeave tbody");
-    blbody.innerHTML = "";
-    kids.forEach(function (kid) {
-      var spl = splWeeks(kid.dob);
-      var row = el("tr");
-      row.appendChild(el("td", null, kid.name));
-      row.appendChild(el("td", "num", String(MATERNITY)));
-      row.appendChild(el("td", "num", String(PATERNITY)));
-      row.appendChild(el("td", spl ? "num" : "num zero", spl ? String(spl) : "–"));
-      row.appendChild(el("td", "num", String(MATERNITY + PATERNITY + spl)));
-      blbody.appendChild(row);
-    });
+      if (open) {
+        const detail = Y.lines.slice().sort((a, b) => (a.payDate < b.payDate ? -1 : 1)).map((l) => {
+          const st = l.projected ? pill("", "If you save") : l.status === RECEIVED ? pill("good", "✓ Received") : pill("info", "Upcoming");
+          return `<tr><td>${esc(l.child)}</td>
+            <td><span class="tag">${swatch(l.category)}${esc(l.benefit)}</span></td>
+            <td>${esc(l.vehicle)}</td>
+            <td class="nowrap">${esc(l.whenDate)}<small>${esc(l.whenNote)}</small></td>
+            <td class="num">${money2(Math.round(l.amount * 100) / 100)}</td><td>${st}</td></tr>`;
+        }).join("");
+        rows.push(`<tr class="detail"><td colspan="8"><div class="tbl-wrap flat"><table class="mini">
+          <thead><tr><th>Child</th><th>Payout</th><th>Paid into</th><th>When</th><th class="num">Amount</th><th>Status</th></tr></thead>
+          <tbody>${detail}</tbody></table></div></td></tr>`);
+      }
+    }
+    if (hiddenCount) {
+      rows.unshift(`<tr class="is-past"><td colspan="6"><button class="linkbtn" type="button" data-action="yt-showpast">
+        Show ${hiddenCount} earlier ${hiddenCount === 1 ? "year" : "years"}</button></td>
+        <td class="num">${money(hiddenTotal)}</td><td class="num">${money(hiddenTotal)}</td></tr>`);
+    }
+    body.innerHTML = rows.join("");
 
-    // ---- mapping
-    var map = document.getElementById("mapping");
-    map.innerHTML = "";
-    MAPPING.forEach(function (m) {
-      var row = el("div", "map-row");
-      var oldCell = el("div", "map-old");
-      oldCell.innerHTML = "<s>" + m.old + "</s>";
-      var arrow = el("div", "map-arrow", "→");
-      var newCell = el("div", "map-new");
-      newCell.innerHTML = "<b>" + m.neu + "</b><div class='map-note'>" + m.note + "</div>";
-      row.appendChild(oldCell); row.appendChild(arrow); row.appendChild(newCell);
-      map.appendChild(row);
+    const tot = { [CASH]: 0, [EDU]: 0, [HEALTH]: 0 };
+    for (const l of shown) tot[l.category] += l.amount;
+    foot.innerHTML = `<tr><td>All years</td><td colspan="2"></td>
+      <td class="num">${money(tot[CASH])}</td><td class="num">${money(tot[EDU])}</td><td class="num">${money(tot[HEALTH])}</td>
+      <td class="num">${money(tot[CASH] + tot[EDU] + tot[HEALTH])}</td><td></td></tr>`;
+  }
+
+  function renderBenefitTable(lines) {
+    const b = {};
+    for (const l of lines) {
+      const r = b[l.benefit] || (b[l.benefit] = { name: l.benefit, cat: l.category, vehicle: l.vehicle, total: 0, first: l.year, last: l.year });
+      r.total += l.amount; r.first = Math.min(r.first, l.year); r.last = Math.max(r.last, l.year);
+    }
+    const rows = Object.values(b).sort((a, c) => c.total - a.total);
+    $("benefitTable").tBodies[0].innerHTML = rows.length ? rows.map((r) =>
+      `<tr><td><span class="tag">${swatch(r.cat)}${esc(r.name)}</span></td><td>${esc(r.vehicle)}</td>
+       <td class="ages">${r.first === r.last ? r.first : r.first + "–" + r.last}</td><td class="num">${money(r.total)}</td></tr>`).join("")
+      : `<tr><td colspan="4" class="empty">Add a child to see where their benefits come from.</td></tr>`;
+  }
+
+  function renderLeaveSummary(K) {
+    const rows = leaveSchedule(K);
+    const cur = rows.find((r) => r.year === THIS_YEAR);
+    const live = cur ? Math.min(cur.count, 3) : 0;
+    $("bands").innerHTML = [[1, "1 child"], [2, "2 children"], [3, "3 or more children"]].map(([n, label]) => {
+      const d = cclNew(n), isLive = live === n;
+      return `<div class="band${isLive ? " live" : ""}"><div class="lbl">${label} aged 12 and below</div>
+        <div class="days">${d} <small>days</small></div>
+        <div class="per">per working parent, per year · ${d * 2} days for the household</div>
+        ${isLive ? pill("info", "Your family in " + THIS_YEAR) : ""}</div>`;
+    }).join("");
+    $("leaveTable").tBodies[0].innerHTML = rows.length ? rows.map((r) =>
+      `<tr class="${r.year < THIS_YEAR ? "is-past" : r.year === THIS_YEAR ? "now" : ""}"><td class="yr">${r.year}</td><td>${r.count}</td>
+       <td class="num">${r.days}</td><td class="num">${r.household}</td>
+       <td class="num ${r.gain > 0 ? "" : "zero"}">${r.gain > 0 ? "+" + r.gain + " days" : "–"}</td></tr>`).join("")
+      : `<tr><td colspan="5" class="empty">Add a child to see your childcare leave.</td></tr>`;
+  }
+
+  /* ================================================================
+     9. Leave tracker
+     ================================================================ */
+
+  function usedDays(filter) { return sum(track.leave.filter(filter), (e) => e.days); }
+
+  function annualStatus(year, used, total) {
+    if (used > total) return pill("crit", "× Over by " + num(used - total) + " days");
+    if (total <= 0) return pill("", "Not entitled");
+    if (year < THIS_YEAR) return used >= total ? pill("good", "✓ All used") : pill("", num(total - used) + " days lapsed");
+    if (year > THIS_YEAR) return pill("", "Opens 1 Jan " + year);
+    if (used >= total) return pill("good", "✓ All used");
+    return daysBetween(TODAY, iso(year, 12, 31)) <= 60 ? pill("warn", "! Use by 31 Dec") : pill("", "Use by 31 Dec");
+  }
+
+  function balanceRow(name, used, total, unit, statusHtml, segs, extra) {
+    const left = total - used;
+    const showLeft = unit === "weeks" ? weeks(Math.max(left, 0)) : num(Math.max(left, 0));
+    const ofText = unit === "weeks" ? `${weeks(used)} of ${weeks(total)} weeks used` : `${num(used)} of ${num(total)} days used`;
+    return `<div class="bal"><div class="top"><span class="name">${esc(name)}</span>
+        <span class="left">${showLeft} <small>${unit} left</small></span></div>
+      ${meter(segs || [{ value: used }], total)}
+      <div class="cap"><span>${ofText}${extra ? " · " + extra : ""}</span>${statusHtml}</div></div>`;
+  }
+
+  function renderLeave() {
+    const K = ordered(), Y = ui.leaveYear;
+    $("leaveBanner").innerHTML = exampleBanner("tracker");
+    $("leaveYear").textContent = Y;
+    $("leaveYearTitle").textContent = Y === THIS_YEAR ? `This year, ${Y}` : String(Y);
+    if (document.activeElement !== $("p1Name")) $("p1Name").value = track.parents.p1;
+    if (document.activeElement !== $("p2Name")) $("p2Name").value = track.parents.p2;
+
+    // ---- yearly allowances, per parent
+    const ccl = cclFor(K, Y), ulic = ulicFor(K, Y);
+    const yearOf = (e) => parts(e.start).y === Y;
+    $("leaveParents").innerHTML = ["p1", "p2"].map((p) => {
+      const rows = [];
+      const cclUsed = usedDays((e) => e.parent === p && e.type === "ccl" && yearOf(e));
+      rows.push(balanceRow("Childcare leave", cclUsed, ccl, "days", annualStatus(Y, cclUsed, ccl), null,
+        Y >= NEW_CCL_FROM ? "new scheme" : "current rules"));
+      const ulicUsed = usedDays((e) => e.parent === p && e.type === "ulic" && yearOf(e));
+      if (ulic || ulicUsed) rows.push(balanceRow("Unpaid infant care leave", ulicUsed, ulic, "days", annualStatus(Y, ulicUsed, ulic), null, "unpaid"));
+      for (const c of track.custom) {
+        const u = usedDays((e) => e.parent === p && e.type === "c:" + c.id && yearOf(e));
+        rows.push(balanceRow(c.name, u, c.days, "days", annualStatus(Y, u, c.days)));
+      }
+      const yearTotal = usedDays((e) => e.parent === p && yearOf(e));
+      return `<div class="parent-card"><header><b><i class="who-dot ${p}"></i>${esc(parentName(p))}</b>
+        <span class="hint" style="margin:0">${num(yearTotal)} days of leave logged in ${Y}</span></header>${rows.join("")}</div>`;
+    }).join("");
+
+    // ---- leave tied to a birth
+    const yStart = iso(Y, 1, 1), yEnd = iso(Y, 12, 31);
+    const relevant = K.filter((k) => { const w = birthWindow(k); return w.from <= yEnd && w.end >= yStart; });
+    $("birthCards").innerHTML = relevant.length ? relevant.map((k) => {
+      const w = birthWindow(k);
+      const forKid = (type, p) => usedDays((e) => e.type === type && e.childId === k.id && (!p || e.parent === p));
+      const status = (used, total) => {
+        if (total <= 0) return pill("", "Not available for this birth");
+        if (used > total) return pill("crit", "× Over by " + weeks(used - total) + " wk");
+        if (used >= total) return pill("good", "✓ All used");
+        if (TODAY > w.end) return pill("crit", "× " + weeks(total - used) + " wk lapsed");
+        if (TODAY < w.from) return pill("", "From " + fmtDate(w.from));
+        return daysBetween(TODAY, w.end) <= 60 ? pill("warn", "! Use by " + fmtDate(w.end)) : pill("", "Use by " + fmtDate(w.end));
+      };
+      const gpml = MATERNITY_WEEKS * WEEK, gppl = paternityWeeks(k.dob) * WEEK, spl = splWeeks(k.dob) * WEEK;
+      const mU = forKid("gpml"), pU = forKid("gppl"), s1 = forKid("spl", "p1"), s2 = forKid("spl", "p2");
+      const born = k.dob <= TODAY ? "Born " + fmtDate(k.dob) : "Due " + fmtDate(k.dob);
+      return `<div class="parent-card"><header><b>${esc(k.name)}</b>
+          <span class="hint" style="margin:0">${born} · window ends ${fmtDate(w.end)}</span></header>
+        ${balanceRow("Maternity leave — " + parentName("p1"), mU, gpml, "weeks", status(mU, gpml))}
+        ${balanceRow("Paternity leave — " + parentName("p2"), pU, gppl, "weeks", status(pU, gppl), null,
+          k.dob < "2025-04-01" && gppl > 2 * WEEK ? "2 weeks were voluntary for this birth" : "")}
+        ${spl ? balanceRow("Shared Parental Leave — shared", s1 + s2, spl, "weeks", status(s1 + s2, spl),
+          [{ value: s1 }, { value: s2, cls: "p2" }], `${esc(parentName("p1"))} ${weeks(s1)} · ${esc(parentName("p2"))} ${weeks(s2)}`)
+          : `<div class="bal"><div class="top"><span class="name">Shared Parental Leave</span></div>
+             <div class="cap"><span>Only for children born on or after 1 Apr 2025.</span></div></div>`}
+      </div>`;
+    }).join("") : `<div class="panel"><p class="hint" style="margin:0">No birth-related leave falls in ${Y}.
+      Maternity, paternity and Shared Parental Leave appear here for any child born within 12 months of this year.</p></div>`;
+
+    // ---- form options
+    fillLeaveForm(K);
+
+    // ---- log
+    const entries = track.leave.filter(yearOf).sort((a, b) => (a.start < b.start ? 1 : -1));
+    $("leaveLogNote").textContent = entries.length
+      ? `${entries.length} ${entries.length === 1 ? "entry" : "entries"} in ${Y}, newest first.`
+      : `Nothing logged for ${Y} yet. Use the form above to record leave as you take it.`;
+    $("leaveLog").tBodies[0].innerHTML = entries.length ? entries.map((e) => {
+      const kid = e.childId ? kidById(K, e.childId) : null;
+      const dates = e.end && e.end !== e.start ? `${fmtShort(e.start)} – ${fmtDate(e.end)}` : fmtDate(e.start);
+      return `<tr><td class="nowrap">${dates}</td><td class="nowrap"><i class="who-dot ${e.parent}"></i>${esc(parentName(e.parent))}</td>
+        <td>${esc(typeName(e.type))}</td><td>${kid ? esc(kid.name) : "—"}</td><td class="num">${num(e.days)}</td>
+        <td>${esc(e.note || "")}</td><td><button class="x" type="button" data-action="leave-remove" data-id="${esc(e.id)}">Remove</button></td></tr>`;
+    }).join("") : `<tr><td colspan="7" class="empty">No leave logged for ${Y}.</td></tr>`;
+
+    // ---- custom types list
+    $("customList").innerHTML = track.custom.map((c) =>
+      `<div class="row-actions" style="justify-content:space-between;padding:6px 10px;border-radius:6px;background:var(--card-sunk)">
+        <span style="font-size:13.5px"><b>${esc(c.name)}</b> · ${num(c.days)} days a year</span>
+        <button class="x" type="button" data-action="custom-remove" data-id="${esc(c.id)}">Remove</button></div>`).join("");
+  }
+
+  function setOptions(select, options, keep) {
+    const prev = keep !== undefined ? keep : select.value;
+    select.innerHTML = options.map(([v, l]) => `<option value="${esc(v)}">${esc(l)}</option>`).join("");
+    if (options.some(([v]) => v === prev)) select.value = prev;
+  }
+
+  function fillLeaveForm(K) {
+    setOptions($("lfParent"), [["p1", parentName("p1")], ["p2", parentName("p2")]]);
+    const p = $("lfParent").value;
+    setOptions($("lfType"), leaveTypes().filter((t) => t.who === "both" || t.who === p).map((t) => [t.id, t.name]));
+    const birth = BIRTH_TYPES.includes($("lfType").value);
+    $("lfChildWrap").hidden = !birth;
+    if (birth) {
+      // the child whose leave window is open today is the likeliest pick
+      const open = K.filter((k) => { const w = birthWindow(k); return w.from <= TODAY && TODAY <= w.end; });
+      const def = (open[open.length - 1] || K[K.length - 1] || {}).id;
+      setOptions($("lfChild"), K.map((k) => [k.id, `${k.name} (${k.dob <= TODAY ? "born" : "due"} ${fmtDate(k.dob)})`]),
+        $("lfChild").value || def);
+    }
+    if (!$("lfFrom").value) $("lfFrom").value = TODAY;
+    if (!ui.leaveDaysTouched) $("lfDays").value = workingDays($("lfFrom").value, $("lfTo").value) || "";
+  }
+
+  /* ================================================================
+     10. Benefit tracker
+     ================================================================ */
+
+  const ACCOUNT_NAMES = { cda: "Child Development Account", lifesg: "LifeSG credits", edusave: "Edusave", psea: "Post-Secondary Education Account", medisave: "MediSave" };
+  const KIND_NAMES = { spent: "Spent", deposit: "You deposited", credit: "Other credit or correction" };
+
+  function computeAccounts(K, lines, filterId) {
+    const sel = filterId === "all" ? K : K.filter((k) => k.id === filterId);
+    const ids = new Set(sel.map((k) => k.id));
+    const L = lines.filter((l) => ids.has(l.childId) && !l.projected);
+    const T = track.tx.filter((t) => ids.has(t.childId));
+    const confirmed = new Set(track.confirmed);
+    const txSum = (acct, kind, kidId) => sum(T.filter((t) => t.account === acct && t.kind === kind && (!kidId || t.childId === kidId)), (t) => t.amount);
+
+    // cash payouts
+    const cash = L.filter((l) => l.account === "cash").sort((a, b) => (a.payDate < b.payDate ? -1 : 1))
+      .map((l) => Object.assign({}, l, { confirmed: confirmed.has(l.id), due: l.payDate <= TODAY }));
+    const cashReceived = sum(cash.filter((c) => c.confirmed), (c) => c.amount);
+    const cashAwaiting = cash.filter((c) => c.due && !c.confirmed);
+    const cashNext = cash.find((c) => !c.due);
+
+    // LifeSG: spending is matched to whichever valid tranche expires first
+    const tranches = [];
+    let lifesgUnmatched = 0;
+    for (const k of sel) {
+      const tr = L.filter((l) => l.account === "lifesg" && l.childId === k.id).map((l) => Object.assign({}, l, { spent: 0 }))
+        .sort((a, b) => (a.expires < b.expires ? -1 : 1));
+      const spends = T.filter((t) => t.childId === k.id && t.account === "lifesg" && t.kind === "spent").sort((a, b) => (a.date < b.date ? -1 : 1));
+      for (const s of spends) {
+        let left = s.amount;
+        for (const t of tr) {
+          if (left <= 0) break;
+          if (t.payDate <= s.date && s.date <= t.expires) { const take = Math.min(left, t.amount - t.spent); t.spent += take; left -= take; }
+        }
+        lifesgUnmatched += left;
+      }
+      tranches.push(...tr);
+    }
+    tranches.sort((a, b) => (a.payDate < b.payDate ? -1 : 1));
+    const active = tranches.filter((t) => t.payDate <= TODAY && TODAY <= t.expires);
+    const lifesg = {
+      credited: sum(tranches.filter((t) => t.payDate <= TODAY), (t) => t.amount),
+      spent: sum(tranches, (t) => t.spent),
+      lapsed: sum(tranches.filter((t) => t.expires < TODAY), (t) => t.amount - t.spent),
+      balance: sum(active, (t) => t.amount - t.spent),
+      next: tranches.find((t) => t.payDate > TODAY),
+      soonest: active.filter((t) => t.amount - t.spent > 0).sort((a, b) => (a.expires < b.expires ? -1 : 1))[0],
+    };
+
+    // CDA: the Government match is worked out from the deposits you log
+    const cda = { fsg: 0, deposits: 0, match: 0, credits: 0, spent: 0, balance: 0, nudges: [] };
+    for (const k of sel) {
+      const fsgLine = L.find((l) => l.childId === k.id && l.benefit === "CDA First Step Grant");
+      const fsg = fsgLine && fsgLine.payDate <= TODAY ? fsgLine.amount : 0;
+      const deadline = iso(k.by + CDA_MATCH_LAST_AGE, 12, 31);
+      const deps = T.filter((t) => t.childId === k.id && t.account === "cda" && t.kind === "deposit");
+      const match = Math.min(sum(deps.filter((t) => t.date <= deadline), (t) => t.amount), CDA_CAP);
+      const credits = txSum("cda", "credit", k.id), spent = txSum("cda", "spent", k.id), deposits = sum(deps, (t) => t.amount);
+      cda.fsg += fsg; cda.deposits += deposits; cda.match += match; cda.credits += credits; cda.spent += spent;
+      cda.balance += fsg + deposits + match + credits - spent;
+      if (k.dob <= TODAY && TODAY <= deadline && match < CDA_CAP) cda.nudges.push({ kid: k, more: CDA_CAP - match, deadline });
+    }
+
+    // Accounts that are credited on a schedule and drawn down by spending
+    const simple = {};
+    for (const acct of ["edusave", "psea", "medisave"]) {
+      const sched = L.filter((l) => l.account === acct);
+      const credited = sum(sched.filter((l) => l.payDate <= TODAY), (l) => l.amount) + txSum(acct, "credit");
+      const spent = txSum(acct, "spent");
+      simple[acct] = { credited, spent, balance: credited - spent, next: sched.filter((l) => l.payDate > TODAY).sort((a, b) => (a.payDate < b.payDate ? -1 : 1))[0] };
+    }
+
+    const upcoming = sum(L.filter((l) => l.payDate > TODAY), (l) => l.amount);
+    return { sel, cash, cashReceived, cashAwaiting, cashNext, tranches, lifesg, lifesgUnmatched, cda, simple, upcoming, T };
+  }
+
+  function renderBenefits() {
+    const K = ordered();
+    $("benefitBanner").innerHTML = exampleBanner("tracker");
+    if (ui.btFilter !== "all" && !kidById(K, ui.btFilter)) ui.btFilter = "all";
+    $("btFilter").innerHTML = (K.length > 1 ? [["all", "All children"]] : []).concat(K.map((k) => [k.id, k.name]))
+      .map(([id, label]) => `<button type="button" data-action="bt-filter" data-id="${esc(id)}" aria-pressed="${ui.btFilter === id || (K.length === 1 && id === K[0].id)}">${esc(label)}</button>`).join("");
+    if (!K.length) {
+      $("btAlerts").innerHTML = `<div class="alert info"><span class="ic">i</span><span>Add a child on the <a class="inline" href="#overview">Overview</a> to start tracking their benefits.</span></div>`;
+      for (const id of ["btTiles", "btAccounts"]) $(id).innerHTML = "";
+      for (const id of ["lifesgTable", "cashTable", "txTable"]) $(id).tBodies[0].innerHTML = "";
+      return;
+    }
+
+    const lines = project(K, 0);
+    const A = computeAccounts(K, lines, K.length === 1 ? K[0].id : ui.btFilter);
+    const many = A.sel.length > 1;
+    const who = (k) => (many ? esc(k.name) + "'s " : "");
+
+    // ---- alerts: what needs doing, most urgent first
+    const alerts = [];
+    if (A.lifesgUnmatched > 0.005) alerts.push(["crit", "×", `You've logged ${money2(A.lifesgUnmatched)} more LifeSG spending than there were valid credits on those dates. Check the dates and amounts.`]);
+    for (const [acct, s] of Object.entries(A.simple)) if (s.balance < -0.005) alerts.push(["crit", "×", `Spending logged on ${ACCOUNT_NAMES[acct]} is ${money2(-s.balance)} more than has been credited. If your statement shows more, add an "Other credit or correction".`]);
+    if (A.cda.balance < -0.005) alerts.push(["crit", "×", `Spending logged on the CDA is more than its balance. Log the deposits you've made.`]);
+    for (const t of A.tranches) {
+      const left = t.amount - t.spent;
+      if (t.payDate <= TODAY && TODAY <= t.expires && left > 0 && daysBetween(TODAY, t.expires) <= 60) {
+        alerts.push(["warn", "!", `${money2(left)} of ${many ? esc(t.child) + "'s " : ""}LifeSG credits expire on ${fmtDate(t.expires)}${t.approx ? " (approximately — check the LifeSG app)" : ""}. Unused credits are lost.`]);
+      }
+    }
+    if (A.cashAwaiting.length) alerts.push(["warn", "!", `${A.cashAwaiting.length} cash ${A.cashAwaiting.length === 1 ? "payout is" : "payouts are"} past due (${money(sum(A.cashAwaiting, (c) => c.amount))}). Tick them off below once you've seen them in your bank account.`]);
+    for (const n of A.cda.nudges) alerts.push(["info", "i", `Save ${money(n.more)} more into ${who(n.kid) || "the "}CDA by ${fmtDate(n.deadline)} to get the full ${money(CDA_CAP)} Government match. Log each deposit below.`]);
+    $("btAlerts").innerHTML = alerts.slice(0, 6).map(([c, ic, t]) => `<div class="alert ${c}"><span class="ic" aria-hidden="true">${ic}</span><span>${t}</span></div>`).join("");
+
+    // ---- headline tiles
+    const inAccounts = A.lifesg.balance + A.cda.balance + A.simple.edusave.balance + A.simple.psea.balance + A.simple.medisave.balance;
+    const spent = A.lifesg.spent + A.cda.spent + A.simple.edusave.spent + A.simple.psea.spent + A.simple.medisave.spent;
+    $("btTiles").innerHTML = [
+      ["In your children's accounts", money(inAccounts), "CDA, LifeSG, Edusave, PSEA and MediSave"],
+      ["Cash received", money(A.cashReceived), A.cashAwaiting.length ? money(sum(A.cashAwaiting, (c) => c.amount)) + " still to confirm" : "All past payouts confirmed"],
+      ["Spent from accounts", money(spent), "From what you've logged"],
+      ["Still to come", money(A.upcoming), "Scheduled payouts from today"],
+    ].map(([k, v, s]) => `<div class="tile"><div class="lbl">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
+
+    // ---- account cards
+    const card = (cat, title, via, big, bigNote, rows, next, action) => `<div class="acct">
+      <div class="hd"><div><div class="ttl">${swatch(cat)}${title}</div><div class="via">${via}</div></div>
+        ${action ? `<button class="linkbtn" type="button" data-action="tx-prefill" data-account="${action}">Log</button>` : ""}</div>
+      <div class="big">${big} <small>${bigNote}</small></div>
+      <dl class="kv">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
+      <div class="nxt">${next}</div></div>`;
+    const whenPhrase = (w) => (/^\d/.test(w) ? "on " + w : /^(By|During|Around)\b/.test(w) ? w.charAt(0).toLowerCase() + w.slice(1) : "in " + w);
+    const nextLine = (l) => (l ? `Next: <b>${money(l.amount)}</b> ${esc(whenPhrase(l.whenDate))}${many ? " for " + esc(l.child) : ""}` : "No further payouts scheduled.");
+    const s = A.simple;
+    $("btAccounts").innerHTML = [
+      card(CASH, "Cash payouts", "Baby Gift, Baby Bonus and Child Credits", money(A.cashReceived), "confirmed",
+        [["Past due", money(sum(A.cash.filter((c) => c.due), (c) => c.amount))], ["Awaiting your tick", money(sum(A.cashAwaiting, (c) => c.amount))],
+         ["Still to come", money(sum(A.cash.filter((c) => !c.due), (c) => c.amount))]], nextLine(A.cashNext), null),
+      card(CASH, "LifeSG credits", "Spend at PayNow or NETS QR shops", money2(A.lifesg.balance), "left",
+        [["Credited", money(A.lifesg.credited)], ["Spent", money2(A.lifesg.spent)], ["Lapsed unused", money2(A.lifesg.lapsed)]],
+        A.lifesg.soonest ? `Use by <b>${fmtDate(A.lifesg.soonest.expires)}</b>${A.lifesg.soonest.approx ? " (approx.)" : ""}` : A.lifesg.next ? `Next: <b>${money(A.lifesg.next.amount)}</b> ${esc(whenPhrase(A.lifesg.next.whenDate))}` : "No further tranches announced.", "lifesg"),
+      card(EDU, "Child Development Account", "Childcare, preschool and approved clinics", money2(A.cda.balance), "balance",
+        [["First Step Grant", money(A.cda.fsg)], ["Your deposits", money2(A.cda.deposits)], ["Government match", money2(A.cda.match)], ["Spent", money2(A.cda.spent)]],
+        A.cda.nudges.length ? `Match left to earn: <b>${money(sum(A.cda.nudges, (n) => n.more))}</b>` : "Government match fully earned or closed.", "cda"),
+      card(EDU, "Edusave", "School fees and enrichment", money2(s.edusave.balance), "balance",
+        [["Credited", money2(s.edusave.credited)], ["Spent", money2(s.edusave.spent)]], nextLine(s.edusave.next), "edusave"),
+      card(EDU, "PSEA", "Post-secondary fees", money2(s.psea.balance), "balance",
+        [["Credited", money2(s.psea.credited)], ["Spent", money2(s.psea.spent)]], nextLine(s.psea.next), "psea"),
+      card(HEALTH, "MediSave", "Premiums, vaccinations, approved care", money2(s.medisave.balance), "balance",
+        [["Credited", money2(s.medisave.credited)], ["Spent", money2(s.medisave.spent)]], "MediShield Life premiums come out automatically — log them from the CPF statement.", "medisave"),
+    ].join("");
+
+    // ---- LifeSG tranches
+    $("lifesgTable").tBodies[0].innerHTML = A.tranches.length ? A.tranches.map((t) => {
+      const left = t.amount - t.spent;
+      let st;
+      if (t.payDate > TODAY) st = pill("info", "Arriving " + (t.approx ? "around " + fmtMonth(t.payDate) : fmtDate(t.payDate)));
+      else if (t.expires < TODAY) st = left > 0.005 ? pill("crit", "× " + money2(left) + " lapsed") : pill("good", "✓ Fully used");
+      else if (left <= 0.005) st = pill("good", "✓ Fully used");
+      else st = daysBetween(TODAY, t.expires) <= 60 ? pill("warn", "! Expiring soon") : pill("", "Active");
+      const name = t.benefit === "Child LifeSG Credits" ? `Child LifeSG ${t.tranche}` : `Large Family ${t.tranche}`;
+      return `<tr class="${t.expires < TODAY ? "is-past" : ""}"><td>${esc(t.child)}</td><td>${name}</td>
+        <td class="nowrap">${t.approx ? "≈ " + fmtMonth(t.payDate) : fmtDate(t.payDate)}</td>
+        <td class="nowrap">${t.approx ? "≈ " + fmtMonth(t.expires) : fmtDate(t.expires)}</td>
+        <td class="num">${money(t.amount)}</td><td class="num">${money2(t.spent)}</td><td class="num">${money2(Math.max(left, 0))}</td><td>${st}</td></tr>`;
+    }).join("") : `<tr><td colspan="8" class="empty">No LifeSG credits for ${many ? "these children" : "this child"}. They go to children aged 12 and below in 2025 and 2026.</td></tr>`;
+
+    // ---- cash checklist: what's due and the next 12 months; later years on request
+    const horizon = addMonths(TODAY, 12);
+    const later = A.cash.filter((c) => c.payDate > horizon);
+    const cashShown = ui.cashAll ? A.cash : A.cash.filter((c) => c.payDate <= horizon);
+    const moreRow = later.length
+      ? `<tr><td colspan="6"><button class="linkbtn" type="button" data-action="cash-more">${ui.cashAll
+          ? "Show only the next 12 months"
+          : `Show ${later.length} later ${later.length === 1 ? "payout" : "payouts"}, up to ${fmtMonth(later[later.length - 1].payDate)} (${money(sum(later, (c) => c.amount))})`}</button></td></tr>`
+      : "";
+    $("cashTable").tBodies[0].innerHTML = (A.cash.length ? cashShown.map((c) => {
+      const st = c.confirmed ? pill("good", "✓ Received") : c.due ? pill("warn", "! Check your bank") : pill("info", "Upcoming");
+      return `<tr class="${c.confirmed ? "is-past" : ""}"><td class="nowrap">${esc(c.whenDate)}<small>${esc(c.whenNote)}</small></td>
+        <td>${esc(c.child)}</td><td>${esc(c.benefit)}</td><td class="num">${money(c.amount)}</td><td>${st}</td>
+        <td><label class="check"><input type="checkbox" data-action="cash-toggle" data-id="${esc(c.id)}" ${c.confirmed ? "checked" : ""} ${c.due || c.confirmed ? "" : "disabled"}>
+          <span>${c.confirmed ? "Yes" : c.due ? "Tick" : "—"}</span></label></td></tr>`;
+    }).join("") : `<tr><td colspan="6" class="empty">No cash payouts.</td></tr>`) + moreRow;
+
+    // ---- transactions
+    fillTxForm(K);
+    const txs = A.T.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
+    $("txTable").tBodies[0].innerHTML = txs.length ? txs.map((t) => {
+      const kid = kidById(K, t.childId);
+      const sign = t.kind === "spent" ? "−" : "+";
+      return `<tr><td class="nowrap">${fmtDate(t.date)}</td><td>${kid ? esc(kid.name) : "—"}</td><td>${ACCOUNT_NAMES[t.account]}</td>
+        <td>${KIND_NAMES[t.kind]}</td><td class="num">${sign}${money2(t.amount).replace("−", "")}</td><td>${esc(t.note || "")}</td>
+        <td><button class="x" type="button" data-action="tx-remove" data-id="${esc(t.id)}">Remove</button></td></tr>`;
+    }).join("") : `<tr><td colspan="7" class="empty">Nothing logged yet. Record deposits and spending as they happen to keep balances right.</td></tr>`;
+  }
+
+  function fillTxForm(K) {
+    const def = ui.btFilter !== "all" ? ui.btFilter : (K[K.length - 1] || {}).id;
+    setOptions($("txChild"), K.map((k) => [k.id, k.name]), $("txChild").value || def);
+    const acct = $("txAccount").value;
+    const kinds = acct === "cda" ? ["deposit", "spent", "credit"] : acct === "lifesg" ? ["spent"] : ["spent", "credit"];
+    setOptions($("txKind"), kinds.map((k) => [k, KIND_NAMES[k]]));
+    if (!$("txDate").value) $("txDate").value = TODAY;
+  }
+
+  /* ================================================================
+     11. Routing and rendering
+     ================================================================ */
+
+  const VIEWS = ["overview", "leave", "benefits"];
+  function render() {
+    if (ui.view === "overview") renderOverview();
+    else if (ui.view === "leave") renderLeave();
+    else renderBenefits();
+  }
+  function route() {
+    const v = location.hash.replace("#", "");
+    const next = VIEWS.includes(v) ? v : "overview";
+    const changed = next !== ui.view;
+    ui.view = next;
+    document.querySelectorAll("[data-view]").forEach((m) => { m.hidden = m.dataset.view !== next; });
+    document.querySelectorAll("[data-nav]").forEach((a) => {
+      if (a.dataset.nav === next) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
+    render();
+    if (changed) window.scrollTo(0, 0);
+  }
+
+  /* ================================================================
+     12. Events
+     ================================================================ */
+
+  // Overview — children
+  $("addKid").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const name = $("kidName").value.trim(), dob = $("kidDob").value;
+    if (!name) { $("kidMsg").textContent = "Enter the child's name so you can tell them apart."; $("kidName").focus(); return; }
+    if (!isIsoDate(dob)) { $("kidMsg").textContent = "Enter a date of birth, or a due date if the baby isn't born yet."; $("kidDob").focus(); return; }
+    $("kidMsg").textContent = "";
+    kids.push({ id: newId(), name: name.slice(0, 40), dob });
+    saveKids(); ev.target.reset(); render();
+    toast(`Added ${name}.`);
+  });
+
+  $("cdaRange").addEventListener("input", (ev) => {
+    ui.ratio = Number(ev.target.value) / 100;
+    $("cdaVal").textContent = ev.target.value + "%";
+    renderOverview();
+  });
+  $("ytHidePast").addEventListener("change", (ev) => { ui.ytHidePast = ev.target.checked; renderOverview(); });
+  $("ytExpand").addEventListener("click", () => {
+    const yearsShown = Array.from(document.querySelectorAll('#yearTable [data-action="yt-toggle"]')).map((b) => Number(b.dataset.year));
+    const allOpen = yearsShown.length && yearsShown.every((y) => ui.ytOpen.has(y));
+    ui.ytOpen = allOpen ? new Set() : new Set(yearsShown);
+    renderOverview();
+  });
+
+  // Leave — form behaviour
+  $("lfParent").addEventListener("change", () => renderLeave());
+  $("lfType").addEventListener("change", () => renderLeave());
+  for (const id of ["lfFrom", "lfTo"]) {
+    $(id).addEventListener("change", () => {
+      if (!ui.leaveDaysTouched) $("lfDays").value = workingDays($("lfFrom").value, $("lfTo").value) || "";
+    });
+  }
+  $("lfDays").addEventListener("input", () => { ui.leaveDaysTouched = $("lfDays").value !== ""; });
+  for (const p of ["p1", "p2"]) {
+    $(p + "Name").addEventListener("input", (ev) => {
+      track.parents[p] = ev.target.value.trim().slice(0, 20) || (p === "p1" ? "Mum" : "Dad");
+      saveTrack(); renderLeave();
     });
   }
 
-  /* ============================================================
-     8. Wire up
-     ============================================================ */
-
-  state.kids = load();
-
-  document.getElementById("addForm").addEventListener("submit", function (ev) {
+  $("leaveForm").addEventListener("submit", (ev) => {
     ev.preventDefault();
-    var name = document.getElementById("kidName").value.trim();
-    var dob = document.getElementById("kidDob").value;
-    if (!name || !dob) return;
-    var parts = dob.split("-").map(Number);
-    state.kids.push({ name: name, dob: { y: parts[0], m: parts[1], d: parts[2] } });
-    save();
-    ev.target.reset();
+    const K = ordered();
+    const parent = $("lfParent").value, type = $("lfType").value;
+    const start = $("lfFrom").value, endRaw = $("lfTo").value;
+    const days = Number($("lfDays").value);
+    const msg = $("lfMsg");
+    if (!isIsoDate(start)) { msg.textContent = "Enter the first day of leave."; $("lfFrom").focus(); return; }
+    if (endRaw && endRaw < start) { msg.textContent = "The end date is before the start date. Swap them, or clear the end date for a single day."; $("lfTo").focus(); return; }
+    if (!(days > 0)) { msg.textContent = "Enter how many working days this was — at least half a day."; $("lfDays").focus(); return; }
+    let childId = null;
+    if (BIRTH_TYPES.includes(type)) {
+      childId = $("lfChild").value;
+      const kid = kidById(K, childId);
+      if (!kid) { msg.textContent = "Choose which child this leave is for. Add the child on the Overview first."; return; }
+      const w = birthWindow(kid);
+      if (start < w.from || start > w.end) { msg.textContent = `${kid.name}'s leave has to be taken between ${fmtDate(w.from)} and ${fmtDate(w.end)}. Check the dates or the child.`; $("lfFrom").focus(); return; }
+    }
+    msg.textContent = "";
+    track.leave.push({ id: newId(), parent, type, childId, start, end: endRaw || start, days, note: $("lfNote").value.trim().slice(0, 80) });
+    saveTrack();
+    ui.leaveYear = parts(start).y;
+    $("lfTo").value = ""; $("lfNote").value = ""; ui.leaveDaysTouched = false;
+    renderLeave();
+    toast(`Logged ${num(days)} ${days === 1 ? "day" : "days"} of ${typeName(type).toLowerCase()} for ${parentName(parent)}.`);
+  });
+
+  $("customForm").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const name = $("cfName").value.trim(), days = Number($("cfDays").value);
+    if (!name) { $("cfMsg").textContent = "Give the leave type a name, like “Annual leave”."; $("cfName").focus(); return; }
+    if (!(days > 0)) { $("cfMsg").textContent = "Enter how many days a year each parent gets."; $("cfDays").focus(); return; }
+    $("cfMsg").textContent = "";
+    track.custom.push({ id: newId(), name: name.slice(0, 30), days });
+    saveTrack(); ev.target.reset(); renderLeave();
+    toast(`Added ${name} — ${num(days)} days a year.`);
+  });
+
+  // Benefits — form behaviour
+  $("txAccount").addEventListener("change", () => fillTxForm(ordered()));
+  $("txForm").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const K = ordered();
+    const childId = $("txChild").value, account = $("txAccount").value, kind = $("txKind").value;
+    const amount = Math.round(Number($("txAmount").value) * 100) / 100, date = $("txDate").value;
+    const msg = $("txMsg");
+    if (!kidById(K, childId)) { msg.textContent = "Choose a child. Add one on the Overview first."; return; }
+    if (!(amount > 0)) { msg.textContent = "Enter an amount above $0."; $("txAmount").focus(); return; }
+    if (!isIsoDate(date)) { msg.textContent = "Enter the date of the transaction."; $("txDate").focus(); return; }
+    msg.textContent = "";
+    track.tx.push({ id: newId(), childId, account, kind, amount, date, note: $("txNote").value.trim().slice(0, 80) });
+    saveTrack();
+    $("txAmount").value = ""; $("txNote").value = "";
+    renderBenefits();
+    toast(`${KIND_NAMES[kind]} ${money2(amount)} — ${ACCOUNT_NAMES[account]}.`);
+  });
+
+  // Delegated clicks across every view
+  document.addEventListener("click", (ev) => {
+    const el = ev.target.closest("[data-action]");
+    if (!el) return;
+    const a = el.dataset.action, id = el.dataset.id;
+
+    if (a === "kid-remove") {
+      armOrRun(el, () => {
+        const kid = kids.find((k) => k.id === id);
+        kids = kids.filter((k) => k.id !== id);
+        track.leave = track.leave.filter((e) => e.childId !== id);
+        track.tx = track.tx.filter((t) => t.childId !== id);
+        track.confirmed = track.confirmed.filter((c) => !c.startsWith(id + "|"));
+        saveKids(); saveTrack(); render();
+        toast(`Removed ${kid ? kid.name : "child"}, with their leave and transactions.`);
+      });
+    } else if (a === "yt-filter") { ui.ytFilter = id; ui.ytOpen = new Set(); renderOverview(); }
+    else if (a === "yt-toggle") {
+      const y = Number(el.dataset.year);
+      if (ui.ytOpen.has(y)) ui.ytOpen.delete(y); else ui.ytOpen.add(y);
+      renderOverview();
+    } else if (a === "yt-showpast") { ui.ytHidePast = false; $("ytHidePast").checked = false; renderOverview(); }
+    else if (a === "year-prev" || a === "year-next") {
+      ui.leaveYear += a === "year-prev" ? -1 : 1;
+      ui.leaveYear = Math.max(2005, Math.min(2045, ui.leaveYear));
+      renderLeave();
+    } else if (a === "leave-remove") {
+      armOrRun(el, () => { track.leave = track.leave.filter((e) => e.id !== id); saveTrack(); renderLeave(); toast("Leave entry removed."); });
+    } else if (a === "custom-remove") {
+      armOrRun(el, () => {
+        track.custom = track.custom.filter((c) => c.id !== id);
+        track.leave = track.leave.filter((e) => e.type !== "c:" + id);
+        saveTrack(); renderLeave(); toast("Leave type removed, with its log entries.");
+      });
+    } else if (a === "bt-filter") { ui.btFilter = id; $("txChild").value = id === "all" ? $("txChild").value : id; renderBenefits(); }
+    else if (a === "tx-remove") {
+      armOrRun(el, () => { track.tx = track.tx.filter((t) => t.id !== id); saveTrack(); renderBenefits(); toast("Transaction removed."); });
+    } else if (a === "tx-prefill") {
+      $("txAccount").value = el.dataset.account; fillTxForm(ordered());
+      if (el.dataset.account === "cda") $("txKind").value = "deposit";
+      $("txPanel").scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(() => $("txAmount").focus({ preventScroll: true }), 350);
+    } else if (a === "cash-more") { ui.cashAll = !ui.cashAll; renderBenefits(); }
+    else if (a === "confirm-all") {
+      const K = ordered();
+      const A = computeAccounts(K, project(K, 0), K.length === 1 ? K[0].id : ui.btFilter);
+      const add = A.cash.filter((c) => c.due && !c.confirmed).map((c) => c.id);
+      track.confirmed = Array.from(new Set(track.confirmed.concat(add)));
+      saveTrack(); renderBenefits();
+      toast(add.length ? `Marked ${add.length} ${add.length === 1 ? "payout" : "payouts"} as received.` : "Every past payout is already ticked.");
+    } else if (a === "backup-download") downloadBackup();
+    else if (a === "backup-show") { $("backupText").value = backupJSON(); $("backupText").select(); $("dataMsg").textContent = ""; }
+    else if (a === "backup-restore") restore($("backupText").value);
+    else if (a === "wipe") {
+      armOrRun(el, () => {
+        kids = []; track = emptyTrack(); saveKids(); saveTrack(); render();
+        $("dataMsg").textContent = ""; toast("All your data has been erased from this browser.");
+      });
+    }
+  });
+
+  document.addEventListener("change", (ev) => {
+    const el = ev.target;
+    if (el.dataset && el.dataset.action === "cash-toggle") {
+      const set = new Set(track.confirmed);
+      if (el.checked) set.add(el.dataset.id); else set.delete(el.dataset.id);
+      track.confirmed = Array.from(set);
+      saveTrack(); renderBenefits();
+    }
+  });
+
+  /* ================================================================
+     13. Backup and restore
+     ================================================================ */
+
+  const backupJSON = () => JSON.stringify({ app: "little-wins", version: 2, exported: TODAY, children: kids, tracker: track }, null, 1);
+
+  function downloadBackup() {
+    try {
+      const blob = new Blob([backupJSON()], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `little-wins-backup-${TODAY}.json`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      $("dataMsg").textContent = "";
+      toast("Backup downloaded.");
+    } catch (e) {
+      $("dataMsg").textContent = "This browser blocked the download. Use “Show backup as text” and copy it instead.";
+    }
+  }
+
+  function restore(text) {
+    let data;
+    try { data = JSON.parse(text); } catch (e) {
+      $("dataMsg").textContent = "That isn't a Little Wins backup — paste the whole text, from the first { to the last }.";
+      return;
+    }
+    const K = data && normaliseKids(data.children);
+    if (!data || data.app !== "little-wins" || !K) {
+      $("dataMsg").textContent = "That isn't a Little Wins backup. Check you copied the right file or text.";
+      return;
+    }
+    kids = K; track = normaliseTrack(data.tracker);
+    saveKids(); saveTrack();
+    $("dataMsg").textContent = ""; $("backupText").value = "";
     render();
+    toast(`Restored ${kids.length} ${kids.length === 1 ? "child" : "children"}, ${track.leave.length} leave entries and ${track.tx.length} transactions.`);
+  }
+
+  $("restoreFile").addEventListener("change", (ev) => {
+    const f = ev.target.files && ev.target.files[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => restore(String(r.result));
+    r.readAsText(f);
+    ev.target.value = "";
   });
 
-  var range = document.getElementById("cdaRange");
-  range.addEventListener("input", function () {
-    state.ratio = Number(range.value) / 100;
-    document.getElementById("cdaVal").textContent = range.value + "%";
-    render();
+  // Another tab changed the data: pick it up rather than overwrite it later.
+  window.addEventListener("storage", (ev) => {
+    if (ev.key === KIDS_KEY) kids = normaliseKids(readJSON(KIDS_KEY)) || [];
+    if (ev.key === TRACK_KEY) track = normaliseTrack(readJSON(TRACK_KEY));
+    if (ev.key === KIDS_KEY || ev.key === TRACK_KEY) render();
   });
 
-  var resizeTimer;
-  window.addEventListener("resize", function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(render, 140);
-  });
-
+  let resizeTimer;
+  window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if (ui.view === "overview") renderOverview(); }, 140); });
   if (window.matchMedia) {
-    var scheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const scheme = window.matchMedia("(prefers-color-scheme: dark)");
     if (scheme.addEventListener) scheme.addEventListener("change", render);
   }
+  window.addEventListener("hashchange", route);
 
-  render();
+  route();
 })();
 </script>
 </body>

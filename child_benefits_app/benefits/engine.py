@@ -246,6 +246,42 @@ def _edusave(child: Child) -> list[Line]:
     return lines
 
 
+def _lifesg_credits(child: Child) -> list[Line]:
+    """Child LifeSG Credits, plus Large Family LifeSG Credits for a 3rd+ child.
+
+    Lines sit in the tranche year. A child born in the tranche year is paid the
+    following April, which the note records.
+    """
+    lines: list[Line] = []
+    for year, amount in sorted(cat.CHILD_LIFESG_CREDITS.items()):
+        age = child.age_turning_in(year)
+        if not 0 <= age <= cat.CHILD_LIFESG_MAX_AGE:
+            continue
+        paid_next_april = age == 0
+        lines.append(Line(
+            child.name, year, age, "Child LifeSG Credits", cat.CASH, "LifeSG credits",
+            amount, _status(year + 1, 4) if paid_next_april else _status(year, 7),
+            CONFIRMED,
+            "Credited the following April for children born in the tranche year. "
+            "Valid for about 12 months." if paid_next_april
+            else "Valid for about 12 months from crediting.",
+        ))
+
+    if child.birth_order >= cat.LARGE_FAMILY_MIN_CHILDREN:
+        first_age, last_age = cat.LARGE_FAMILY_LIFESG_AGES
+        for year, amount in sorted(cat.LARGE_FAMILY_LIFESG_CREDITS.items()):
+            age = child.age_turning_in(year)
+            if not first_age <= age <= last_age:
+                continue
+            lines.append(Line(
+                child.name, year, age, "Large Family LifeSG Credits", cat.CASH,
+                "LifeSG credits", amount, _status(year, 9 if year == 2025 else 4),
+                CONFIRMED,
+                "For a 3rd or later child aged 1 to 6. Ends after the 2026 tranche.",
+            ))
+    return lines
+
+
 def _large_family_medisave(children: list[Child]) -> list[Line]:
     """$5,000 MediSave grant around the birth of the 3rd and later children."""
     lines: list[Line] = []
@@ -284,6 +320,7 @@ def project(children: Iterable[Child], assumptions: Assumptions | None = None) -
         if not child.citizen:
             continue
         lines += _baby_gift(child)
+        lines += _lifesg_credits(child)
         lines += _cda(child, assumptions)
         if child.eligible_for_package:
             lines += _child_credits(child)

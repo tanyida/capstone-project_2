@@ -6,10 +6,26 @@ is worth to a family, year by year.
 
 | | What it is | How it runs |
 | --- | --- | --- |
-| [`public/index.html`](public/index.html) | **Little Wins** — a single-page dashboard and calculator. No server, no build step, no accounts. | Any static host: Vercel, Netlify, Cloudflare Pages, GitHub Pages |
+| [`public/index.html`](public/index.html) | **Little Wins** — a dashboard, calculator, leave tracker and benefit tracker in one page. No server, no build step, no accounts. | Any static host: Vercel, Netlify, Cloudflare Pages, GitHub Pages |
 | [`child_benefits_app/`](child_benefits_app/) | The same model as a multi-page **Streamlit** app, with extra reference pages. | Python + Streamlit |
 
-Both are driven by the same benefit rules and produce the same numbers.
+Both are driven by the same benefit rules and produce the same totals.
+
+## What's in the web page
+
+| Section | What it does |
+| --- | --- |
+| **Overview** | Enter your children; see total benefits, a payout timeline, and a year-by-year table showing each child's school stage, what lands that year and a running total. Open any year for every payout's date, account and status. |
+| **Leave tracker** | Log leave as you take it. Childcare and unpaid infant care leave reset each calendar year for each parent; maternity, paternity and Shared Parental Leave are tracked per child against their 12-month window. Add your own leave types (annual leave, sick leave, adoption leave). Flags overruns and leave about to lapse. |
+| **Benefit tracker** | Balances for the CDA, LifeSG credits, Edusave, PSEA and MediSave, built from the official schedule plus the deposits and spending you log. Tick off cash payouts as they reach your bank. Warns when LifeSG credits are about to expire and how much CDA saving is still needed to earn the full Government match. |
+
+Tracker data is kept in the visitor's own browser (`localStorage`) and never sent anywhere,
+so there are no accounts and nothing to secure on a server. The flip side is that it doesn't
+follow people between devices — the **Your data** panel at the bottom of the page downloads or
+restores a backup.
+
+The trackers live only in the web page. The Streamlit app forgets everything on refresh, and
+giving it per-user storage would mean adding accounts and a database.
 
 ## Deploying the web page
 
@@ -78,8 +94,14 @@ python -m pytest child_benefits_app/tests -q
 
 These pin the projection to the officially announced figures: $62,000 per child from
 the package, $32,000 of Child Credits over 16 years, the top-up of existing Baby
-Bonus recipients to $10,000, and the Government's worked example that a couple with
-three primary-school children goes from 4 to 24 childcare leave days a year.
+Bonus recipients to $10,000, the $500 Child LifeSG Credits for children aged 12 and
+below in 2025 and 2026, and the Government's worked example that a couple with three
+primary-school children goes from 4 to 24 childcare leave days a year.
+
+The web page ports the same rules to JavaScript. When changing a rule, change it in both
+`child_benefits_app/benefits/` and `web/app.body.html`, then check that the same children
+give the same total in each — for example Amelia (4 Mar 2019) and Ben (20 Nov 2024) come
+to $120,080.
 
 ## Disclaimer
 
