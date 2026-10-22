@@ -1,4 +1,4 @@
-"""Little Wins - Singapore child benefits dashboard.
+"""ParentedSG - Singapore child benefits dashboard.
 
 Run with:  streamlit run child_benefits_app/Dashboard.py
 """

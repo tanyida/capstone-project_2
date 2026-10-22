@@ -120,8 +120,12 @@ BBCG_TIERS = [
     (date(1, 1, 1), (6_000, 8_000)),
 ]
 
-# The cash gift is paid out from birth until the child turns 6.5.
+# From 14 Feb 2023 the cash gift is paid in instalments until the child turns 6.5. Earlier
+# cohorts were paid in full within 18 months, so none of them are still being paid when the
+# SG Child Support Package starts - and only children still being paid get the top-up.
+BBCG_EXTENDED_SCHEDULE_START = date(2023, 2, 14)
 BBCG_LAST_AGE = 6.5
+BBCG_LAST_AGE_MONTHS = 78
 BBCG_FRONT_LOADED = 9_000  # $3,000 at birth + $1,500 at 6, 12, 15 and 18 months
 
 # CDA First Step Grant by cohort.

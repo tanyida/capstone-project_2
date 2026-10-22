@@ -1,4 +1,4 @@
-# Little Wins - Singapore child benefits dashboard
+# ParentedSG - Singapore child benefits dashboard (Streamlit)
 
 A Streamlit app that shows parents every government benefit their child is
 entitled to, year by year, from birth to age 17 - and lets them calculate the

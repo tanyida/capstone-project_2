@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Wrap the canonical page body into a deployable standalone HTML file.
 
-``web/app.body.html`` is the single source of truth for the Little Wins page.
+``web/app.body.html`` is the single source of truth for the ParentedSG page.
 It is written in the shape a Claude Artifact expects - no ``<!doctype>``,
 ``<html>``, ``<head>`` or ``<body>`` tags, because the artifact host supplies
 those. A static host such as Vercel does not, so this script adds the document
 skeleton, the metadata and the small reset the artifact host would otherwise
-inject, and writes ``public/index.html``.
+inject, loads the sign-in library and the site's ``config.js``, and writes
+``public/index.html``.
+
+The Claude Artifact preview gets neither script, so it always runs without accounts.
 
 Run it after any edit to the page:
 
@@ -23,16 +26,19 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "web" / "app.body.html"
 TARGET = ROOT / "public" / "index.html"
 
-TITLE = "Little Wins &mdash; Singapore child benefits, year by year"
+TITLE = "ParentedSG &mdash; your family's benefits and leave"
 DESCRIPTION = (
-    "Work out every Singapore government child benefit your family is entitled to "
-    "under the SG Child Support Package: a year-by-year payout timeline, totals by "
-    "cash, education and healthcare, and your government-paid leave."
+    "See every Singapore government benefit your children are entitled to under the "
+    "SG Child Support Package, and track the leave and benefits you use - in one "
+    "family account shared with your spouse."
 )
 SOCIAL = (
-    "Enter your children and see every benefit, payout year and leave entitlement "
-    "under the SG Child Support Package."
+    "Your family's child benefits and parental leave, tracked together with your spouse."
 )
+
+# supabase-js is served from this site rather than a CDN: it is the exact build the
+# sign-in flow was tested against, and the site keeps working if a CDN is unreachable.
+SUPABASE_JS = "vendor/supabase-js-2.118.0.js"
 
 HEAD = f"""<!doctype html>
 <html lang="en-SG">
@@ -54,11 +60,13 @@ HEAD = f"""<!doctype html>
   img {{ max-width: 100%; }}
   [hidden] {{ display: none !important; }}
 </style>
+<script src="{SUPABASE_JS}"></script>
+<script src="config.js"></script>
 """
 
 # Everything before this marker is head material (<link>, <style>); everything
-# from it onwards is the rendered page.
-BODY_MARKER = '<div class="wrap">'
+# from it onwards is the rendered page. It is the first screen the page shows.
+BODY_MARKER = '<div data-screen="loading"'
 
 
 def build() -> str:

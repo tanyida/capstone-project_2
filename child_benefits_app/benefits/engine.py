@@ -115,7 +115,10 @@ def _baby_gift(child: Child) -> list[Line]:
 
     # Existing children: they were on the Baby Bonus Cash Gift.
     legacy_total = cat.tier_amount(cat.BBCG_TIERS, child.dob, child.birth_order)
-    still_in_window = child.age_on(date(2027, 3, 31)) < cat.BBCG_LAST_AGE
+    cutoff = date(2027, 3, 31)
+    months_old = (cutoff.year - child.dob.year) * 12 + (cutoff.month - child.dob.month) - (cutoff.day < child.dob.day)
+    still_in_window = (child.dob >= cat.BBCG_EXTENDED_SCHEDULE_START
+                       and months_old < cat.BBCG_LAST_AGE_MONTHS)
 
     if not still_in_window:
         # The cash gift finished before the package started - no top-up.

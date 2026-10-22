@@ -1,78 +1,82 @@
-# Singapore child benefits
+# ParentedSG
 
-Two ways to explore what the **SG Child Support Package** — announced at the 2026
-National Day Rally, replacing the Baby Bonus Scheme and the Large Families Scheme —
-is worth to a family, year by year.
+Every Singapore government benefit your children are entitled to under the **SG Child Support
+Package**, and the leave you take as parents — tracked together in one family account.
 
 | | What it is | How it runs |
 | --- | --- | --- |
-| [`public/index.html`](public/index.html) | **Little Wins** — a dashboard, calculator, leave tracker and benefit tracker in one page. No server, no build step, no accounts. | Any static host: Vercel, Netlify, Cloudflare Pages, GitHub Pages |
-| [`child_benefits_app/`](child_benefits_app/) | The same model as a multi-page **Streamlit** app, with extra reference pages. | Python + Streamlit |
+| [`public/`](public/) | **ParentedSG** — the web app: overview, leave tracker, benefit tracker, sign-in and shared family accounts. | Any static host (Vercel, Netlify, Cloudflare Pages). Family accounts use Supabase. |
+| [`child_benefits_app/`](child_benefits_app/) | The same benefit rules as a **Streamlit** app with reference pages. | Python + Streamlit |
 
-Both are driven by the same benefit rules and produce the same totals.
+Both share the same benefit rules and give the same totals.
 
-## What's in the web page
+## What's in the web app
 
 | Section | What it does |
 | --- | --- |
-| **Overview** | Enter your children; see total benefits, a payout timeline, and a year-by-year table showing each child's school stage, what lands that year and a running total. Open any year for every payout's date, account and status. |
-| **Leave tracker** | Log leave as you take it. Childcare and unpaid infant care leave reset each calendar year for each parent; maternity, paternity and Shared Parental Leave are tracked per child against their 12-month window. Add your own leave types (annual leave, sick leave, adoption leave). Flags overruns and leave about to lapse. |
-| **Benefit tracker** | Balances for the CDA, LifeSG credits, Edusave, PSEA and MediSave, built from the official schedule plus the deposits and spending you log. Tick off cash payouts as they reach your bank. Warns when LifeSG credits are about to expire and how much CDA saving is still needed to earn the full Government match. |
+| **Sign in** | Each parent signs in with their own email and password. One starts a family account; the other joins it with an invite code. Both then see and update the same records. |
+| **Overview** | Built only from the children you add. Total entitlement from birth to 17, what's been received, the balance left in each account and what's still to come — plus each parent's leave left this year. Updates as either parent logs leave or spending. |
+| **Leave tracker** | Childcare and unpaid infant care leave per parent, reset every calendar year. Maternity, paternity and Shared Parental Leave only for children within 12 months of birth (or expected) — once a child's window closes, that leave no longer applies. Custom leave types (annual, sick, adoption). Dates are entered as DD/MM/YYYY. |
+| **Benefit tracker** | Balances for the CDA, LifeSG credits, Edusave, PSEA and MediSave from the official schedule plus logged deposits and spending. Tick off cash payouts as they arrive. Warnings for LifeSG credits about to expire and CDA match still to earn. |
 
-Tracker data is kept in the visitor's own browser (`localStorage`) and never sent anywhere,
-so there are no accounts and nothing to secure on a server. The flip side is that it doesn't
-follow people between devices — the **Your data** panel at the bottom of the page downloads or
-restores a backup.
+People who'd rather not make an account can choose **Use ParentedSG on this device only** on the
+sign-in page; their records then stay in that browser.
 
-The trackers live only in the web page. The Streamlit app forgets everything on refresh, and
-giving it per-user storage would mean adding accounts and a database.
+## Deploying
 
-## Deploying the web page
+The site is static — no build step. On Vercel, import the repository and deploy;
+[`vercel.json`](vercel.json) serves the `public/` folder as-is. Without family accounts switched
+on, the site still works in device-only mode.
 
-The page is one self-contained HTML file. It needs no build, no environment
-variables and no backend — visitors just open the URL.
+### Turning on family accounts
 
-### Vercel
+Family accounts use [Supabase](https://supabase.com) for sign-in and the shared database. The free
+plan is enough to start.
 
-1. Push this repository to GitHub.
-2. At [vercel.com/new](https://vercel.com/new), import the repository.
-3. Accept the defaults and deploy. [`vercel.json`](vercel.json) already pins the
-   framework to none and the output directory to `public/`, so Vercel serves the
-   page as-is instead of trying to build the Python app.
+1. **Create a project** at supabase.com.
+2. **Create the tables.** In the dashboard open *SQL Editor → New query*, paste the whole of
+   [`supabase/schema.sql`](supabase/schema.sql) and press *Run*. It is safe to run again.
+3. **Tell Supabase where the site lives.** Under *Authentication → URL Configuration*, set the
+   *Site URL* to your site's address (for example `https://parentedsg.vercel.app`) and add the same
+   address under *Redirect URLs*. Confirmation and password-reset emails link back to it.
+4. **Connect the site.** Under *Project Settings → API*, copy the *Project URL* and the *anon public*
+   key into [`public/config.js`](public/config.js). The anon key is designed to be public — the
+   row-level security created in step 2 is what keeps each family's records private.
+5. **Deploy** — commit and push; Vercel redeploys.
 
-You get a public `*.vercel.app` URL, and every push to the branch redeploys.
+Then create an account on the site, choose **Start family account**, and give your spouse the
+invite code shown on the Overview. A family holds at most two parents.
 
-To deploy from this machine instead, without the GitHub step:
+Things to know before real families rely on it:
 
-```bash
-npx vercel --prod
-```
+- Supabase's built-in email sender is rate-limited and meant for testing. For real users, connect
+  your own email provider under *Authentication → Emails → SMTP settings*.
+- Free projects are paused after a period of inactivity; check Supabase's current plan limits.
+- Each family's records live in your Supabase project. You are responsible for that data — take
+  Supabase backups and consider what privacy notice your users need.
 
-### Other hosts
+### How the data is protected
 
-| Host | What to do |
-| --- | --- |
-| **Netlify** | Publish directory `public`, build command empty |
-| **Cloudflare Pages** | Build output directory `public`, framework preset "None" |
-| **GitHub Pages** | Settings → Pages → deploy from branch, folder `/public` (rename to `/docs` if Pages will not offer `/public`) |
-
-Locally, `python -m http.server -d public` serves it at <http://localhost:8000>.
+- Every table has row-level security: a signed-in parent can read and change only rows belonging to
+  a family they are a member of. The public key on its own can read nothing.
+- Joining a family, leaving it and changing its invite code only happen through database functions
+  that check who is calling. Nobody can add themselves to a family directly, see another family's
+  invite code, or point a record at another family's child.
+- Restoring a backup replaces the family's records in a single transaction — it applies in full or
+  not at all.
 
 ## Editing the page
 
-`web/app.body.html` is the **single source of truth**. It is written in the shape a
-Claude Artifact expects — no `<!doctype>`, `<html>`, `<head>` or `<body>` tags,
-because the artifact host supplies those.
-
-After editing it, regenerate the deployable file:
+`web/app.body.html` is the single source of truth for the page. After editing it, regenerate the
+deployable file:
 
 ```bash
 python tools/build_static.py     # web/app.body.html -> public/index.html
 ```
 
-`tools/build_static.py` adds the document skeleton, the page metadata and the small
-CSS reset a static host does not inject. Do not hand-edit `public/index.html` — the
-next build overwrites it.
+The build adds the document `<head>`, the sign-in library
+([`public/vendor/supabase-js-2.118.0.js`](public/vendor/), served from the site rather than a CDN)
+and `config.js`. Don't hand-edit `public/index.html` — the next build overwrites it.
 
 ## Running the Streamlit app
 
@@ -81,10 +85,8 @@ pip install -r child_benefits_app/requirements.txt
 streamlit run child_benefits_app/Dashboard.py
 ```
 
-Streamlit needs a Python server, so it cannot go on Vercel. Free hosting for it is
-[Streamlit Community Cloud](https://share.streamlit.io) — also a public URL with no
-login for visitors. See [`child_benefits_app/README.md`](child_benefits_app/README.md)
-for what each page does.
+Streamlit needs a Python server, so it can't go on Vercel; [Streamlit Community
+Cloud](https://share.streamlit.io) hosts it for free. It has no accounts or trackers.
 
 ## Tests
 
@@ -92,20 +94,18 @@ for what each page does.
 python -m pytest child_benefits_app/tests -q
 ```
 
-These pin the projection to the officially announced figures: $62,000 per child from
-the package, $32,000 of Child Credits over 16 years, the top-up of existing Baby
-Bonus recipients to $10,000, the $500 Child LifeSG Credits for children aged 12 and
-below in 2025 and 2026, and the Government's worked example that a couple with three
-primary-school children goes from 4 to 24 childcare leave days a year.
+These pin the benefit rules to the announced figures: $62,000 per child from the package, $32,000
+of Child Credits over 16 years, Baby Bonus recipients still being paid topped up to $10,000, the
+$500 Child LifeSG Credits for children aged 12 and below in 2025 and 2026, and the Government's
+worked example that a couple with three primary-school children goes from 4 to 24 childcare leave
+days a year.
 
 The web page ports the same rules to JavaScript. When changing a rule, change it in both
-`child_benefits_app/benefits/` and `web/app.body.html`, then check that the same children
-give the same total in each — for example Amelia (4 Mar 2019) and Ben (20 Nov 2024) come
-to $120,080.
+`child_benefits_app/benefits/` and `web/app.body.html`, and check the same children give the same
+total in each — for example Amelia (04/03/2019) and Ben (20/11/2024) come to $120,080.
 
 ## Disclaimer
 
-A prototype built for educational purposes. Not affiliated with, endorsed by or
-operated by any Singapore government agency. Benefit rules are modelled from public
-announcements and may be incomplete or out of date — fuller implementation details
-are expected in early 2027. Do not rely on it for financial decisions.
+A prototype built for educational purposes. Not affiliated with, endorsed by or operated by any
+Singapore government agency. Benefit and leave rules are modelled from public announcements and may
+be incomplete or out of date. Do not rely on it for financial decisions.

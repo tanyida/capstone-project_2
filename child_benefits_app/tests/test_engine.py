@@ -72,6 +72,19 @@ def test_baby_bonus_is_topped_up_to_ten_thousand():
     assert total_gift == cat.BABY_GIFT
 
 
+def test_no_top_up_for_a_six_year_old_past_age_six_and_a_half():
+    """Born Jun 2020: 6 years 9 months on 31 Mar 2027, so no longer being paid."""
+    by_benefit, _ = _totals([engine.Child("Leo", date(2020, 6, 15))])
+    assert "Baby Gift top-up" not in by_benefit
+    assert by_benefit["Baby Bonus Cash Gift"] == 8_000
+
+
+def test_no_top_up_for_cohorts_paid_in_full_by_18_months():
+    """Born before 14 Feb 2023: the whole cash gift was paid by 18 months."""
+    by_benefit, _ = _totals([engine.Child("Early 2022", date(2022, 1, 10))])
+    assert "Baby Gift top-up" not in by_benefit
+
+
 def test_no_top_up_once_the_cash_gift_window_has_closed():
     child = engine.Child("Older kid", date(2016, 5, 1))
     by_benefit, _ = _totals([child])

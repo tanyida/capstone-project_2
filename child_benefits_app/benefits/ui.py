@@ -12,7 +12,7 @@ import streamlit as st
 from . import catalogue as cat
 from .engine import Child, Assumptions, RECEIVED, UPCOMING
 
-APP_TITLE = "Little Wins"
+APP_TITLE = "ParentedSG"
 APP_TAGLINE = "Every government benefit your child is entitled to, year by year."
 
 CSS = """
